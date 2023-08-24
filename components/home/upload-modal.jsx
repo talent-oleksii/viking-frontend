@@ -585,14 +585,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 >
                   What do you want to say?
                 </label>
-                <div className="w-6 h-6 border-2 border-white"></div>
               </div>
               <div className="relative">
                 <textarea
                   id="message"
                   rows="6"
                   maxLength="250"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-0 focus:border-gray-50"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0"
                   placeholder="You can type any language!"
                   ref={textRef}
                   onChange={(e) => {
