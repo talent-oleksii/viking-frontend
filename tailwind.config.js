@@ -13,7 +13,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontFamily :{
-        'bricolage': ['Bricolage Grotesque', 'sans-serif'],
+        'clash': ['Clash Display', 'sans-serif'],
       },
     },
   },
