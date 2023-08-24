@@ -276,10 +276,10 @@ export default function Home() {
           </motion.p>
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-4">
             <button
-              className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
+              className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => setShowUploadModal(true)}
             >
-              <Upload className="h-5 w-5 text-white group-hover:text-black" />
+              <Upload className="h-5 w-5 text-white" />
               <p>Upload image</p>
             </button>
             <p className="mt-2.5 text-center text-sm text-gray-500">
@@ -290,7 +290,7 @@ export default function Home() {
             className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video controls src="/videos/trump.mp4"></video>
+            <video controls playsInline src="/videos/trump.mp4" poster="/images/trump.jpg"></video>
           </motion.div>
         </motion.div>
         <motion.div>
