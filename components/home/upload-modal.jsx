@@ -8,12 +8,16 @@ import {
   ChangeEvent,
   Fragment,
   useRef,
+  useEffect,
 } from "react";
 import Image from "next/image";
 import { UploadCloud } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useDropzone } from "react-dropzone";
+import { Toaster, toast } from "sonner";
+import { MoonLoader } from "react-spinners";
 
 const people = [
   {
@@ -209,7 +213,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [data, setData] = useState({
     image: null,
   });
-  const [fileSizeTooBig, setFileSizeTooBig] = useState(false);
+  const [fileSizeTooBig, setFileSizeTooBig] = useState(true);
 
   const [dragActive, setDragActive] = useState(false);
 
@@ -239,45 +243,278 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   }, [data.image, saving]);
 
   const images = [
-    { src: "/images/trump.jpg", id: "image1" },
-    { src: "/images/trump.jpg", id: "image2" },
-    { src: "/images/trump.jpg", id: "image3" },
-    { src: "/images/trump.jpg", id: "image4" },
-    { src: "/images/trump.jpg", id: "image5" },
-    { src: "/images/trump.jpg", id: "image6" },
+    { src: "/images/trump2.png", id: "trump" },
+    { src: "/images/biden.png", id: "biden" },
+    { src: "/images/elon.png", id: "elon" },
+    { src: "/images/tucker.png", id: "tucker" },
+    { src: "/images/rogan.png", id: "rogan" },
+    { src: "/images/beast.png", id: "beast" },
+    { src: "/images/kanye.png", id: "kanye" },
+    { src: "/images/kim.png", id: "kim" },
+    { src: "/images/lebron.png", id: "lebron" },
   ];
 
-  // const handleImageClick = async (imageId) => {
-  //   try {
-  //     const response = await fetch("/api/your-endpoint", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ imageId }),
-  //     });
+  const [imageFormData, setImageFormData] = useState(null);
+  const [audioFormData, setAudioFormData] = useState(null);
 
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok");
-  //     }
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  //     const data = await response.json();
-  //     console.log(data);
+  const handleImageClick = async (imageSrc) => {
+    console.log(`Image Source URL: ${imageSrc}`);
+    setSelectedImage(imageSrc);
 
-  //   } catch (error) {
-  //     console.error("There was a problem with the fetch operation:", error.message);
-  //   }
-  // };
+    const imgElement = new window.Image(); // use window.Image here
+    imgElement.src = imageSrc;
+
+    imgElement.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = imgElement.width;
+      canvas.height = imgElement.height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(imgElement, 0, 0);
+
+      canvas.toBlob((blob) => {
+        const formData = new FormData();
+        formData.append("image", blob);
+
+        // Store the FormData object in state
+        setImageFormData(formData);
+
+        // Log FormData content for debugging
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
+      }, "image/jpeg");
+    };
+  };
 
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
 
   const [selected, setSelected] = useState(people[0]);
+  useEffect(() => {
+    voiceRef.current = selected.voice;
+    console.log(selected.voice);
+  }, [selected]);
+
+  const voiceRef = useRef();
   const textRef = useRef();
   const [message, setMessage] = useState("");
 
+  const [imageUploaded, setImageUploaded] = useState(false);
+  const [audioUploaded, setAudioUploaded] = useState(false);
+
+  const onImageDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      // Validate file type
+      console.log(file.type);
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please only upload image files under 4MB");
+        return;
+      }
+
+      // setImageUploading(true);
+      const reader = new FileReader();
+
+      reader.onload = async () => {
+        const binaryStr = reader.result;
+
+        const formData = new FormData();
+        formData.append("name", "image");
+        formData.append("files", new Blob([binaryStr], { type: file.type }));
+
+        // Update state
+        setImageFormData(formData);
+        setImageUploaded(true);
+        // setImageUploading(false);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  }, []);
+
+  // const onAudioDrop = useCallback((acceptedFiles) => {
+  //   acceptedFiles.forEach((file) => {
+  //     // Validate file type
+  //     console.log(file.type);
+  //     if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
+  //       toast.error("Please only upload MP3 files under 4MB");
+  //       return;
+  //     }
+
+  //     // setAudioUploading(true);
+  //     const reader = new FileReader();
+
+  //     reader.onload = async () => {
+  //       const binaryStr = reader.result;
+
+  //       const formData = new FormData();
+  //       formData.append("name", "audio");
+  //       formData.append("files", new Blob([binaryStr], { type: file.type }));
+
+  //       // Update audio state
+  //       setAudioFormData(formData);
+  //       setAudioUploaded(true);
+  //       // setAudioUploading(false);
+  //     };
+  //     reader.readAsArrayBuffer(file);
+  //   });
+  // }, []);
+
+  const onAudioDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      // Validate file type
+      console.log(file.type);
+      if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
+        toast.error("Please only upload MP3 files.");
+        return;
+      }
+
+      // setAudioUploading(true);
+      const reader = new FileReader();
+
+      reader.onload = async () => {
+        const binaryStr = reader.result;
+
+        // Create an AudioContext
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+
+        // Decode the audio data
+        audioContext
+          .decodeAudioData(binaryStr)
+          .then((audioBuffer) => {
+            const duration = audioBuffer.duration; // Get duration in seconds
+            if (duration >= 30) {
+              toast.error("Please upload MP3 file shorter than 30 seconds");
+              return;
+            }
+
+            const formData = new FormData();
+            // formData.append("name", "audio");
+            formData.append(
+              "audio",
+              new Blob([binaryStr], { type: file.type })
+            );
+
+            // Update audio state
+            setAudioFormData(formData);
+            setAudioUploaded(true);
+            // setAudioUploading(false);
+          })
+          .catch((error) => {
+            toast.error("Failed to decode audio file.");
+            console.error(error);
+          });
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
+  }, []);
+
+  const { getRootProps: getImageRootProps, getInputProps: getImageInputProps } =
+    useDropzone({ onDrop: onImageDrop });
+
+  const { getRootProps: getAudioRootProps, getInputProps: getAudioInputProps } =
+    useDropzone({ onDrop: onAudioDrop });
+
+  const [shouldReplicate, setShouldReplicate] = useState(false);
+
+  useEffect(() => {
+    if (audioFormData && shouldReplicate) {
+      replicate();
+      setShouldReplicate(false);  // Reset the flag
+    }
+  }, [audioFormData, shouldReplicate]);
+
+  const TTS = async () => {
+    const text = textRef.current.value;
+    const selectedVoice = voiceRef.current;
+
+    console.log(text);
+    console.log(selectedVoice);
+
+    try {
+      const response = await fetch("/api/TTS", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: text,
+          voice: selectedVoice,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      console.log("*******");
+
+      // Create a blob from the response
+      const audioBlob = await response.blob();
+
+      // Create FormData and append the blob to it
+      const formData = new FormData();
+      formData.append("audio", audioBlob, "audio.mp3"); // Assuming audio is in mp3 format
+
+      // Save the FormData into state
+      setAudioFormData(formData);
+      setShouldReplicate(true);
+
+      // // Play the audio
+      // const audioBlobUrl = URL.createObjectURL(await response.blob());
+      // const audioElement = new Audio(audioBlobUrl);
+      // audioElement.play();
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      // setTTSLoading(false);
+    }
+  };
+
+  const replicate = async () => {
+    console.log("inside replicate");
+
+    // Create a new FormData object to hold the final form data
+    const finalFormData = new FormData();
+
+    // Merge imageFormData into finalFormData
+    for (const [key, value] of imageFormData) {
+      finalFormData.append(key, value);
+    }
+
+    // Merge audioFormData into finalFormData
+    for (const [key, value] of audioFormData) {
+      finalFormData.append(key, value);
+    }
+
+    try {
+      const response = await fetch("/api/predictions", {
+        method: "POST",
+        body: finalFormData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Replicate failed");
+      }
+
+      // Handle response data here
+      const data = await response.json();
+      console.log(data);
+      // setFileUploaded(true);
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Error processing. Please try again.");
+    } finally {
+      // setUploadLoading(false);
+    }
+  };
+
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
-      {currentStep === "iimage" ? (
+      <Toaster richColors position="top-right" />
+      {currentStep === "image" ? (
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
           <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
@@ -289,42 +526,28 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 height={20}
               />
             </a>
-            <h3 className="font-display text-2xl font-bold">Choose Image</h3>
+            <h3 className="font-clash text-2xl font-bold">Choose Image</h3>
             <p className="text-sm text-gray-500">
               Select an image, or upload your own.
             </p>
           </div>
-          <form
-            className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setSaving(true);
-              fetch("/api/upload", {
-                method: "POST",
-                body: JSON.stringify(data),
-              }).then(async (res) => {
-                if (res.status === 200) {
-                  const { key } = await res.json();
-                  router.push(`/p/${key}`);
-                } else {
-                  setSaving(false);
-                  alert("Something went wrong. Please try again later.");
-                }
-              });
-            }}
-          >
+          <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
             <div id="select image" className="mb-4">
-              <p className="block text-sm font-medium text-gray-700 pb-2">
+              <p className="block text-sm font-medium text-gray-700 mb-2">
                 Select image
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {images.map((image) => (
                   <img
-                    key={image.id}
+                    key={image.id} // Add this line
                     src={image.src}
                     alt=""
-                    className="rounded-md w-full cursor-pointer"
-                    onClick={() => handleImageClick(image.id)}
+                    className={`rounded-md w-full cursor-pointer ${
+                      selectedImage && selectedImage !== image.src
+                        ? "opacity-50"
+                        : "opacity-100"
+                    }`}
+                    onClick={() => handleImageClick(image.src)}
                   />
                 ))}
               </div>
@@ -332,110 +555,60 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
             <div>
               <div className="flex items-center justify-between">
-                <p className="block text-sm font-medium text-gray-700">
-                  Upload image
+                <p className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload image (optional)
                 </p>
-                {fileSizeTooBig && (
-                  <p className="text-sm text-red-500">
-                    File size too big (max 5MB)
-                  </p>
-                )}
               </div>
-              <label
-                htmlFor="image-upload"
-                className="group relative mt-2 flex h-32 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 bg-white shadow-sm transition-all hover:bg-gray-50"
-              >
-                <div
-                  className="absolute z-[5] h-full w-full rounded-md"
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(true);
-                  }}
-                  onDragEnter={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(true);
-                  }}
-                  onDragLeave={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(false);
-                  }}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(false);
-                    setFileSizeTooBig(false);
-                    const file =
-                      e.dataTransfer.files && e.dataTransfer.files[0];
-                    if (file) {
-                      if (file.size / 1024 / 1024 > 5) {
-                        setFileSizeTooBig(true);
-                      } else {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                          setData((prev) => ({
-                            ...prev,
-                            image: e.target?.result,
-                          }));
-                        };
-                        reader.readAsDataURL(file);
-                      }
-                    }
-                  }}
-                />
-                <div
-                  className={`${
-                    dragActive ? "border-2 border-black" : ""
-                  } absolute z-[3] flex h-full w-full flex-col items-center justify-center rounded-md px-10 transition-all ${
-                    data.image
-                      ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
-                      : "bg-white opacity-100 hover:bg-gray-50"
-                  }`}
-                >
-                  <UploadCloud
-                    className={`${
-                      dragActive ? "scale-110" : "scale-100"
-                    } h-7 w-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
-                  />
-                  <p className="mt-2 text-center text-sm text-gray-500">
-                    Drag and drop or click to upload.
-                  </p>
-                  <span className="sr-only">Image upload</span>
+              {imageUploaded ? (
+                <div className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                  Image Uploaded ✅
                 </div>
-                {data.image && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={data.image}
-                    alt="Preview"
-                    className="h-full w-full rounded-md object-cover"
+              ) : (
+                <label
+                  {...getImageRootProps()}
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <svg
+                      aria-hidden="true"
+                      className="w-6 h-6 mb-1 text-gray-400"
+                      fill="none"
+                      stroke="#b5c6d1"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="text-xs text-gray-400 ">Upload File</p>
+                  </div>
+                  <input
+                    {...getImageInputProps()}
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
                   />
-                )}
-              </label>
-              <div className="mt-1 flex rounded-md shadow-sm">
-                <input
-                  id="image-upload"
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  className="sr-only"
-                  onChange={onChangePicture}
-                />
-              </div>
+                </label>
+              )}
             </div>
 
             <button
-              disabled={saveDisabled}
+              disabled={!imageFormData}
               onClick={() => {
+                event.preventDefault();
                 if (currentStep === "image") {
                   setCurrentStep("audio");
                 }
               }}
               className={`${
-                saveDisabled
+                !imageFormData
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
-                  : "border-black bg-black text-white hover:bg-white hover:text-black"
+                  : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               {saving ? (
@@ -458,38 +631,20 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 height={20}
               />
             </a>
-            <h3 className="font-display text-2xl font-bold">Add Voice</h3>
+            <h3 className="font-clash text-2xl font-bold">Add Voice</h3>
             <p className="text-sm text-gray-500">
               Generate voice clip, or upload your own.
             </p>
           </div>
-          <form
-            className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setSaving(true);
-              fetch("/api/upload", {
-                method: "POST",
-                body: JSON.stringify(data),
-              }).then(async (res) => {
-                if (res.status === 200) {
-                  const { key } = await res.json();
-                  router.push(`/p/${key}`);
-                } else {
-                  setSaving(false);
-                  alert("Something went wrong. Please try again later.");
-                }
-              });
-            }}
-          >
+          <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
             <div id="select voice" className="">
               <Listbox value={selected} onChange={setSelected}>
                 {({ open }) => (
                   <>
-                    <Listbox.Label className="block text-sm font-medium text-gray-700">
+                    <Listbox.Label className="block text-sm font-medium text-gray-700 mb-2">
                       Select voice
                     </Listbox.Label>
-                    <div className="relative mt-2">
+                    <div className="relative">
                       <Listbox.Button className="bg-white border pl-3 py-2.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-newblue focus:border-newblue block w-full">
                         <span className="flex items-center">
                           <img
@@ -592,7 +747,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   rows="6"
                   maxLength="250"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0"
-                  placeholder="You can type any language!"
+                  placeholder="You can generate speech in any language!"
                   ref={textRef}
                   onChange={(e) => {
                     setMessage(e.target.value);
@@ -604,107 +759,60 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between">
+            <div id="upload audio">
+              <div className="flex items-center justify-between mb-2">
                 <p className="block text-sm font-medium text-gray-700">
-                  Upload audio
+                  Upload audio (optional)
                 </p>
-                {fileSizeTooBig && (
-                  <p className="text-sm text-red-500">
-                    File size too big (max 5MB)
-                  </p>
-                )}
               </div>
-              <label
-                htmlFor="image-upload"
-                className="group relative mt-2 flex h-32 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 bg-white shadow-sm transition-all hover:bg-gray-50"
-              >
-                <div
-                  className="absolute z-[5] h-full w-full rounded-md"
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(true);
-                  }}
-                  onDragEnter={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(true);
-                  }}
-                  onDragLeave={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(false);
-                  }}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDragActive(false);
-                    setFileSizeTooBig(false);
-                    const file =
-                      e.dataTransfer.files && e.dataTransfer.files[0];
-                    if (file) {
-                      if (file.size / 1024 / 1024 > 5) {
-                        setFileSizeTooBig(true);
-                      } else {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                          setData((prev) => ({
-                            ...prev,
-                            image: e.target?.result,
-                          }));
-                        };
-                        reader.readAsDataURL(file);
-                      }
-                    }
-                  }}
-                />
-                <div
-                  className={`${
-                    dragActive ? "border-2 border-black" : ""
-                  } absolute z-[3] flex h-full w-full flex-col items-center justify-center rounded-md px-10 transition-all ${
-                    data.image
-                      ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
-                      : "bg-white opacity-100 hover:bg-gray-50"
-                  }`}
-                >
-                  <UploadCloud
-                    className={`${
-                      dragActive ? "scale-110" : "scale-100"
-                    } h-7 w-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
-                  />
-                  <p className="mt-2 text-center text-sm text-gray-500">
-                    Drag and drop or click to upload.
-                  </p>
-                  <span className="sr-only">Image upload</span>
+              {audioUploaded ? (
+                <div className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                  Audio Uploaded ✅
                 </div>
-                {data.image && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={data.image}
-                    alt="Preview"
-                    className="h-full w-full rounded-md object-cover"
+              ) : (
+                <label
+                  {...getAudioRootProps()}
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <svg
+                      aria-hidden="true"
+                      className="w-6 h-6 mb-1 text-gray-400"
+                      fill="none"
+                      stroke="#b5c6d1"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="text-xs text-gray-400 ">Upload File</p>
+                  </div>
+                  <input
+                    {...getAudioInputProps()}
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
                   />
-                )}
-              </label>
-              <div className="mt-1 flex rounded-md shadow-sm">
-                <input
-                  id="image-upload"
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  className="sr-only"
-                  onChange={onChangePicture}
-                />
-              </div>
+                </label>
+              )}
             </div>
 
             <button
-              disabled={saveDisabled}
+              disabled={!audioFormData && !message.trim()}
+              onClick={() => {
+                event.preventDefault();
+                message.trim() ? TTS() : replicate();
+              }}
               className={`${
-                saveDisabled
+                !audioFormData && !message.trim()
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
-                  : "border-black bg-black text-white hover:bg-white hover:text-black"
+                  : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               {saving ? (

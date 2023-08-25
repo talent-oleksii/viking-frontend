@@ -290,7 +290,7 @@ export default function Home() {
             className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video controls playsInline src="/videos/trump.mp4" poster="/images/trump.png"></video>
+            <video controls playsInline src="/videos/trump.mp4" poster="/images/trump1.png"></video>
           </motion.div>
         </motion.div>
         <motion.div>
