@@ -18,6 +18,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useDropzone } from "react-dropzone";
 import { Toaster, toast } from "sonner";
 import { MoonLoader } from "react-spinners";
+import Balancer from "react-wrap-balancer";
 
 const people = [
   {
@@ -720,9 +721,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               />
             </a>
             <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
-            <p className="text-sm text-gray-500">
-              Select sample media, or upload your own. Works with images and videos.
-            </p>
+            <Balancer className="text-sm text-gray-500">
+              Select sample media, or upload your own.
+              <span className="hidden sm:inline"><br /></span>
+              <span className="hidden sm:inline">Works with images and videos.</span>
+            </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
             <div id="select image" className="mb-4">
@@ -939,7 +942,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   id="message"
                   rows="6"
                   maxLength="250"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0 focus:ring-0"
                   placeholder="You can generate speech in any language!"
                   ref={textRef}
                   onChange={(e) => {
