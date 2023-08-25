@@ -721,7 +721,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
             <p className="text-sm text-gray-500">
-              Select provided media, or upload your own. Works with images and videos.
+              Select sample media, or upload your own. Works with images and videos.
             </p>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
