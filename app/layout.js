@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,200;10..48,300;10..48,400;10..48,500;10..48,600;10..48,700;10..48,800&display=swap" rel="stylesheet"></link>
       </head>
-      <body className={`${inter.className} bg-white`}>
+      <body className={`${inter.className} bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100`}>
         {children}
       </body>
     </html>
