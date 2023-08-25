@@ -727,7 +727,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               <span className="hidden sm:inline">Works with images and videos.</span>
             </Balancer>
           </div>
-          <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
+          <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
             <div id="select image" className="">
               <p className="block text-sm font-medium text-gray-700 mb-2">
                 Select media
@@ -832,7 +832,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               Generate audio clips, or upload your own.
             </p>
           </div>
-          <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
+          <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
             <div id="select voice" className="">
               <Listbox value={selected} onChange={setSelected}>
                 {({ open }) => (
