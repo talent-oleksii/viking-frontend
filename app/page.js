@@ -281,7 +281,7 @@ export default function Home() {
               </span>
             </Balancer>
           </motion.p>
-          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-3 sm:-mb-4">
+          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-3 sm:-mb-3">
             <button
               className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => setShowUploadModal(true)}
