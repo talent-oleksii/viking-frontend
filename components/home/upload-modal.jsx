@@ -243,15 +243,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   }, [data.image, saving]);
 
   const images = [
-    { src: "/images/trump2.png", id: "trump" },
-    { src: "/images/biden.png", id: "biden" },
-    { src: "/images/elon.png", id: "elon" },
-    { src: "/images/tucker.png", id: "tucker" },
-    { src: "/images/rogan.png", id: "rogan" },
-    { src: "/images/beast.png", id: "beast" },
-    { src: "/images/kanye.png", id: "kanye" },
-    { src: "/images/kim.png", id: "kim" },
-    { src: "/images/lebron.png", id: "lebron" },
+    { highResSrc: "/images/trump2.png", thumbnailSrc: "/images/Ttrump2.png", id: "trump" },
+    { highResSrc: "/images/biden.png", thumbnailSrc: "/images/Tbiden.png", id: "biden" },
+    { highResSrc: "/images/elon.png", thumbnailSrc: "/images/Telon.png", id: "elon" },
+    { highResSrc: "/images/tucker.png", thumbnailSrc: "/images/Ttucker.png", id: "tucker" },
+    { highResSrc: "/images/rogan.png", thumbnailSrc: "/images/Trogan.png", id: "rogan" },
+    { highResSrc: "/images/beast.png", thumbnailSrc: "/images/Tbeast.png", id: "beast" },
+    { highResSrc: "/images/kanye.png", thumbnailSrc: "/images/Tkanye.png", id: "kanye" },
+    { highResSrc: "/images/kim.png", thumbnailSrc: "/images/Tkim.png", id: "kim" },
+    { highResSrc: "/images/lebron.png", thumbnailSrc: "/images/Tlebron.png", id: "lebron" },
   ];
 
   const [imageFormData, setImageFormData] = useState(null);
@@ -540,14 +540,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 {images.map((image) => (
                   <img
                     key={image.id} // Add this line
-                    src={image.src}
+                    src={image.thumbnailSrc}
                     alt=""
                     className={`rounded-md w-full cursor-pointer ${
-                      selectedImage && selectedImage !== image.src
+                      selectedImage && selectedImage !== image.highResSrc
                         ? "opacity-50"
                         : "opacity-100"
                     }`}
-                    onClick={() => handleImageClick(image.src)}
+                    onClick={() => handleImageClick(image.highResSrc)}
                   />
                 ))}
               </div>
