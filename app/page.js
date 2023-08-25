@@ -263,7 +263,7 @@ export default function Home() {
             </p>
           </motion.a>
           <motion.h1
-            className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-4xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer>Deepfakes from any image</Balancer>
@@ -273,7 +273,12 @@ export default function Home() {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              Make anyone say anything. Just upload an image.
+              <span className="sm:hidden">
+                Make anyone say anything. Just upload image.
+              </span>
+              <span className="hidden sm:inline">
+                Make anyone say anything. Just upload an image.
+              </span>
             </Balancer>
           </motion.p>
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-4">
