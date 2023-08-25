@@ -728,7 +728,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
-            <div id="select image" className="mb-4">
+            <div id="select image" className="">
               <p className="block text-sm font-medium text-gray-700 mb-2">
                 Select media
               </p>
