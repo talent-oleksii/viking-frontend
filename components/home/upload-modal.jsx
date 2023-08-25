@@ -740,7 +740,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     alt=""
                     className={`rounded-md w-full cursor-pointer ${
                       selectedImage && selectedImage !== image.highResSrc
-                        ? "opacity-50"
+                        ? "opacity-30"
                         : "opacity-100"
                     }`}
                     onClick={() => handleImageClick(image.highResSrc)}
@@ -756,19 +756,19 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </p>
               </div>
               {imageUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   Image Uploaded ✅
                 </div>
               ) : (
                 <label
                   {...getImageRootProps()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
-                  <div className="flex flex-col items-center justify-center">
+                  <div className="flex sm:flex-col items-center justify-center">
                     <svg
                       aria-hidden="true"
-                      className="w-6 h-6 mb-1 text-gray-400"
+                      className="w-6 h-6 mb-1 text-gray-400 hidden sm:block"
                       fill="none"
                       stroke="#b5c6d1"
                       viewBox="0 0 24 24"
@@ -781,7 +781,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       ></path>
                     </svg>
-                    <p className="text-xs text-gray-400 ">Upload File</p>
+                    <p className="text-xs text-gray-400">Upload File</p>
                   </div>
                   <input
                     {...getImageInputProps()}
@@ -962,19 +962,19 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </p>
               </div>
               {audioUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   Audio Uploaded ✅
                 </div>
               ) : (
                 <label
                   {...getAudioRootProps()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
                   <div className="flex flex-col items-center justify-center">
                     <svg
                       aria-hidden="true"
-                      className="w-6 h-6 mb-1 text-gray-400"
+                      className="w-6 h-6 mb-1 text-gray-400 hidden sm:block"
                       fill="none"
                       stroke="#b5c6d1"
                       viewBox="0 0 24 24"
@@ -987,7 +987,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       ></path>
                     </svg>
-                    <p className="text-xs text-gray-400 ">Upload File</p>
+                    <p className="text-xs text-gray-400">Upload File</p>
                   </div>
                   <input
                     {...getAudioInputProps()}
