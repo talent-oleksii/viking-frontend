@@ -710,18 +710,18 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       <Toaster richColors position="top-right" />
       {currentStep === "image" ? (
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
-          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
+          <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <Image
                 src="/images/logo.png"
                 alt="Logo"
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10 rounded-full sm:mb-0 mb-2"
                 width={20}
                 height={20}
               />
             </a>
             <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
-            <Balancer className="text-sm text-gray-500">
+            <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
               Select sample media, or upload your own.
               <span className="hidden sm:inline"><br /></span>
               <span className="hidden sm:inline">Works with images and videos.</span>
@@ -817,18 +817,18 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         </div>
       ) : (
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
-          <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
+          <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <Image
                 src="/images/logo.png"
                 alt="Logo"
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10 rounded-full sm:mb-0 mb-2"
                 width={20}
                 height={20}
               />
             </a>
             <h3 className="font-clash text-2xl font-bold">Add Voice</h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
               Generate audio clips, or upload your own.
             </p>
           </div>

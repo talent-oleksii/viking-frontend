@@ -246,7 +246,7 @@ export default function Home() {
             href="https://twitter.com/TobyTabi"
             target="_blank"
             rel="noreferrer"
-            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
+            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-7 py-2 transition-colors hover:bg-blue-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
