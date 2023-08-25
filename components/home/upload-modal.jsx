@@ -695,7 +695,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const data = await response.json();
       console.log(data);
       // setFileUploaded(true);
-      
+
     } catch (error) {
       console.log(error.message);
       toast.error("Error processing. Please try again.");
@@ -719,15 +719,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 height={20}
               />
             </a>
-            <h3 className="font-clash text-2xl font-bold">Choose Image</h3>
+            <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
             <p className="text-sm text-gray-500">
-              Select an image, or upload your own.
+              Select provided media, or upload your own. Works with images and videos.
             </p>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">
             <div id="select image" className="mb-4">
               <p className="block text-sm font-medium text-gray-700 mb-2">
-                Select image
+                Select media
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {images.map((image) => (
@@ -749,7 +749,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             <div>
               <div className="flex items-center justify-between">
                 <p className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload image (optional)
+                  Upload media (optional)
                 </p>
               </div>
               {imageUploaded ? (
@@ -826,7 +826,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Add Voice</h3>
             <p className="text-sm text-gray-500">
-              Generate voice clip, or upload your own.
+              Generate audio clips, or upload your own.
             </p>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 py-8 md:px-16">

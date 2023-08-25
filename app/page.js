@@ -282,7 +282,7 @@ export default function Home() {
               onClick={() => setShowUploadModal(true)}
             >
               <Upload className="h-5 w-5 text-white" />
-              <p>Upload image</p>
+              <p>Image / Video</p>
             </button>
             <p className="mt-2.5 text-center text-sm text-gray-500">
               120.4K deepfakes generated and counting!
