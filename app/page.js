@@ -283,13 +283,13 @@ export default function Home() {
           </motion.p>
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-4">
             <button
-              className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
+              className="group mx-auto mt-3.5 sm:mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => setShowUploadModal(true)}
             >
               <Upload className="h-5 w-5 text-white" />
               <p>Image / Video</p>
             </button>
-            <p className="mt-2.5 text-center text-sm text-gray-500">
+            <p className="mt-3 sm:mt-2.5 text-center text-xs text-gray-500">
               120.4K deepfakes generated and counting!
             </p>
           </motion.div>
