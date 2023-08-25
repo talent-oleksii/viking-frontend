@@ -190,7 +190,6 @@ export default function Home() {
   const scrolled = useScroll(50);
   const { UploadModal, setShowUploadModal } = useUploadModal();
 
-
   return (
     <>
       <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
@@ -213,10 +212,13 @@ export default function Home() {
             <p>Deepfake.Pics</p>
           </Link>
           <div className="flex items-center space-x-4">
+            {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+              Pricing
+            </button> */}
             <button className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm">
               Pricing
             </button>
-            <button className="px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+            <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
               Sign Up
             </button>
           </div>
@@ -290,12 +292,15 @@ export default function Home() {
             className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video controls playsInline src="/videos/trump.mp4" poster="/images/trump1.png"></video>
+            <video
+              controls
+              playsInline
+              src="/videos/trump.mp4"
+              poster="/images/trump1.png"
+            ></video>
           </motion.div>
         </motion.div>
-        <motion.div>
-
-        </motion.div>
+        <motion.div></motion.div>
       </main>
     </>
   );

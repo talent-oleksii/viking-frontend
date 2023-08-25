@@ -243,21 +243,89 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   }, [data.image, saving]);
 
   const images = [
-    { highResSrc: "/images/trump2.png", thumbnailSrc: "/images/Ttrump2.png", id: "trump" },
-    { highResSrc: "/images/biden.png", thumbnailSrc: "/images/Tbiden.png", id: "biden" },
-    { highResSrc: "/images/elon.png", thumbnailSrc: "/images/Telon.png", id: "elon" },
-    { highResSrc: "/images/tucker.png", thumbnailSrc: "/images/Ttucker.png", id: "tucker" },
-    { highResSrc: "/images/rogan.png", thumbnailSrc: "/images/Trogan.png", id: "rogan" },
-    { highResSrc: "/images/beast.png", thumbnailSrc: "/images/Tbeast.png", id: "beast" },
-    { highResSrc: "/images/kanye.png", thumbnailSrc: "/images/Tkanye.png", id: "kanye" },
-    { highResSrc: "/images/kim.png", thumbnailSrc: "/images/Tkim.png", id: "kim" },
-    { highResSrc: "/images/lebron.png", thumbnailSrc: "/images/Tlebron.png", id: "lebron" },
+    {
+      highResSrc: "/images/trump2.png",
+      thumbnailSrc: "/images/Ttrump2.png",
+      id: "trump",
+    },
+    {
+      highResSrc: "/images/biden.png",
+      thumbnailSrc: "/images/Tbiden.png",
+      id: "biden",
+    },
+    {
+      highResSrc: "/images/elon.png",
+      thumbnailSrc: "/images/Telon.png",
+      id: "elon",
+    },
+    {
+      highResSrc: "/images/tucker.png",
+      thumbnailSrc: "/images/Ttucker.png",
+      id: "tucker",
+    },
+    {
+      highResSrc: "/images/rogan.png",
+      thumbnailSrc: "/images/Trogan.png",
+      id: "rogan",
+    },
+    {
+      highResSrc: "/images/beast.png",
+      thumbnailSrc: "/images/Tbeast.png",
+      id: "beast",
+    },
+    {
+      highResSrc: "/images/kanye.png",
+      thumbnailSrc: "/images/Tkanye.png",
+      id: "kanye",
+    },
+    {
+      highResSrc: "/images/kim.png",
+      thumbnailSrc: "/images/Tkim.png",
+      id: "kim",
+    },
+    {
+      highResSrc: "/images/lebron.png",
+      thumbnailSrc: "/images/Tlebron.png",
+      id: "lebron",
+    },
   ];
 
   const [imageFormData, setImageFormData] = useState(null);
   const [audioFormData, setAudioFormData] = useState(null);
 
   const [selectedImage, setSelectedImage] = useState(null);
+
+  // const handleImageClick = async (imageSrc) => {
+  //   console.log(`Image Source URL: ${imageSrc}`);
+  //   setSelectedImage(imageSrc);
+
+  //   const imgElement = new window.Image(); // use window.Image here
+  //   imgElement.src = imageSrc;
+
+  //   imgElement.onload = () => {
+  //     const canvas = document.createElement("canvas");
+  //     canvas.width = imgElement.width;
+  //     canvas.height = imgElement.height;
+
+  //     const ctx = canvas.getContext("2d");
+  //     ctx.drawImage(imgElement, 0, 0);
+
+  //     canvas.toBlob((blob) => {
+  //       const formData = new FormData();
+  //       formData.append("image", blob);
+
+  //       // Store the FormData object in state
+  //       setImageFormData(formData);
+
+  //       // Log FormData content for debugging
+  //       for (const [key, value] of formData.entries()) {
+  //         console.log(`${key}: ${value}`);
+  //       }
+  //     }, "image/jpeg");
+  //   };
+  // };
+
+  const [base64Image, setBase64Image] = useState(null);
 
   const handleImageClick = async (imageSrc) => {
     console.log(`Image Source URL: ${imageSrc}`);
@@ -274,18 +342,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const ctx = canvas.getContext("2d");
       ctx.drawImage(imgElement, 0, 0);
 
-      canvas.toBlob((blob) => {
-        const formData = new FormData();
-        formData.append("image", blob);
+      // Convert canvas to base64 data URI
+      const base64Image = canvas.toDataURL("image/jpeg");
 
-        // Store the FormData object in state
-        setImageFormData(formData);
+      // Store the base64 encoded image in state
+      setBase64Image(base64Image);
 
-        // Log FormData content for debugging
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}: ${value}`);
-        }
-      }, "image/jpeg");
+      // Log base64 image content for debugging
+      console.log(`Base64 Image: ${base64Image}`);
     };
   };
 
@@ -304,6 +368,34 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [audioUploaded, setAudioUploaded] = useState(false);
 
+  // const onImageDrop = useCallback((acceptedFiles) => {
+  //   acceptedFiles.forEach((file) => {
+  //     // Validate file type
+  //     console.log(file.type);
+  //     if (!file.type.startsWith("image/")) {
+  //       toast.error("Please only upload image files under 4MB");
+  //       return;
+  //     }
+
+  //     // setImageUploading(true);
+  //     const reader = new FileReader();
+
+  //     reader.onload = async () => {
+  //       const binaryStr = reader.result;
+
+  //       const formData = new FormData();
+  //       formData.append("name", "image");
+  //       formData.append("files", new Blob([binaryStr], { type: file.type }));
+
+  //       // Update state
+  //       setImageFormData(formData);
+  //       setImageUploaded(true);
+  //       // setImageUploading(false);
+  //     };
+  //     reader.readAsArrayBuffer(file);
+  //   });
+  // }, []);
+
   const onImageDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       // Validate file type
@@ -313,22 +405,21 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         return;
       }
 
-      // setImageUploading(true);
       const reader = new FileReader();
 
       reader.onload = async () => {
-        const binaryStr = reader.result;
+        const dataUrl = reader.result;
 
-        const formData = new FormData();
-        formData.append("name", "image");
-        formData.append("files", new Blob([binaryStr], { type: file.type }));
-
-        // Update state
-        setImageFormData(formData);
+        // Now dataUrl is a Base64 encoded Data URL you can use
+        // Update state or send to server as needed
+        setBase64Image(dataUrl);
         setImageUploaded(true);
-        // setImageUploading(false);
+
+        // Log base64 image content for debugging
+        console.log(`Base64 Image: ${dataUrl}`);
       };
-      reader.readAsArrayBuffer(file);
+
+      reader.readAsDataURL(file);
     });
   }, []);
 
@@ -337,7 +428,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   //     // Validate file type
   //     console.log(file.type);
   //     if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-  //       toast.error("Please only upload MP3 files under 4MB");
+  //       toast.error("Please only upload MP3 files.");
   //       return;
   //     }
 
@@ -347,18 +438,43 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   //     reader.onload = async () => {
   //       const binaryStr = reader.result;
 
-  //       const formData = new FormData();
-  //       formData.append("name", "audio");
-  //       formData.append("files", new Blob([binaryStr], { type: file.type }));
+  //       // Create an AudioContext
+  //       const audioContext = new (window.AudioContext ||
+  //         window.webkitAudioContext)();
 
-  //       // Update audio state
-  //       setAudioFormData(formData);
-  //       setAudioUploaded(true);
-  //       // setAudioUploading(false);
+  //       // Decode the audio data
+  //       audioContext
+  //         .decodeAudioData(binaryStr)
+  //         .then((audioBuffer) => {
+  //           const duration = audioBuffer.duration; // Get duration in seconds
+  //           if (duration >= 30) {
+  //             toast.error("Please upload MP3 file shorter than 30 seconds");
+  //             return;
+  //           }
+
+  //           const formData = new FormData();
+  //           // formData.append("name", "audio");
+  //           formData.append(
+  //             "audio",
+  //             new Blob([binaryStr], { type: file.type })
+  //           );
+
+  //           // Update audio state
+  //           setAudioFormData(formData);
+  //           setAudioUploaded(true);
+  //           // setAudioUploading(false);
+  //         })
+  //         .catch((error) => {
+  //           toast.error("Failed to decode audio file.");
+  //           console.error(error);
+  //         });
   //     };
+
   //     reader.readAsArrayBuffer(file);
   //   });
   // }, []);
+
+  const [base64Audio, setBase64Audio] = useState(null);
 
   const onAudioDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -373,15 +489,24 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const reader = new FileReader();
 
       reader.onload = async () => {
-        const binaryStr = reader.result;
+        const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
 
         // Create an AudioContext
         const audioContext = new (window.AudioContext ||
           window.webkitAudioContext)();
 
+        // Convert Base64 to ArrayBuffer
+        const base64 = dataUrl.split(",")[1];
+        const binaryString = atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
         // Decode the audio data
         audioContext
-          .decodeAudioData(binaryStr)
+          .decodeAudioData(bytes.buffer)
           .then((audioBuffer) => {
             const duration = audioBuffer.duration; // Get duration in seconds
             if (duration >= 30) {
@@ -389,15 +514,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               return;
             }
 
-            const formData = new FormData();
-            // formData.append("name", "audio");
-            formData.append(
-              "audio",
-              new Blob([binaryStr], { type: file.type })
-            );
-
             // Update audio state
-            setAudioFormData(formData);
+            setBase64Audio(dataUrl); // Store the Data URI in the state
             setAudioUploaded(true);
             // setAudioUploading(false);
           })
@@ -406,8 +524,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             console.error(error);
           });
       };
-
-      reader.readAsArrayBuffer(file);
+      reader.readAsDataURL(file); // Read the file as a Data URL
     });
   }, []);
 
@@ -420,11 +537,58 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [shouldReplicate, setShouldReplicate] = useState(false);
 
   useEffect(() => {
-    if (audioFormData && shouldReplicate) {
+    if (base64Audio && shouldReplicate) {
       replicate();
-      setShouldReplicate(false);  // Reset the flag
+      setShouldReplicate(false); // Reset the flag
     }
-  }, [audioFormData, shouldReplicate]);
+  }, [base64Audio, shouldReplicate]);
+
+  // const TTS = async () => {
+  //   const text = textRef.current.value;
+  //   const selectedVoice = voiceRef.current;
+
+  //   console.log(text);
+  //   console.log(selectedVoice);
+
+  //   try {
+  //     const response = await fetch("/api/TTS", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         message: text,
+  //         voice: selectedVoice,
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Something went wrong");
+  //     }
+
+  //     console.log("*******");
+
+  //     // Create a blob from the response
+  //     const audioBlob = await response.blob();
+
+  //     // Create FormData and append the blob to it
+  //     const formData = new FormData();
+  //     formData.append("audio", audioBlob, "audio.mp3"); // Assuming audio is in mp3 format
+
+  //     // Save the FormData into state
+  //     setAudioFormData(formData);
+  //     setShouldReplicate(true);
+
+  //     // // Play the audio
+  //     // const audioBlobUrl = URL.createObjectURL(await response.blob());
+  //     // const audioElement = new Audio(audioBlobUrl);
+  //     // audioElement.play();
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   } finally {
+  //     // setTTSLoading(false);
+  //   }
+  // };
 
   const TTS = async () => {
     const text = textRef.current.value;
@@ -449,23 +613,23 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         throw new Error("Something went wrong");
       }
 
-      console.log("*******");
-
       // Create a blob from the response
       const audioBlob = await response.blob();
 
-      // Create FormData and append the blob to it
-      const formData = new FormData();
-      formData.append("audio", audioBlob, "audio.mp3"); // Assuming audio is in mp3 format
+      // Convert blob to Base64 Data URI
+      const reader = new FileReader();
+      reader.readAsDataURL(audioBlob);
+      reader.onloadend = () => {
+        const base64Audio = reader.result;
 
-      // Save the FormData into state
-      setAudioFormData(formData);
-      setShouldReplicate(true);
+        // Save the Base64 audio Data URI into state
+        setBase64Audio(base64Audio); // Store the Data URI in the state
+        setShouldReplicate(true);
 
-      // // Play the audio
-      // const audioBlobUrl = URL.createObjectURL(await response.blob());
-      // const audioElement = new Audio(audioBlobUrl);
-      // audioElement.play();
+        // // Optionally, play the audio
+        // const audioElement = new Audio(base64Audio);
+        // audioElement.play();
+      };
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -473,26 +637,54 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     }
   };
 
+  // const replicate = async () => {
+  //   console.log("inside replicate");
+
+  //   // Create a new FormData object to hold the final form data
+  //   const finalFormData = new FormData();
+
+  //   // Merge imageFormData into finalFormData
+  //   for (const [key, value] of imageFormData) {
+  //     finalFormData.append(key, value);
+  //   }
+
+  //   // Merge audioFormData into finalFormData
+  //   for (const [key, value] of audioFormData) {
+  //     finalFormData.append(key, value);
+  //   }
+
+  //   try {
+  //     const response = await fetch("/api/predictions", {
+  //       method: "POST",
+  //       body: finalFormData,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Replicate failed");
+  //     }
+
+  //     // Handle response data here
+  //     const data = await response.json();
+  //     console.log(data);
+  //     // setFileUploaded(true);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     toast.error("Error processing. Please try again.");
+  //   } finally {
+  //     // setUploadLoading(false);
+  //   }
+  // };
+
   const replicate = async () => {
     console.log("inside replicate");
-
-    // Create a new FormData object to hold the final form data
-    const finalFormData = new FormData();
-
-    // Merge imageFormData into finalFormData
-    for (const [key, value] of imageFormData) {
-      finalFormData.append(key, value);
-    }
-
-    // Merge audioFormData into finalFormData
-    for (const [key, value] of audioFormData) {
-      finalFormData.append(key, value);
-    }
 
     try {
       const response = await fetch("/api/predictions", {
         method: "POST",
-        body: finalFormData,
+        body: JSON.stringify({
+          image: base64Image,
+          audio: base64Audio,
+        }),
       });
 
       if (!response.ok) {
@@ -503,6 +695,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const data = await response.json();
       console.log(data);
       // setFileUploaded(true);
+      
     } catch (error) {
       console.log(error.message);
       toast.error("Error processing. Please try again.");
@@ -598,7 +791,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div>
 
             <button
-              disabled={!imageFormData}
+              disabled={!base64Image}
               onClick={() => {
                 event.preventDefault();
                 if (currentStep === "image") {
@@ -606,7 +799,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !imageFormData
+                !base64Image
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
@@ -671,7 +864,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                       >
-                        <Listbox.Options className="absolute z-10 mt-1 max-h-[66vh] sm:max-h-[370px] w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Listbox.Options className="absolute z-10 mt-1 max-h-[66vh] sm:max-h-[380px] w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           {people.map((person) => (
                             <Listbox.Option
                               key={person.id}
@@ -804,13 +997,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div>
 
             <button
-              disabled={!audioFormData && !message.trim()}
+              disabled={!base64Audio && !message.trim()}
               onClick={() => {
                 event.preventDefault();
                 message.trim() ? TTS() : replicate();
               }}
               className={`${
-                !audioFormData && !message.trim()
+                !base64Audio && !message.trim()
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
