@@ -262,7 +262,7 @@ export default function Home() {
             >
               <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
                 <h5 className="mb-4 text-lg font-medium text-gray-800 ">
-                  Hobby
+                  Starter
                 </h5>
                 <div className="flex items-baseline text-gray-900 ">
                   <span className="text-3xl font-semibold text-gray-500 ">

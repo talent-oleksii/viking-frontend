@@ -17,7 +17,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useDropzone } from "react-dropzone";
 import { Toaster, toast } from "sonner";
-import { MoonLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import Balancer from "react-wrap-balancer";
 
 const people = [
@@ -298,7 +298,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const [base64Image, setBase64Image] = useState(null);
 
+  // const [imageLoading, setImageLoading] = useState(false);
+  const [imageButton, setImageButton] = useState(false);
+  const [generating, setGenerating] = useState(false);
+
   const handleImageClick = async (imageSrc) => {
+    // setImageLoading(true);
+    setImageButton(true);
+
     console.log(`Image Source URL: ${imageSrc}`);
     setSelectedImage(imageSrc);
 
@@ -318,9 +325,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
       // Store the base64 encoded image in state
       setBase64Image(base64Image);
-
-      // Log base64 image content for debugging
       console.log(`Base64 Image: ${base64Image}`);
+
+      // setImageLoading(false);
     };
   };
 
@@ -502,16 +509,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const videoURL = await response.json(); // Assuming the server returns just the video URL
       console.log(videoURL);
 
-      const parts = videoURL.split('/');
+      const parts = videoURL.split("/");
       const videoID = parts[parts.length - 2]; // Extract the unique ID from the URL
 
       router.push(`/${videoID}`);
-
     } catch (error) {
       console.log(error.message);
       toast.error("Error processing. Please try again.");
-    } finally {
-      // setUploadLoading(false);
     }
   };
 
@@ -533,8 +537,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
               Select sample media, or upload your own.
-              <span className="hidden sm:inline"><br /></span>
-              <span className="hidden sm:inline">Works with images and videos.</span>
+              <span className="hidden sm:inline">
+                <br />
+              </span>
+              <span className="hidden sm:inline">
+                Works with images and videos.
+              </span>
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
@@ -604,7 +612,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div>
 
             <button
-              disabled={!base64Image}
+              disabled={!imageButton}
               onClick={() => {
                 event.preventDefault();
                 if (currentStep === "image") {
@@ -612,16 +620,17 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !base64Image
+                !imageButton
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
-              {saving ? (
-                <LoadingDots color="#808080" />
+              <p className="text-sm">Next step</p>
+              {/* {imageLoading ? (
+                <BeatLoader size="8" color="#808080" />
               ) : (
                 <p className="text-sm">Next step</p>
-              )}
+              )} */}
             </button>
           </form>
         </div>
@@ -813,6 +822,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               disabled={!base64Audio && !message.trim()}
               onClick={() => {
                 event.preventDefault();
+                setGenerating(true)
                 message.trim() ? TTS() : replicate();
               }}
               className={`${
@@ -821,8 +831,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
-              {saving ? (
-                <LoadingDots color="#808080" />
+              {generating ? (
+                <BeatLoader size="8" color="#898989" />
               ) : (
                 <p className="text-sm">Generate</p>
               )}

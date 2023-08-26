@@ -15,7 +15,7 @@ export async function POST(request) {
             text: message,
             model_id: "eleven_multilingual_v2",
             voice_settings: {
-              stability: 0.7,
+              stability: 0.5,
               similarity_boost: 1,
               use_speaker_boost: true,
             },
