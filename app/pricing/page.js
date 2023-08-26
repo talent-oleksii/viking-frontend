@@ -333,7 +333,7 @@ export default function Home() {
                     </span>
                   </li> */}
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
@@ -413,7 +413,7 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
@@ -504,7 +504,7 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
