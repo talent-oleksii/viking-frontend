@@ -760,14 +760,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <textarea
                   id="message"
                   rows="6"
-                  maxLength="250"
+                  maxLength="300"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0 focus:ring-0"
                   placeholder="You can generate speech in any language!"
                   ref={textRef}
                   onChange={(e) => {
                     setMessage(e.target.value);
-                    if (e.target.value.length > 250) {
-                      toast.error("Max length 250 characters");
+                    if (e.target.value.length > 300) {
+                      toast.error("Max length 300 characters");
                     }
                   }}
                 />
@@ -806,7 +806,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       ></path>
                     </svg>
-                    <p className="text-xs text-gray-400">Upload File</p>
+                    <p className="text-xs text-gray-400">Tip: Clone any voice at voice-clone.ai</p>
                   </div>
                   <input
                     {...getAudioInputProps()}
