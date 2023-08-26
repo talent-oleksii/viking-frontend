@@ -23,6 +23,87 @@ function PredictionPage({ params }) {
   const scrolled = useScroll(50);
   const router = useRouter();
 
+  const supabase = createClientComponentClient();
+  const [session, setSession] = useState(null);
+  const [isSessionLoaded, setIsSessionLoaded] = useState(false);
+  const [subscription, setSubscription] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+  const [lemonURL, setLemonURL] = useState("");
+
+  useEffect(() => {
+    // Get the initial session state when component first loads
+    setSession(supabase.auth.session);
+
+    // Subscribe to session changes (logged in or logged out)
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, newSession) => {
+        // console.log('New session:', newSession);
+        setSession(newSession);
+        setIsSessionLoaded(true); // Setting the session as loaded
+      }
+    );
+
+    // Unsubscribe when unmounting the component
+    // return () => {
+    //   authListener.unsubscribe();
+    // };
+  }, []);
+
+  useEffect(() => {
+    checkSubscription();
+    getUserData();
+  }, [session]);
+
+  const handleGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  };
+
+  const checkSubscription = async () => {
+    if (!session || !session.user) {
+      console.log("No session or user found");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("is_active")
+      .eq("email", session.user.email);
+
+    console.log(session.user.email);
+
+    // console.log(data);
+    // console.log(data[0].is_active);
+
+    if (data[0].is_active === true) {
+      setSubscription(true);
+      console.log("Subscription is active");
+    } else {
+      setSubscription(false);
+      console.log("Subscription is not active");
+    }
+  };
+
+  const getUserData = async () => {
+    if (!session) {
+      console.log("No session found");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select()
+      .eq("email", session.user.email);
+
+    console.log(session.user.email);
+    console.log(session);
+    console.log(data);
+    console.log(data[0].tokens);
+
+    setUserInfo(data[0]);
+  };
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
@@ -54,9 +135,15 @@ function PredictionPage({ params }) {
             >
               Pricing
             </button>
-            <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Sign Up
-            </button>
+            {session ? (
+              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Credits: {userInfo.tokens}
+              </button>
+            ) : (
+              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Sign Up
+              </button>
+            )}
           </div>
         </div>
       </div>

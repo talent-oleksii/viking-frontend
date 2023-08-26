@@ -192,9 +192,15 @@ export default function Home() {
             >
               Pricing
             </button>
-            <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Sign Up
-            </button>
+            {session ? (
+              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Credits: {userInfo.tokens}
+              </button>
+            ) : (
+              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Sign Up
+              </button>
+            )}
           </div>
         </div>
       </div>

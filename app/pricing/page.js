@@ -192,9 +192,15 @@ export default function Home() {
             >
               Pricing
             </button>
-            <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Sign Up
-            </button>
+            {session ? (
+              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Credits: {userInfo.tokens}
+              </button>
+            ) : (
+              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+                Sign Up
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -276,9 +282,9 @@ export default function Home() {
                   </span>
                 </div>
                 <ul role="list" className="space-y-4 my-8">
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -286,13 +292,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       10 credits / mo
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -300,13 +306,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Images + videos
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -314,13 +320,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       AI voices (English)
                     </span>
                   </li>
-                  {/* <li class="flex space-x-3 line-through decoration-gray-500">
+                  {/* <li className="flex space-x-3 line-through decoration-gray-500">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-gray-400 "
+                      className="flex-shrink-0 w-4 h-4 text-gray-400 "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -328,12 +334,12 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500">
+                    <span className="text-base font-normal leading-tight text-gray-500">
                       Available in 5 languages
                     </span>
                   </li> */}
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
@@ -356,9 +362,9 @@ export default function Home() {
                   </span>
                 </div>
                 <ul role="list" className="space-y-4 my-8">
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -366,13 +372,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       100 credits / mo
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -380,13 +386,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Images + videos
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -394,13 +400,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       AI voices (Multilingual)
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -408,12 +414,12 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Custom uploads
                     </span>
                   </li>
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
@@ -433,9 +439,9 @@ export default function Home() {
                   </span>
                 </div>
                 <ul role="list" className="space-y-4 my-8">
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -443,13 +449,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Unlimited credits
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -457,13 +463,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Images + videos
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -471,13 +477,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       AI voices (Multilingual)
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -485,13 +491,13 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Custom uploads
                     </span>
                   </li>
-                  <li class="flex space-x-3 items-center">
+                  <li className="flex space-x-3 items-center">
                     <svg
-                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      className="flex-shrink-0 w-4 h-4 text-neworange "
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -499,12 +505,12 @@ export default function Home() {
                     >
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                    <span className="text-base font-normal leading-tight text-gray-500 ">
                       Professional quality
                     </span>
                   </li>
                 </ul>
-                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                   Choose Plan
                 </button>
               </div>
