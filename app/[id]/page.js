@@ -23,13 +23,6 @@ function PredictionPage({ params }) {
   const scrolled = useScroll(50);
   const router = useRouter();
 
-  const videoRef = useRef(null);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
-
-  const handleVideoLoaded = () => {
-    setIsVideoLoading(false);
-  };
-
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
@@ -123,18 +116,11 @@ function PredictionPage({ params }) {
             className="group relative mx-auto mt-10 w-full overflow-hidden rounded-2xl border border-gray-200 focus:ring-0"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            {isVideoLoading && (
-              <div
-                class="h-60 sm:h-[400px] w-full bg-gray-300 animate-pulse"
-              />
-            )}
             <video
               controls
               playsInline
               src={videoURL}
-              ref={videoRef}
-              onLoadedData={handleVideoLoaded}
-            />
+            ></video>
           </motion.div>
         </motion.div>
         <motion.div></motion.div>
