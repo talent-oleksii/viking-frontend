@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import Balancer from "react-wrap-balancer";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const supabase = createClientComponentClient();
@@ -22,6 +23,7 @@ export default function Home() {
   const [subscription, setSubscription] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [lemonURL, setLemonURL] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     // Get the initial session state when component first loads
@@ -184,7 +186,10 @@ export default function Home() {
             {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
               Pricing
             </button> */}
-            <button className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm">
+            <button
+              onClick={() => router.push("/pricing")}
+              className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
+            >
               Pricing
             </button>
             <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
@@ -196,7 +201,7 @@ export default function Home() {
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
         <UploadModal />
         <motion.div
-          className="z-10 max-w-2xl px-5 xl:px-0"
+          className="z-10 max-w-5xl px-5 xl:px-0"
           initial="hidden"
           whileInView="show"
           animate="show"
@@ -210,17 +215,12 @@ export default function Home() {
             },
           }}
         >
-          <motion.a
+          <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
-            href="https://twitter.com/TobyTabi"
-            target="_blank"
-            rel="noreferrer"
-            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-7 py-2 transition-colors hover:bg-blue-200"
+            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-7 py-2 transition-colors"
           >
-            <p className="text-sm font-semibold text-[#1d9bf0]">
-              Pricing
-            </p>
-          </motion.a>
+            <p className="text-sm font-semibold text-[#1d9bf0]">Pricing</p>
+          </motion.div>
           <motion.h1
             className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
@@ -232,9 +232,9 @@ export default function Home() {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              {/* <span className="sm:hidden">
-                Just one click away.
-              </span> */}
+              <span className="sm:hidden">
+                Just one click away. Get started now.
+              </span>
               <span className="hidden sm:inline">
                 You're one click away. Get started now.
               </span>
@@ -253,15 +253,262 @@ export default function Home() {
             </p>
           </motion.div> */}
           <motion.div
-            className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
+            className="group relative mx-auto pt-10 sm:pt-11 w-full overflow-hidden rounded-2xl focus:ring-0 "
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video
-              controls
-              playsInline
-              src="/videos/trump.mp4"
-              poster="/images/trump1.png"
-            ></video>
+            <div
+              id="pricing"
+              className="flex flex-col sm:flex-row gap-8 sm:gap-5 items-start pb-2 sm:px-0 px-7"
+            >
+              <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
+                <h5 className="mb-4 text-lg font-medium text-gray-800 ">
+                  Hobby
+                </h5>
+                <div className="flex items-baseline text-gray-900 ">
+                  <span className="text-3xl font-semibold text-gray-500 ">
+                    $
+                  </span>
+                  <span className="text-5xl font-extrabold tracking-tight">
+                    9
+                  </span>
+                  <span className="ml-1 text-xl font-semibold text-gray-500 ">
+                    USD
+                  </span>
+                </div>
+                <ul role="list" className="space-y-4 my-8">
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      10 credits / mo
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Images + videos
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      AI voices (English)
+                    </span>
+                  </li>
+                  {/* <li class="flex space-x-3 line-through decoration-gray-500">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-gray-400 "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500">
+                      Available in 5 languages
+                    </span>
+                  </li> */}
+                </ul>
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                  Choose Plan
+                </button>
+              </div>
+              <div className="relative w-full sm:w-[280px] px-8 py-7 bg-white border border-sky-200 shadow-xl rounded-[17px] sm:px-8 sm:py-7">
+                <small className="text-white absolute -top-3 right-5  bg-gradient-to-r from-sky-300 to-[#5C9CF4] font-normal rounded-full px-2.5 py-1 text-xs ml-auto">
+                  Most popular
+                </small>
+                <h5 className="mb-4 text-lg font-medium animate-text-shimmer text-transparent bg-clip-text bg-gradient-to-r bg-[length:250%_100%] from-sky-400 via-fuchsia-400 to-sky-400 opacity-90">
+                  Legend
+                </h5>
+                <div className="flex items-baseline text-gray-900 ">
+                  <span className="text-3xl font-semibold text-gray-500 ">
+                    $
+                  </span>
+                  <span className="text-5xl font-extrabold tracking-tight">
+                    19
+                  </span>
+                  <span className="ml-1 text-xl font-semibold text-gray-500 ">
+                    USD
+                  </span>
+                </div>
+                <ul role="list" className="space-y-4 my-8">
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      100 credits / mo
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Images + videos
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      AI voices (Multilingual)
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Custom uploads
+                    </span>
+                  </li>
+                </ul>
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                  Choose Plan
+                </button>
+              </div>
+              <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
+                <h5 className="mb-4 text-lg font-medium text-gray-800 ">
+                  Elite
+                </h5>
+                <div className="flex items-baseline text-gray-900 ">
+                  <span className="text-3xl font-semibold text-gray-500 ">
+                    $
+                  </span>
+                  <span className="text-5xl font-extrabold tracking-tight">
+                    49
+                  </span>
+                  <span className="ml-1 text-xl font-semibold text-gray-500 ">
+                    USD
+                  </span>
+                </div>
+                <ul role="list" className="space-y-4 my-8">
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Unlimited credits
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Images + videos
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      AI voices (Multilingual)
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Custom uploads
+                    </span>
+                  </li>
+                  <li class="flex space-x-3 items-center">
+                    <svg
+                      class="flex-shrink-0 w-4 h-4 text-neworange "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="text-base font-normal leading-tight text-gray-500 ">
+                      Professional quality
+                    </span>
+                  </li>
+                </ul>
+                <button class="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center">
+                  Choose Plan
+                </button>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
         <motion.div></motion.div>

@@ -14,12 +14,14 @@ import { motion } from "framer-motion";
 import Balancer from "react-wrap-balancer";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Upload } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 function PredictionPage({ params }) {
   const videoURL = `https://pbxt.replicate.delivery/${params.id}/result_voice.mp4`;
   console.log(params);
 
   const scrolled = useScroll(50);
+  const router = useRouter();
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
@@ -46,7 +48,10 @@ function PredictionPage({ params }) {
             {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
               Pricing
             </button> */}
-            <button className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm">
+            <button
+              onClick={() => router.push("/pricing")}
+              className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
+            >
               Pricing
             </button>
             <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
@@ -76,7 +81,7 @@ function PredictionPage({ params }) {
             href="https://twitter.com/intent/tweet?text=Just%20made%20this%20awesome%20video%20with%20deepfake.pics%20created%20by%20%40TobyTabi%20%F0%9F%94%A5%0A%0A%28please%20upload%20video%29"
             target="_blank"
             rel="noreferrer"
-            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-7 py-2 transition-colors hover:bg-blue-200"
+            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

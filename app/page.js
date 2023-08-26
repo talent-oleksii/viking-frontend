@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import Balancer from "react-wrap-balancer";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const supabase = createClientComponentClient();
@@ -22,6 +23,7 @@ export default function Home() {
   const [subscription, setSubscription] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [lemonURL, setLemonURL] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     // Get the initial session state when component first loads
@@ -184,7 +186,10 @@ export default function Home() {
             {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
               Pricing
             </button> */}
-            <button className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm">
+            <button
+              onClick={() => router.push("/pricing")}
+              className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
+            >
               Pricing
             </button>
             <button className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
@@ -215,7 +220,7 @@ export default function Home() {
             href="https://twitter.com/TobyTabi"
             target="_blank"
             rel="noreferrer"
-            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-7 py-2 transition-colors hover:bg-blue-200"
+            className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +255,10 @@ export default function Home() {
               </span>
             </Balancer>
           </motion.p>
-          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="-mb-3 sm:-mb-3">
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className="-mb-3 sm:-mb-3"
+          >
             <button
               className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => setShowUploadModal(true)}

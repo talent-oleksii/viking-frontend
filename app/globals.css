@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes text-shimmer {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  .animate-text-shimmer {
+      animation: text-shimmer 2.5s ease-out infinite alternate;
+  }
+  
