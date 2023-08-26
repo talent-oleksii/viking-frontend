@@ -258,7 +258,7 @@ export default function Home() {
           >
             <div
               id="pricing"
-              className="flex flex-col sm:flex-row gap-8 sm:gap-5 items-start pb-2 sm:px-0 px-7"
+              className="flex flex-col sm:flex-row gap-8 sm:gap-6 items-start pb-2 sm:px-0 px-7"
             >
               <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
                 <h5 className="mb-4 text-lg font-medium text-gray-800 ">
