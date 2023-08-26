@@ -499,9 +499,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       }
 
       // Handle response data here
-      const data = await response.json();
-      console.log(data);
-      // setFileUploaded(true);
+      const videoURL = await response.json(); // Assuming the server returns just the video URL
+      console.log(videoURL);
+
+      const parts = videoURL.split('/');
+      const videoID = parts[parts.length - 2]; // Extract the unique ID from the URL
+
+      router.push(`/${videoID}`);
 
     } catch (error) {
       console.log(error.message);
