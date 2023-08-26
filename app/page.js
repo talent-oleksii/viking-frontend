@@ -156,37 +156,6 @@ export default function Home() {
     LemonSqueezy.Url.Open(lemonURL);
   };
 
-  // const summarize = async (transcript) => {
-  //   setIsSummarizing(true);
-  //   console.log("Transcript:", transcript);
-
-  //   try {
-  //     const response = await fetch("/api/summarize", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         text: transcript,
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Server responded with ${response.status} for summarize`
-  //       );
-  //     } else {
-  //       await reduceTokens({ value: 1 }).then(async (res) => {
-  //         setUserInfo(res.data[0]);
-  //         const data = await response.json();
-  //         console.log(data);
-  //         setSummary(data);
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   } finally {
-  //     setIsSummarizing(false);
-  //   }
-  // };
-
   const scrolled = useScroll(50);
   const { UploadModal, setShowUploadModal } = useUploadModal();
 

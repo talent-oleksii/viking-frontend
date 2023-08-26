@@ -296,36 +296,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // const handleImageClick = async (imageSrc) => {
-  //   console.log(`Image Source URL: ${imageSrc}`);
-  //   setSelectedImage(imageSrc);
-
-  //   const imgElement = new window.Image(); // use window.Image here
-  //   imgElement.src = imageSrc;
-
-  //   imgElement.onload = () => {
-  //     const canvas = document.createElement("canvas");
-  //     canvas.width = imgElement.width;
-  //     canvas.height = imgElement.height;
-
-  //     const ctx = canvas.getContext("2d");
-  //     ctx.drawImage(imgElement, 0, 0);
-
-  //     canvas.toBlob((blob) => {
-  //       const formData = new FormData();
-  //       formData.append("image", blob);
-
-  //       // Store the FormData object in state
-  //       setImageFormData(formData);
-
-  //       // Log FormData content for debugging
-  //       for (const [key, value] of formData.entries()) {
-  //         console.log(`${key}: ${value}`);
-  //       }
-  //     }, "image/jpeg");
-  //   };
-  // };
-
   const [base64Image, setBase64Image] = useState(null);
 
   const handleImageClick = async (imageSrc) => {
@@ -369,34 +339,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [audioUploaded, setAudioUploaded] = useState(false);
 
-  // const onImageDrop = useCallback((acceptedFiles) => {
-  //   acceptedFiles.forEach((file) => {
-  //     // Validate file type
-  //     console.log(file.type);
-  //     if (!file.type.startsWith("image/")) {
-  //       toast.error("Please only upload image files under 4MB");
-  //       return;
-  //     }
-
-  //     // setImageUploading(true);
-  //     const reader = new FileReader();
-
-  //     reader.onload = async () => {
-  //       const binaryStr = reader.result;
-
-  //       const formData = new FormData();
-  //       formData.append("name", "image");
-  //       formData.append("files", new Blob([binaryStr], { type: file.type }));
-
-  //       // Update state
-  //       setImageFormData(formData);
-  //       setImageUploaded(true);
-  //       // setImageUploading(false);
-  //     };
-  //     reader.readAsArrayBuffer(file);
-  //   });
-  // }, []);
-
   const onImageDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       // Validate file type
@@ -423,57 +365,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       reader.readAsDataURL(file);
     });
   }, []);
-
-  // const onAudioDrop = useCallback((acceptedFiles) => {
-  //   acceptedFiles.forEach((file) => {
-  //     // Validate file type
-  //     console.log(file.type);
-  //     if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-  //       toast.error("Please only upload MP3 files.");
-  //       return;
-  //     }
-
-  //     // setAudioUploading(true);
-  //     const reader = new FileReader();
-
-  //     reader.onload = async () => {
-  //       const binaryStr = reader.result;
-
-  //       // Create an AudioContext
-  //       const audioContext = new (window.AudioContext ||
-  //         window.webkitAudioContext)();
-
-  //       // Decode the audio data
-  //       audioContext
-  //         .decodeAudioData(binaryStr)
-  //         .then((audioBuffer) => {
-  //           const duration = audioBuffer.duration; // Get duration in seconds
-  //           if (duration >= 30) {
-  //             toast.error("Please upload MP3 file shorter than 30 seconds");
-  //             return;
-  //           }
-
-  //           const formData = new FormData();
-  //           // formData.append("name", "audio");
-  //           formData.append(
-  //             "audio",
-  //             new Blob([binaryStr], { type: file.type })
-  //           );
-
-  //           // Update audio state
-  //           setAudioFormData(formData);
-  //           setAudioUploaded(true);
-  //           // setAudioUploading(false);
-  //         })
-  //         .catch((error) => {
-  //           toast.error("Failed to decode audio file.");
-  //           console.error(error);
-  //         });
-  //     };
-
-  //     reader.readAsArrayBuffer(file);
-  //   });
-  // }, []);
 
   const [base64Audio, setBase64Audio] = useState(null);
 
@@ -544,53 +435,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     }
   }, [base64Audio, shouldReplicate]);
 
-  // const TTS = async () => {
-  //   const text = textRef.current.value;
-  //   const selectedVoice = voiceRef.current;
-
-  //   console.log(text);
-  //   console.log(selectedVoice);
-
-  //   try {
-  //     const response = await fetch("/api/TTS", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         message: text,
-  //         voice: selectedVoice,
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Something went wrong");
-  //     }
-
-  //     console.log("*******");
-
-  //     // Create a blob from the response
-  //     const audioBlob = await response.blob();
-
-  //     // Create FormData and append the blob to it
-  //     const formData = new FormData();
-  //     formData.append("audio", audioBlob, "audio.mp3"); // Assuming audio is in mp3 format
-
-  //     // Save the FormData into state
-  //     setAudioFormData(formData);
-  //     setShouldReplicate(true);
-
-  //     // // Play the audio
-  //     // const audioBlobUrl = URL.createObjectURL(await response.blob());
-  //     // const audioElement = new Audio(audioBlobUrl);
-  //     // audioElement.play();
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   } finally {
-  //     // setTTSLoading(false);
-  //   }
-  // };
-
   const TTS = async () => {
     const text = textRef.current.value;
     const selectedVoice = voiceRef.current;
@@ -624,7 +468,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         const base64Audio = reader.result;
 
         // Save the Base64 audio Data URI into state
-        setBase64Audio(base64Audio); // Store the Data URI in the state
+        setBase64Audio(base64Audio);
         setShouldReplicate(true);
 
         // // Optionally, play the audio
@@ -637,44 +481,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       // setTTSLoading(false);
     }
   };
-
-  // const replicate = async () => {
-  //   console.log("inside replicate");
-
-  //   // Create a new FormData object to hold the final form data
-  //   const finalFormData = new FormData();
-
-  //   // Merge imageFormData into finalFormData
-  //   for (const [key, value] of imageFormData) {
-  //     finalFormData.append(key, value);
-  //   }
-
-  //   // Merge audioFormData into finalFormData
-  //   for (const [key, value] of audioFormData) {
-  //     finalFormData.append(key, value);
-  //   }
-
-  //   try {
-  //     const response = await fetch("/api/predictions", {
-  //       method: "POST",
-  //       body: finalFormData,
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Replicate failed");
-  //     }
-
-  //     // Handle response data here
-  //     const data = await response.json();
-  //     console.log(data);
-  //     // setFileUploaded(true);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //     toast.error("Error processing. Please try again.");
-  //   } finally {
-  //     // setUploadLoading(false);
-  //   }
-  // };
 
   const replicate = async () => {
     console.log("inside replicate");

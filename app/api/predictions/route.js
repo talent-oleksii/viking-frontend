@@ -19,10 +19,8 @@ export async function POST(request) {
       }
     );
 
-    const data = await response.json()
-    console.log(data)
-
-    return new Response(JSON.stringify(data));
+    console.log(response)
+    return new Response(JSON.stringify(response));
 
   } catch (error) {
     console.error("Server Error:", error);
