@@ -425,14 +425,14 @@ export default function Home() {
               </div>
               <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
                 <h5 className="mb-4 text-lg font-medium text-gray-800 ">
-                  Elite
+                  Professional
                 </h5>
                 <div className="flex items-baseline text-gray-900 ">
                   <span className="text-3xl font-semibold text-gray-500 ">
                     $
                   </span>
                   <span className="text-5xl font-extrabold tracking-tight">
-                    49
+                    99
                   </span>
                   <span className="ml-1 text-xl font-semibold text-gray-500 ">
                     USD
