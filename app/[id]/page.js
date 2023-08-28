@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import va from '@vercel/analytics';
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -126,21 +127,46 @@ function PredictionPage({ params }) {
             <p>Deepfake.Pics</p>
           </Link>
           <div className="flex items-center space-x-4">
-            {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Pricing
-            </button> */}
             <button
               onClick={() => router.push("/pricing")}
               className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
             >
               Pricing
             </button>
-            {session ? (
-              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+            {userInfo.variant_id === "111140" ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
+                Unlimited
+              </button>
+            ) : subscription ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Credits: {userInfo.tokens}
               </button>
+            ) : session ? (
+              <div>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="sm:hidden px-4 py-1.5 text-white border bg-black rounded-lg text-sm"
+                >
+                  Pricing
+                </button>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="hidden sm:block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+                >
+                  Credits: {userInfo.tokens}
+                </button>
+              </div>
             ) : (
-              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+              <button
+                onClick={handleGoogle}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Sign Up
               </button>
             )}
@@ -195,7 +221,21 @@ function PredictionPage({ params }) {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              <span className="">Share on Twitter to earn 0.5 credits.</span>
+              {userInfo.variant_id === "111139" ? (
+                <span className="">
+                  Share on Twitter to earn 10 free credits.
+                </span>
+              ) : userInfo.variant_id === "111140" ? (
+                <span className="">
+                  Share on Twitter to get featured for free.
+                </span>
+              ) : (
+                <span className="">
+                  <span className="">
+                    Share on Twitter to earn 1 free credit.
+                  </span>
+                </span>
+              )}
             </Balancer>
           </motion.p>
           <motion.div
@@ -203,11 +243,7 @@ function PredictionPage({ params }) {
             className="group relative mx-auto mt-10 w-full overflow-hidden rounded-2xl border border-gray-200 focus:ring-0"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video
-              controls
-              playsInline
-              src={videoURL}
-            ></video>
+            <video controls playsInline src={videoURL}></video>
           </motion.div>
         </motion.div>
         <motion.div></motion.div>

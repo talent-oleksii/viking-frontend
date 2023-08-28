@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import va from '@vercel/analytics';
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { DotLoader, MoonLoader } from "react-spinners";
 import { Toaster, toast } from "sonner";
 import { Drawer } from "vaul";
+import { BeatLoader } from "react-spinners";
 
 import useScroll from "@/lib/hooks/use-scroll";
 import { useUploadModal } from "@/components/home/upload-modal";
@@ -97,6 +99,10 @@ export default function Home() {
     console.log(data[0].tokens);
 
     setUserInfo(data[0]);
+
+    buyLink1();
+    buyLink2();
+    buyLink3();
   };
 
   const reduceTokens = async (reduceAmount) => {
@@ -127,39 +133,139 @@ export default function Home() {
     }
   };
 
+  const scrolled = useScroll(50);
+  const { UploadModal, setShowUploadModal } = useUploadModal();
+
   useEffect(() => {
     setTimeout(() => {
       window.createLemonSqueezy();
-    }, 250); // 1000 milliseconds = 1 second
+    }, 100); // 1000 milliseconds = 1 second
   }, []);
 
-  const subscribe = async (email) => {
+  const [link1, setLink1] = useState("");
+  const [link2, setLink2] = useState("");
+  const [link3, setLink3] = useState("");
+
+  const buyLink1 = async () => {
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("/api/buyLink1", {
         method: "POST",
-        body: email,
+        body: session.user.email,
       });
 
       if (!response.ok) {
         throw new Error(
-          `Server responded with ${response.status} for Subscribe`
+          `Server responded with ${response.status} for buyLink1`
         );
       }
 
-      const data = await response.json();
-      console.log(data);
-      setLemonURL(data);
+      const data1 = await response.json();
+      console.log(data1);
+      setLink1(data1);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const subscribe2 = () => {
-    LemonSqueezy.Url.Open(lemonURL);
+  const buyLink2 = async () => {
+    try {
+      const response = await fetch("/api/buyLink2", {
+        method: "POST",
+        body: session.user.email,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Server responded with ${response.status} for buyLink2`
+        );
+      }
+
+      const data2 = await response.json();
+      console.log(data2);
+      setLink2(data2);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const scrolled = useScroll(50);
-  const { UploadModal, setShowUploadModal } = useUploadModal();
+  const buyLink3 = async () => {
+    try {
+      const response = await fetch("/api/buyLink3", {
+        method: "POST",
+        body: session.user.email,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Server responded with ${response.status} for buyLink3`
+        );
+      }
+
+      const data3 = await response.json();
+      console.log(data3);
+      setLink3(data3);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const clickBuyLink1 = () => {
+    LemonSqueezy.Url.Open(link1);
+  };
+
+  const clickBuyLink2 = () => {
+    LemonSqueezy.Url.Open(link2);
+  };
+
+  const clickBuyLink3 = () => {
+    LemonSqueezy.Url.Open(link3);
+  };
+
+  const [cancelLoading, setCancelLoading] = useState(false);
+
+  const cancelLemon = async (id) => {
+    setCancelLoading(true);
+    try {
+      const response = await fetch("/api/cancelLemon", {
+        method: "POST",
+        body: id,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Server responded with ${response.status} for cancelLemon`
+        );
+      }
+
+      setCancelLoading(false);
+      getUserData();
+      window.location.reload(); // Refresh the page
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Cancel failed");
+    }
+  };
+
+  const cancelSubscription = async (email) => {
+    try {
+      const response = await fetch("/api/cancel", {
+        method: "POST",
+        body: email,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status} for Cancel`);
+      }
+
+      const data4 = await response.json();
+      console.log(data4);
+
+      // toast.success('cancel supabase')
+    } catch (error) {
+      console.log(error.message);
+      toast.error("Cancel failed");
+    }
+  };
 
   return (
     <>
@@ -183,21 +289,46 @@ export default function Home() {
             <p>Deepfake.Pics</p>
           </Link>
           <div className="flex items-center space-x-4">
-            {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Pricing
-            </button> */}
             <button
               onClick={() => router.push("/pricing")}
               className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
             >
               Pricing
             </button>
-            {session ? (
-              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+            {userInfo.variant_id === "111140" ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
+                Unlimited
+              </button>
+            ) : subscription ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Credits: {userInfo.tokens}
               </button>
+            ) : session ? (
+              <div>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="sm:hidden px-4 py-1.5 text-white border bg-black rounded-lg text-sm"
+                >
+                  Pricing
+                </button>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="hidden sm:block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+                >
+                  Credits: {userInfo.tokens}
+                </button>
+              </div>
             ) : (
-              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+              <button
+                onClick={handleGoogle}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Sign Up
               </button>
             )}
@@ -339,9 +470,36 @@ export default function Home() {
                     </span>
                   </li> */}
                 </ul>
-                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
-                  Choose Plan
-                </button>
+                {userInfo.variant_id === 111138 ? (
+                  cancelLoading ? (
+                    <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                      Loading...
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        cancelLemon(userInfo.subscription_id);
+                        cancelSubscription(userInfo.email);
+                      }}
+                      className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                    >
+                      Cancel Plan
+                    </button>
+                  )
+                ) : (
+                  <button
+                    onClick={() => {
+                      if (session) {
+                        clickBuyLink1();
+                      } else {
+                        handleGoogle();
+                      }
+                    }}
+                    className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                  >
+                    Choose Plan
+                  </button>
+                )}
               </div>
               <div className="relative w-full sm:w-[280px] px-8 py-7 bg-white border border-sky-200 shadow-xl rounded-[17px] sm:px-8 sm:py-7">
                 <small className="text-white absolute -top-3 right-5  bg-gradient-to-r from-sky-300 to-[#5C9CF4] font-normal rounded-full px-2.5 py-1 text-xs ml-auto">
@@ -419,9 +577,36 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
-                  Choose Plan
-                </button>
+                {userInfo.variant_id === 111139 ? (
+                  cancelLoading ? (
+                    <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                      Loading...
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        cancelLemon(userInfo.subscription_id);
+                        cancelSubscription(userInfo.email);
+                      }}
+                      className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                    >
+                      Cancel Plan
+                    </button>
+                  )
+                ) : (
+                  <button
+                    onClick={() => {
+                      if (session) {
+                        clickBuyLink2();
+                      } else {
+                        handleGoogle();
+                      }
+                    }}
+                    className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                  >
+                    Choose Plan
+                  </button>
+                )}
               </div>
               <div className="w-full sm:w-[280px] px-8 py-7 bg-white border border-gray-200 rounded-[17px] sm:px-8 sm:py-7">
                 <h5 className="mb-4 text-lg font-medium text-gray-800 ">
@@ -538,9 +723,36 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                <button className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
-                  Choose Plan
-                </button>
+                {userInfo.variant_id === 111140 ? (
+                  cancelLoading ? (
+                    <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
+                      Loading...
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        cancelLemon(userInfo.subscription_id);
+                        cancelSubscription(userInfo.email);
+                      }}
+                      className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                    >
+                      Cancel Plan
+                    </button>
+                  )
+                ) : (
+                  <button
+                    onClick={() => {
+                      if (session) {
+                        clickBuyLink3();
+                      } else {
+                        handleGoogle();
+                      }
+                    }}
+                    className="text-white bg-black focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black"
+                  >
+                    Choose Plan
+                  </button>
+                )}
               </div>
             </div>
           </motion.div>

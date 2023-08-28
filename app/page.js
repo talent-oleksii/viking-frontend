@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import va from '@vercel/analytics';
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -127,37 +128,6 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.createLemonSqueezy();
-    }, 250); // 1000 milliseconds = 1 second
-  }, []);
-
-  const subscribe = async (email) => {
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        body: email,
-      });
-
-      if (!response.ok) {
-        throw new Error(
-          `Server responded with ${response.status} for Subscribe`
-        );
-      }
-
-      const data = await response.json();
-      console.log(data);
-      setLemonURL(data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  const subscribe2 = () => {
-    LemonSqueezy.Url.Open(lemonURL);
-  };
-
   const scrolled = useScroll(50);
   const { UploadModal, setShowUploadModal } = useUploadModal();
 
@@ -183,21 +153,46 @@ export default function Home() {
             <p>Deepfake.Pics</p>
           </Link>
           <div className="flex items-center space-x-4">
-            {/* <button className="sm:hidden px-4 py-1.5 text-white bg-black rounded-lg text-sm">
-              Pricing
-            </button> */}
             <button
               onClick={() => router.push("/pricing")}
               className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
             >
               Pricing
             </button>
-            {session ? (
-              <button onClick={() => router.push("/pricing")} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+            {userInfo.variant_id === "111140" ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
+                Unlimited
+              </button>
+            ) : subscription ? (
+              <button
+                onClick={() => router.push("/pricing")}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Credits: {userInfo.tokens}
               </button>
+            ) : session ? (
+              <div>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="sm:hidden px-4 py-1.5 text-white border bg-black rounded-lg text-sm"
+                >
+                  Pricing
+                </button>
+                <button
+                  onClick={() => router.push("/pricing")}
+                  className="hidden sm:block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+                >
+                  Credits: {userInfo.tokens}
+                </button>
+              </div>
             ) : (
-              <button onClick={handleGoogle} className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm">
+              <button
+                onClick={handleGoogle}
+                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              >
                 Sign Up
               </button>
             )}
@@ -267,7 +262,13 @@ export default function Home() {
           >
             <button
               className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
-              onClick={() => setShowUploadModal(true)}
+              onClick={() => {
+                if (session) {
+                  setShowUploadModal(true);
+                } else {
+                  handleGoogle();
+                }
+              }}
             >
               <Upload className="h-5 w-5 text-white" />
               <p>Image / Video</p>

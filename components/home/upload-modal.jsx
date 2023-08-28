@@ -19,6 +19,8 @@ import { useDropzone } from "react-dropzone";
 import { Toaster, toast } from "sonner";
 import { BeatLoader } from "react-spinners";
 import Balancer from "react-wrap-balancer";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import va from '@vercel/analytics';
 
 const people = [
   {
@@ -210,6 +212,113 @@ function classNames(...classes) {
 }
 
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
+  const supabase = createClientComponentClient();
+  const [session, setSession] = useState(null);
+  const [isSessionLoaded, setIsSessionLoaded] = useState(false);
+  const [subscription, setSubscription] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+  const [lemonURL, setLemonURL] = useState("");
+
+  useEffect(() => {
+    // Get the initial session state when component first loads
+    setSession(supabase.auth.session);
+
+    // Subscribe to session changes (logged in or logged out)
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, newSession) => {
+        // console.log('New session:', newSession);
+        setSession(newSession);
+        setIsSessionLoaded(true); // Setting the session as loaded
+      }
+    );
+
+    // Unsubscribe when unmounting the component
+    // return () => {
+    //   authListener.unsubscribe();
+    // };
+  }, []);
+
+  useEffect(() => {
+    checkSubscription();
+    getUserData();
+  }, [session]);
+
+  const handleGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  };
+
+  const checkSubscription = async () => {
+    if (!session || !session.user) {
+      console.log("No session or user found");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("is_active")
+      .eq("email", session.user.email);
+
+    console.log(session.user.email);
+
+    // console.log(data);
+    // console.log(data[0].is_active);
+
+    if (data[0].is_active === true) {
+      setSubscription(true);
+      console.log("Subscription is active");
+    } else {
+      setSubscription(false);
+      console.log("Subscription is not active");
+    }
+  };
+
+  const getUserData = async () => {
+    if (!session) {
+      console.log("No session found");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select()
+      .eq("email", session.user.email);
+
+    console.log(session.user.email);
+    console.log(data);
+    console.log(data[0].tokens);
+
+    setUserInfo(data[0]);
+  };
+
+  const reduceTokens = async () => {
+    let newTokenValue = userInfo.tokens - 1;
+    let email = userInfo.email;
+
+    try {
+      const response = await fetch("/api/reduceTokens", {
+        method: "POST",
+        body: JSON.stringify({
+          newTokenValue,
+          email,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Server responded with ${response.status} for reduceAmount`
+        );
+      }
+
+      const data = await response.json();
+      setUserInfo(data);
+    } catch (error) {
+      console.log(error.message);
+      toast.error("reduceAmount error");
+    }
+  };
+
   const router = useRouter();
   const [data, setData] = useState({
     image: null,
@@ -347,84 +456,96 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [audioUploaded, setAudioUploaded] = useState(false);
 
   const onImageDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      // Validate file type
-      console.log(file.type);
-      if (!file.type.startsWith("image/")) {
-        toast.error("Please only upload image files under 4MB");
-        return;
-      }
+    if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
+      toast.error("Custom uploads only available for paid users");
+      console.log(userInfo.variant_id);
+      return;
+    } else {
+      acceptedFiles.forEach((file) => {
+        // Validate file type
+        console.log(file.type);
+        if (!file.type.startsWith("image/")) {
+          toast.error("Please only upload image files under 4MB");
+          return;
+        }
 
-      const reader = new FileReader();
+        const reader = new FileReader();
 
-      reader.onload = async () => {
-        const dataUrl = reader.result;
+        reader.onload = async () => {
+          const dataUrl = reader.result;
 
-        // Now dataUrl is a Base64 encoded Data URL you can use
-        // Update state or send to server as needed
-        setBase64Image(dataUrl);
-        setImageUploaded(true);
+          // Now dataUrl is a Base64 encoded Data URL you can use
+          // Update state or send to server as needed
+          setBase64Image(dataUrl);
+          setImageUploaded(true);
 
-        // Log base64 image content for debugging
-        console.log(`Base64 Image: ${dataUrl}`);
-      };
+          // Log base64 image content for debugging
+          console.log(`Base64 Image: ${dataUrl}`);
+        };
 
-      reader.readAsDataURL(file);
-    });
+        reader.readAsDataURL(file);
+      });
+    }
   }, []);
 
   const [base64Audio, setBase64Audio] = useState(null);
 
   const onAudioDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      // Validate file type
-      console.log(file.type);
-      if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-        toast.error("Please only upload MP3 files.");
-        return;
-      }
-
-      // setAudioUploading(true);
-      const reader = new FileReader();
-
-      reader.onload = async () => {
-        const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
-
-        // Create an AudioContext
-        const audioContext = new (window.AudioContext ||
-          window.webkitAudioContext)();
-
-        // Convert Base64 to ArrayBuffer
-        const base64 = dataUrl.split(",")[1];
-        const binaryString = atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
+    if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
+      toast.error("Custom uploads only available for paid users");
+      console.log(userInfo.variant_id);
+      return;
+    } else {
+      acceptedFiles.forEach((file) => {
+        // Validate file type
+        console.log(file.type);
+        if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
+          toast.error("Please only upload MP3 files.");
+          return;
         }
 
-        // Decode the audio data
-        audioContext
-          .decodeAudioData(bytes.buffer)
-          .then((audioBuffer) => {
-            const duration = audioBuffer.duration; // Get duration in seconds
-            if (duration >= 30) {
-              toast.error("Please upload MP3 file shorter than 30 seconds");
-              return;
-            }
+        // setAudioUploading(true);
+        const reader = new FileReader();
 
-            // Update audio state
-            setBase64Audio(dataUrl); // Store the Data URI in the state
-            setAudioUploaded(true);
-            // setAudioUploading(false);
-          })
-          .catch((error) => {
-            toast.error("Failed to decode audio file.");
-            console.error(error);
-          });
-      };
-      reader.readAsDataURL(file); // Read the file as a Data URL
-    });
+        reader.onload = async () => {
+          const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
+
+          // Create an AudioContext
+          const audioContext = new (window.AudioContext ||
+            window.webkitAudioContext)();
+
+          // Convert Base64 to ArrayBuffer
+          const base64 = dataUrl.split(",")[1];
+          const binaryString = atob(base64);
+          const len = binaryString.length;
+          const bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
+
+          // Decode the audio data
+          audioContext
+            .decodeAudioData(bytes.buffer)
+            .then((audioBuffer) => {
+              const duration = audioBuffer.duration; // Get duration in seconds
+              if (duration >= 30) {
+                toast.error("Please upload MP3 file shorter than 30 seconds");
+                return;
+              }
+
+              // Update audio state
+              setBase64Audio(dataUrl); // Store the Data URI in the state
+              setAudioUploaded(true);
+              // setAudioUploading(false);
+            })
+            .catch((error) => {
+              toast.error("Failed to decode audio file.");
+              console.error(error);
+            });
+        };
+        reader.readAsDataURL(file); // Read the file as a Data URL
+      });
+    }
   }, []);
 
   const { getRootProps: getImageRootProps, getInputProps: getImageInputProps } =
@@ -505,9 +626,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         throw new Error("Replicate failed");
       }
 
+      await reduceTokens();
+
       // Handle response data here
       const videoURL = await response.json(); // Assuming the server returns just the video URL
       console.log(videoURL);
+      saveURL(videoURL);
 
       const parts = videoURL.split("/");
       const videoID = parts[parts.length - 2]; // Extract the unique ID from the URL
@@ -518,6 +642,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       toast.error("Error processing. Please try again.");
     }
   };
+
+  const saveURL = async (videoURL) => {
+    const { data, error } = await supabase
+    .from("videos")
+    .insert({
+      email: session.user.email,
+      url: videoURL,
+    });
+  }
 
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
@@ -806,7 +939,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       ></path>
                     </svg>
-                    <p className="text-xs text-gray-400">Tip: Clone any voice at voice-clone.ai</p>
+                    <p className="text-xs text-gray-400">
+                      Tip: Clone any voice at voice-clone.ai
+                    </p>
                   </div>
                   <input
                     {...getAudioInputProps()}
@@ -822,8 +957,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               disabled={!base64Audio && !message.trim()}
               onClick={() => {
                 event.preventDefault();
-                setGenerating(true)
-                message.trim() ? TTS() : replicate();
+                if (userInfo.tokens > 0) {
+                  setGenerating(true);
+                  message.trim() ? TTS() : replicate();
+                } else {
+                  router.push("/pricing");
+                }
               }}
               className={`${
                 !base64Audio && !message.trim()
@@ -832,7 +971,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               {generating ? (
-                <BeatLoader size="8" color="#898989" />
+                <BeatLoader size={8} color="#898989" />
               ) : (
                 <p className="text-sm">Generate</p>
               )}
