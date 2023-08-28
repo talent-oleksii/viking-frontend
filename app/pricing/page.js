@@ -521,9 +521,12 @@ export default function Home() {
                 )}
               </div>
               <div className="relative w-full sm:w-[280px] px-8 py-7 bg-white border border-sky-200 shadow-xl rounded-[17px] sm:px-8 sm:py-7">
-                <small className="text-white absolute -top-3 right-5  bg-gradient-to-r from-sky-300 to-[#5C9CF4] font-normal rounded-full px-2.5 py-1 text-xs ml-auto">
-                  Most popular
+                <small className="text-white absolute -top-3 right-5 bg-gradient-to-r from-sky-300 to-[#5C9CF4] font-normal rounded-full px-2.5 py-1 text-xs ml-auto">
+                  Limited Time
                 </small>
+                {/* <small className="text-white absolute -top-3 right-5 bg-gradient-to-r from-sky-300 to-[#5C9CF4] font-normal rounded-full px-2.5 py-1 text-xs ml-auto">
+                  Most Popular
+                </small> */}
                 <h5 className="mb-4 text-lg font-medium animate-text-shimmer text-transparent bg-clip-text bg-gradient-to-r bg-[length:250%_100%] from-sky-400 via-fuchsia-400 to-sky-400 opacity-90">
                   Legend
                 </h5>
