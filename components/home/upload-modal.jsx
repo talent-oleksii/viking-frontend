@@ -469,6 +469,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           return;
         }
 
+        va.track("Upload custom media");
+
         const reader = new FileReader();
 
         reader.onload = async () => {
@@ -503,6 +505,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           toast.error("Please only upload MP3 files.");
           return;
         }
+
+        va.track("Upload custom audio");
 
         // setAudioUploading(true);
         const reader = new FileReader();
@@ -750,6 +754,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 event.preventDefault();
                 if (currentStep === "image") {
                   setCurrentStep("audio");
+                  va.track("Next Step Button");
                 }
               }}
               className={`${
@@ -960,8 +965,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 if (userInfo.tokens > 0) {
                   setGenerating(true);
                   message.trim() ? TTS() : replicate();
+                  va.track("Generate Button");
                 } else {
                   router.push("/pricing");
+                  va.track("Generate Button - No Credits");
                 }
               }}
               className={`${

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import va from '@vercel/analytics';
+import va from "@vercel/analytics";
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -154,21 +154,30 @@ export default function Home() {
           </Link>
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => router.push("/pricing")}
+              onClick={() => {
+                router.push("/pricing");
+                va.track("Pricing Button");
+              }}
               className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
             >
               Pricing
             </button>
             {userInfo.variant_id === "111140" ? (
               <button
-                onClick={() => router.push("/pricing")}
+                onClick={() => {
+                  router.push("/pricing");
+                  va.track("Credits Button");
+                }}
                 className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
               >
                 Unlimited
               </button>
             ) : subscription ? (
               <button
-                onClick={() => router.push("/pricing")}
+                onClick={() => {
+                  router.push("/pricing");
+                  va.track("Credits Button");
+                }}
                 className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
               >
                 Credits: {userInfo.tokens}
@@ -176,13 +185,19 @@ export default function Home() {
             ) : session ? (
               <div>
                 <button
-                  onClick={() => router.push("/pricing")}
+                  onClick={() => {
+                    router.push("/pricing");
+                    va.track("Pricing Button");
+                  }}
                   className="sm:hidden px-4 py-1.5 text-white border bg-black rounded-lg text-sm"
                 >
                   Pricing
                 </button>
                 <button
-                  onClick={() => router.push("/pricing")}
+                  onClick={() => {
+                    router.push("/pricing");
+                    va.track("Credits Button");
+                  }}
                   className="hidden sm:block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
                 >
                   Credits: {userInfo.tokens}
@@ -190,7 +205,10 @@ export default function Home() {
               </div>
             ) : (
               <button
-                onClick={handleGoogle}
+                onClick={() => {
+                  handleGoogle();
+                  va.track("Sign Up Button");
+                }}
                 className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
               >
                 Sign Up
@@ -222,6 +240,9 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
             className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"
+            onClick={() => {
+              va.track("Introducing Deepfake Button");
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -265,8 +286,10 @@ export default function Home() {
               onClick={() => {
                 if (session) {
                   setShowUploadModal(true);
+                  va.track("Image / Video");
                 } else {
                   handleGoogle();
+                  va.track("Image / Video - Sign Up");
                 }
               }}
             >
