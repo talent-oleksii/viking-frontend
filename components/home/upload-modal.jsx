@@ -200,7 +200,7 @@ const people = [
   },
   {
     id: 26,
-    name: "Girlfriend (19+)",
+    name: "Girlfriend (18+)",
     voice: "CYblCq7uaxtBek0cNmMF",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Girlfriend.png",
