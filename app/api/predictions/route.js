@@ -7,6 +7,7 @@ const replicate = new Replicate({
 export async function POST(request) {
   console.log('inside')
   const { image, audio } = await request.json();
+  console.log(image)
 
   try {
     const response = await replicate.run(

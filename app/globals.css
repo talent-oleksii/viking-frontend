@@ -15,4 +15,34 @@
       animation: text-shimmer 2.5s ease-out infinite alternate;
   }
   
-  
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+/* Note: This is experimental and may not work in all versions */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@layer components {
+  audio {
+      background-color: transparent;
+  }
+
+  audio::-webkit-media-controls-panel {
+      background-color: transparent !important;
+  }
+
+  @screen md {
+      audio {
+          background-color: white;
+      }
+
+      audio::-webkit-media-controls-panel {
+          background-color: white !important;
+      }
+  }
+}

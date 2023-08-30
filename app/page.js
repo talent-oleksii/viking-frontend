@@ -273,7 +273,7 @@ export default function Home() {
             className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Balancer>Deepfakes from any video</Balancer>
+            <Balancer>Deepfakes from any image</Balancer>
           </motion.h1>
           <motion.p
             className="mt-5 text-center text-gray-500 md:text-xl"
@@ -281,10 +281,10 @@ export default function Home() {
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Make anyone say anything. Just upload video.
+                Make anyone say anything. Just upload image.
               </span>
               <span className="hidden sm:inline">
-                Make anyone say anything. Just upload a video.
+                Make anyone say anything. Just upload an image.
               </span>
             </Balancer>
           </motion.p>
@@ -322,8 +322,9 @@ export default function Home() {
               columnClassName="my-masonry-grid_column"
             >
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/yilongmusk.mp4"
@@ -331,8 +332,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/donaldtrump.mp4"
@@ -340,8 +342,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kimkardashian.mp4"
@@ -349,8 +352,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/joebiden.mp4"
@@ -358,8 +362,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/aoc.mp4"
@@ -367,8 +372,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kanyewest.mp4"
@@ -376,8 +382,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/tuckercarlson.mp4"
@@ -385,8 +392,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/stephenasmith.mp4"
@@ -394,8 +402,9 @@ export default function Home() {
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
+                controls loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/loganpaul.mp4"

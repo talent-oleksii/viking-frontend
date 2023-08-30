@@ -368,49 +368,49 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const images = [
     {
-      highResSrc: "/images/trump2.png",
-      thumbnailSrc: "/images/Ttrump2.png",
-      id: "trump",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/yilongmusk.mp4",
+      thumbnail: "/images/modal/yilongmusk.png",
+      id: "yilongmusk",
     },
     {
-      highResSrc: "/images/biden.png",
-      thumbnailSrc: "/images/Tbiden.png",
-      id: "biden",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/donaldtrump.mp4",
+      thumbnail: "/images/modal/donaldtrump.png",
+      id: "donaldtrump",
     },
     {
-      highResSrc: "/images/elon.png",
-      thumbnailSrc: "/images/Telon.png",
-      id: "elon",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kimkardashian.mp4",
+      thumbnail: "/images/modal/kimkardashian.png",
+      id: "kimkardashian",
     },
     {
-      highResSrc: "/images/tucker.png",
-      thumbnailSrc: "/images/Ttucker.png",
-      id: "tucker",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/joebiden.mp4",
+      thumbnail: "/images/modal/joebiden.png",
+      id: "joebiden",
     },
     {
-      highResSrc: "/images/rogan.png",
-      thumbnailSrc: "/images/Trogan.png",
-      id: "rogan",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/aoc.mp4",
+      thumbnail: "/images/modal/aoc.png",
+      id: "aoc",
     },
     {
-      highResSrc: "/images/beast.png",
-      thumbnailSrc: "/images/Tbeast.png",
-      id: "beast",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kanyewest.mp4",
+      thumbnail: "/images/modal/kanyewest.png",
+      id: "kanyewest",
     },
     {
-      highResSrc: "/images/kanye.png",
-      thumbnailSrc: "/images/Tkanye.png",
-      id: "kanye",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/tuckercarlson.mp4",
+      thumbnail: "/images/modal/tuckercarlson.png",
+      id: "tuckercarlson",
     },
     {
-      highResSrc: "/images/kim.png",
-      thumbnailSrc: "/images/Tkim.png",
-      id: "kim",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/stephenasmith.mp4",
+      thumbnail: "/images/modal/stephenasmith.png",
+      id: "stephenasmith",
     },
     {
-      highResSrc: "/images/lebron.png",
-      thumbnailSrc: "/images/Tlebron.png",
-      id: "lebron",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/loganpaul.mp4",
+      thumbnail: "/images/modal/loganpaul.png",
+      id: "loganpaul",
     },
   ];
 
@@ -425,34 +425,43 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [imageButton, setImageButton] = useState(false);
   const [generating, setGenerating] = useState(false);
 
-  const handleImageClick = async (imageSrc) => {
-    // setImageLoading(true);
+  const [selectedLink, setSelectedLink] = useState(null);
+  const [videoLink, setVideoLink] = useState(null);
+
+  const handleVideoClick = async (link) => {
     setImageButton(true);
-
-    console.log(`Image Source URL: ${imageSrc}`);
-    setSelectedImage(imageSrc);
-
-    const imgElement = new window.Image(); // use window.Image here
-    imgElement.src = imageSrc;
-
-    imgElement.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = imgElement.width;
-      canvas.height = imgElement.height;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(imgElement, 0, 0);
-
-      // Convert canvas to base64 data URI
-      const base64Image = canvas.toDataURL("image/jpeg");
-
-      // Store the base64 encoded image in state
-      setBase64Image(base64Image);
-      console.log(`Base64 Image: ${base64Image}`);
-
-      // setImageLoading(false);
-    };
+    setSelectedLink(link);
+    setVideoLink(link);
   };
+
+  // const handleImageClick = async (imageSrc) => {
+  //   // setImageLoading(true);
+  //   setImageButton(true);
+
+  //   console.log(`Image Source URL: ${imageSrc}`);
+  //   setSelectedImage(imageSrc);
+
+  //   const imgElement = new window.Image(); // use window.Image here
+  //   imgElement.src = imageSrc;
+
+  //   imgElement.onload = () => {
+  //     const canvas = document.createElement("canvas");
+  //     canvas.width = imgElement.width;
+  //     canvas.height = imgElement.height;
+
+  //     const ctx = canvas.getContext("2d");
+  //     ctx.drawImage(imgElement, 0, 0);
+
+  //     // Convert canvas to base64 data URI
+  //     const base64Image = canvas.toDataURL("image/jpeg");
+
+  //     // Store the base64 encoded image in state
+  //     setBase64Image(base64Image);
+  //     console.log(`Base64 Image: ${base64Image}`);
+
+  //     // setImageLoading(false);
+  //   };
+  // };
 
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
 
@@ -469,102 +478,162 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [audioUploaded, setAudioUploaded] = useState(false);
 
-  const onImageDrop = useCallback((acceptedFiles) => {
-    if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
-      toast.error("Upgrade your plan to upload custom files");
-      console.log(userInfo.variant_id);
-      return;
-    } else {
-      acceptedFiles.forEach((file) => {
-        // Validate file type
-        console.log(file.type);
-        if (!file.type.startsWith("image/")) {
-          toast.error("Please only upload image files under 4MB");
-          return;
-        }
+  const [uploadingVideo, setUploadingVideo] = useState(false);
 
-        va.track("Upload custom media");
+  const onImageDrop = useCallback(
+    (acceptedFiles) => {
+      if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
+        toast.error("Upgrade your plan to upload custom files");
+        console.log(userInfo.variant_id);
+        return;
+      } else {
+        acceptedFiles.forEach((file) => {
+          // Validate file size
+          if (file.size > 52428800) {
+            toast.error("File size exceeds the 50MB size limit");
+            return;
+          }
 
-        const reader = new FileReader();
+          // Validate file type
+          console.log(file.type);
+          if (
+            !file.type.startsWith("image/") &&
+            !file.type.startsWith("video/")
+          ) {
+            toast.error("Please only upload image or video files");
+            return;
+          }
 
-        reader.onload = async () => {
-          const dataUrl = reader.result;
+          va.track("Upload custom media");
+          setUploadingVideo(true);
+          uploadVideo(file);
+        });
+      }
+    },
+    [userInfo]
+  );
 
-          // Now dataUrl is a Base64 encoded Data URL you can use
-          // Update state or send to server as needed
-          setBase64Image(dataUrl);
-          setImageUploaded(true);
-
-          // Log base64 image content for debugging
-          console.log(`Base64 Image: ${dataUrl}`);
-        };
-
-        reader.readAsDataURL(file);
+  const uploadVideo = async (file) => {
+    console.log(file.name);
+    const { data, error } = await supabase.storage
+      .from("uploads")
+      .upload(`${file.name}`, file, {
+        upsert: true,
       });
-    }
-  }, []);
+
+    console.log(data);
+    console.log(error);
+
+    console.log(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
+    );
+    setVideoLink(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
+    );
+    setImageUploaded(true);
+    setImageButton(true);
+    setUploadingVideo(false);
+  };
+
+  // const onImageDrop = useCallback((acceptedFiles) => {
+  //   if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
+  //     toast.error("Upgrade your plan to upload custom files");
+  //     console.log(userInfo.variant_id);
+  //     return;
+  //   } else {
+  //     acceptedFiles.forEach((file) => {
+  //       // Validate file type
+  //       console.log(file.type);
+  //       if (!file.type.startsWith("image/")) {
+  //         toast.error("Please only upload image files under 4MB");
+  //         return;
+  //       }
+
+  //       va.track("Upload custom media");
+
+  //       const reader = new FileReader();
+
+  //       reader.onload = async () => {
+  //         const dataUrl = reader.result;
+
+  //         // Now dataUrl is a Base64 encoded Data URL you can use
+  //         // Update state or send to server as needed
+  //         setBase64Image(dataUrl);
+  //         setImageUploaded(true);
+
+  //         // Log base64 image content for debugging
+  //         console.log(`Base64 Image: ${dataUrl}`);
+  //       };
+
+  //       reader.readAsDataURL(file);
+  //     });
+  //   }
+  // }, []);
 
   const [base64Audio, setBase64Audio] = useState(null);
 
-  const onAudioDrop = useCallback((acceptedFiles) => {
-    if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
-      toast.error("Upgrade your plan to upload custom files");
-      console.log(userInfo.variant_id);
-      return;
-    } else {
-      acceptedFiles.forEach((file) => {
-        // Validate file type
-        console.log(file.type);
-        if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-          toast.error("Please only upload MP3 files");
-          return;
-        }
-
-        va.track("Upload custom audio");
-
-        // setAudioUploading(true);
-        const reader = new FileReader();
-
-        reader.onload = async () => {
-          const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
-
-          // Create an AudioContext
-          const audioContext = new (window.AudioContext ||
-            window.webkitAudioContext)();
-
-          // Convert Base64 to ArrayBuffer
-          const base64 = dataUrl.split(",")[1];
-          const binaryString = atob(base64);
-          const len = binaryString.length;
-          const bytes = new Uint8Array(len);
-          for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
+  const onAudioDrop = useCallback(
+    (acceptedFiles) => {
+      if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
+        toast.error("Upgrade your plan to upload custom files");
+        console.log(userInfo.variant_id);
+        return;
+      } else {
+        acceptedFiles.forEach((file) => {
+          // Validate file type
+          console.log(file.type);
+          if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
+            toast.error("Please only upload MP3 files");
+            return;
           }
 
-          // Decode the audio data
-          audioContext
-            .decodeAudioData(bytes.buffer)
-            .then((audioBuffer) => {
-              const duration = audioBuffer.duration; // Get duration in seconds
-              if (duration >= 20) {
-                toast.error("Upgrade to upload MP3 longer than 20 seconds");
-                return;
-              }
+          va.track("Upload custom audio");
 
-              // Update audio state
-              setBase64Audio(dataUrl); // Store the Data URI in the state
-              setAudioUploaded(true);
-              // setAudioUploading(false);
-            })
-            .catch((error) => {
-              toast.error("Failed to decode audio file.");
-              console.error(error);
-            });
-        };
-        reader.readAsDataURL(file); // Read the file as a Data URL
-      });
-    }
-  }, []);
+          // setAudioUploading(true);
+          const reader = new FileReader();
+
+          reader.onload = async () => {
+            const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
+
+            // Create an AudioContext
+            const audioContext = new (window.AudioContext ||
+              window.webkitAudioContext)();
+
+            // Convert Base64 to ArrayBuffer
+            const base64 = dataUrl.split(",")[1];
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            // Decode the audio data
+            audioContext
+              .decodeAudioData(bytes.buffer)
+              .then((audioBuffer) => {
+                const duration = audioBuffer.duration; // Get duration in seconds
+                if (duration >= 20) {
+                  toast.error("Upgrade to upload MP3 longer than 20 seconds");
+                  return;
+                }
+
+                // Update audio state
+                setBase64Audio(dataUrl); // Store the Data URI in the state
+                setAudioUploaded(true);
+                // setAudioUploading(false);
+              })
+              .catch((error) => {
+                toast.error("Failed to decode audio file.");
+                console.error(error);
+              });
+          };
+          reader.readAsDataURL(file); // Read the file as a Data URL
+        });
+      }
+    },
+    [userInfo]
+  );
 
   const { getRootProps: getImageRootProps, getInputProps: getImageInputProps } =
     useDropzone({ onDrop: onImageDrop });
@@ -635,7 +704,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       const response = await fetch("/api/predictions", {
         method: "POST",
         body: JSON.stringify({
-          image: base64Image,
+          image: videoLink,
           audio: base64Audio,
         }),
       });
@@ -697,20 +766,20 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
             <div id="select image" className="">
               <p className="block text-sm font-medium text-gray-700 mb-2">
-                Select media
+                Select video
               </p>
               <div className="grid grid-cols-3 gap-2">
                 {images.map((image) => (
                   <img
                     key={image.id} // Add this line
-                    src={image.thumbnailSrc}
+                    src={image.thumbnail}
                     alt=""
                     className={`rounded-md w-full cursor-pointer ${
-                      selectedImage && selectedImage !== image.highResSrc
+                      selectedLink && selectedLink !== image.link
                         ? "opacity-30"
                         : "opacity-100"
                     }`}
-                    onClick={() => handleImageClick(image.highResSrc)}
+                    onClick={() => handleVideoClick(image.link)}
                   />
                 ))}
               </div>
@@ -719,12 +788,16 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             <div>
               <div className="flex items-center justify-between">
                 <p className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload media (optional)
+                  Upload (optional)
                 </p>
               </div>
               {imageUploaded ? (
                 <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   Image Uploaded ✅
+                </div>
+              ) : uploadingVideo ? (
+                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                  Uploading...
                 </div>
               ) : (
                 <label
