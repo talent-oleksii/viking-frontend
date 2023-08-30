@@ -132,6 +132,16 @@ export default function Home() {
   const scrolled = useScroll(50);
   const { UploadModal, setShowUploadModal } = useUploadModal();
 
+  const handleMouseEnter = (e) => {
+    const video = e.currentTarget; // Use currentTarget to get the element the event is attached to
+    video.setAttribute("controls", "controls");
+  };
+
+  const handleMouseLeave = (e) => {
+    const video = e.currentTarget;
+    video.removeAttribute("controls");
+  };
+
   return (
     <>
       <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
@@ -263,7 +273,7 @@ export default function Home() {
             className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Balancer>Deepfakes from any image</Balancer>
+            <Balancer>Deepfakes from any video</Balancer>
           </motion.h1>
           <motion.p
             className="mt-5 text-center text-gray-500 md:text-xl"
@@ -271,10 +281,10 @@ export default function Home() {
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Make anyone say anything. Just upload image.
+                Make anyone say anything. Just upload video.
               </span>
               <span className="hidden sm:inline">
-                Make anyone say anything. Just upload an image.
+                Make anyone say anything. Just upload a video.
               </span>
             </Balancer>
           </motion.p>
@@ -312,84 +322,87 @@ export default function Home() {
               columnClassName="my-masonry-grid_column"
             >
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/donaldtrump_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/yilongmusk.mp4"
+                poster="/images/landing/yilongmusk.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/yilongmusk_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/donaldtrump.mp4"
+                poster="/images/landing/donaldtrump.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/tuckercarlson_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/kimkardashian.mp4"
+                poster="/images/landing/kimkardashian.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/aoc_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/joebiden.mp4"
+                poster="/images/landing/joebiden.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/stephenasmith_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/aoc.mp4"
+                poster="/images/landing/aoc.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/joebiden_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/kanyewest.mp4"
+                poster="/images/landing/kanyewest.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/trump.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/tuckercarlson.mp4"
+                poster="/images/landing/tuckercarlson.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/trump.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/stephenasmith.mp4"
+                poster="/images/landing/stephenasmith.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
-                controls
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="/videos/kanyewest_landing.mp4"
-                poster="/images/trump1.png"
+                src="/videos/landing/loganpaul.mp4"
+                poster="/images/landing/loganpaul.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
             </Masonry>
-            {/* <video
-              controls
-              playsInline
-              src="/videos/trump.mp4"
-              poster="/images/trump1.png"
-            ></video> */}
           </motion.div>
         </motion.div>
         <motion.div></motion.div>
