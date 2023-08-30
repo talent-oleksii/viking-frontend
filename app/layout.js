@@ -5,8 +5,8 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Deepfake | Create Deepfakes',
-  description: 'Generate deepfake videos with AI.',
+  title: 'Deepfake | Create Deepfakes of Anyone',
+  description: 'Create realistic deepfake videos using cutting-edge AI. Upload a photo or video of someone and have them say what you type, all in a matter of minutes.',
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -22,8 +22,8 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site" content="Deepfake"/>
-        <meta name="twitter:title" content="Deepfake | Create Deepfakes"/>
-        <meta name="twitter:description" content="Generate deepfake videos with AI."/>
+        <meta name="twitter:title" content="Deepfake | Create Deepfakes of Anyone"/>
+        <meta name="twitter:description" content="Create realistic deepfake videos using cutting-edge AI. Upload a photo or video of someone and have them say what you type, all in a matter of minutes."/>
         <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
         <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap" rel="stylesheet"/>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
