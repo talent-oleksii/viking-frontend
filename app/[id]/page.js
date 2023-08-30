@@ -136,7 +136,7 @@ function PredictionPage({ params }) {
             >
               Pricing
             </button>
-            {userInfo.variant_id === "111140" ? (
+            {userInfo.variant_id == "111140" ? (
               <button
                 onClick={() => {
                   router.push("/pricing");
@@ -242,11 +242,11 @@ function PredictionPage({ params }) {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              {userInfo.variant_id === "111139" ? (
+              {userInfo.variant_id == "111139" ? (
                 <span className="">
                   Share on Twitter to earn 10 free credits.
                 </span>
-              ) : userInfo.variant_id === "111140" ? (
+              ) : userInfo.variant_id == "111140" ? (
                 <span className="">
                   Share on Twitter to get featured for free.
                 </span>

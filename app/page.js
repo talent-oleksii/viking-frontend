@@ -173,7 +173,7 @@ export default function Home() {
             >
               Pricing
             </button>
-            {userInfo.variant_id === "111140" ? (
+            {userInfo.variant_id == "111140" ? (
               <button
                 onClick={() => {
                   router.push("/pricing");

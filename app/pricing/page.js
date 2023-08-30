@@ -298,7 +298,7 @@ export default function Home() {
             >
               Pricing
             </button>
-            {userInfo.variant_id === "111140" ? (
+            {userInfo.variant_id == "111140" ? (
               <button
                 onClick={() => {
                   router.push("/pricing");
@@ -488,7 +488,7 @@ export default function Home() {
                     </span>
                   </li> */}
                 </ul>
-                {userInfo.variant_id === 111138 ? (
+                {userInfo.variant_id == 111138 ? (
                   cancelLoading ? (
                     <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                       Loading...
@@ -616,7 +616,7 @@ export default function Home() {
                     </span>
                   </li> */}
                 </ul>
-                {userInfo.variant_id === 111139 ? (
+                {userInfo.variant_id == 111139 ? (
                   cancelLoading ? (
                     <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                       Loading...
@@ -763,7 +763,7 @@ export default function Home() {
                     </span>
                   </li>
                 </ul>
-                {userInfo.variant_id === 111140 ? (
+                {userInfo.variant_id == 111140 ? (
                   cancelLoading ? (
                     <div className="text-black bg-white focus:ring-0 focus:outline-none font-medium rounded-full text-sm w-full py-2.5 inline-flex justify-center text-center hover:text-black hover:bg-white border border-black">
                       Loading...
