@@ -82,7 +82,7 @@ export async function POST(request) {
       // update token value
       const { data, error } = await supabase
         .from("users")
-        .update({ tokens: 10000 })
+        .update({ tokens: 1000 })
         .eq("email", userEmail);
     }
 
@@ -126,7 +126,7 @@ export async function POST(request) {
         // update token value
         const { data, error } = await supabase
           .from("users")
-          .update({ tokens: 10000 })
+          .update({ tokens: 1000 })
           .eq("email", userEmail);
       }
     }

@@ -209,7 +209,7 @@ function PredictionPage({ params }) {
         >
           <motion.a
             variants={FADE_DOWN_ANIMATION_VARIANTS}
-            href="https://twitter.com/intent/tweet?text=Just%20made%20this%20awesome%20video%20with%20deepfake.pics%20created%20by%20%40TobyTabi%20%F0%9F%94%A5%0A%0A%28please%20upload%20video%29"
+            href="https://twitter.com/intent/tweet?text=Follow%20these%20steps%20to%20earn%20free%20credits%20%F0%9F%91%87%0A%0A1.%20Link%20deepfake.pics%0A%0A2.%20Upload%20your%20video%0A%0A%28send%20me%20a%20DM%20after%20you%27re%20done%20%40tobytabi%29"
             target="_blank"
             rel="noreferrer"
             className="mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"

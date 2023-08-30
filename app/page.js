@@ -8,6 +8,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { DotLoader, MoonLoader } from "react-spinners";
 import { Toaster, toast } from "sonner";
 import { Drawer } from "vaul";
+import Masonry from "react-masonry-css";
 
 import useScroll from "@/lib/hooks/use-scroll";
 import { useUploadModal } from "@/components/home/upload-modal";
@@ -220,7 +221,7 @@ export default function Home() {
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
         <UploadModal />
         <motion.div
-          className="z-10 max-w-2xl px-5 xl:px-0"
+          className="z-10 max-w-5xl px-5 xl:px-0"
           initial="hidden"
           whileInView="show"
           animate="show"
@@ -259,7 +260,7 @@ export default function Home() {
             </p>
           </motion.a>
           <motion.h1
-            className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer>Deepfakes from any image</Balancer>
@@ -301,15 +302,94 @@ export default function Home() {
             </p>
           </motion.div>
           <motion.div
-            className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
+            className="mt-10 w-full"
+            // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <video
+            <Masonry
+              breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
+              className="w-full flex justify-around gap-5 sm:gap-6 sm:px-6"
+              columnClassName="my-masonry-grid_column"
+            >
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/donaldtrump_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/yilongmusk_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/tuckercarlson_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/aoc_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/kanyewest_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+            </Masonry>
+            {/* <video
               controls
               playsInline
               src="/videos/trump.mp4"
               poster="/images/trump1.png"
-            ></video>
+            ></video> */}
           </motion.div>
         </motion.div>
         <motion.div></motion.div>

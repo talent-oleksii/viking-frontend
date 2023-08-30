@@ -457,7 +457,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onImageDrop = useCallback((acceptedFiles) => {
     if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
-      toast.error("Custom uploads only available for paid users");
+      toast.error("Upgrade your plan to upload custom files");
       console.log(userInfo.variant_id);
       return;
     } else {
@@ -494,7 +494,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onAudioDrop = useCallback((acceptedFiles) => {
     if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
-      toast.error("Custom uploads only available for paid users");
+      toast.error("Upgrade your plan to upload custom files");
       console.log(userInfo.variant_id);
       return;
     } else {
@@ -502,7 +502,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         // Validate file type
         console.log(file.type);
         if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-          toast.error("Please only upload MP3 files.");
+          toast.error("Please only upload MP3 files");
           return;
         }
 
@@ -532,8 +532,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             .decodeAudioData(bytes.buffer)
             .then((audioBuffer) => {
               const duration = audioBuffer.duration; // Get duration in seconds
-              if (duration >= 30) {
-                toast.error("Please upload MP3 file shorter than 30 seconds");
+              if (duration >= 20) {
+                toast.error("Upgrade to upload MP3 longer than 20 seconds");
                 return;
               }
 
@@ -898,14 +898,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <textarea
                   id="message"
                   rows="6"
-                  maxLength="300"
+                  maxLength="250"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0 focus:ring-0"
                   placeholder="You can generate speech in any language!"
                   ref={textRef}
                   onChange={(e) => {
                     setMessage(e.target.value);
-                    if (e.target.value.length > 300) {
-                      toast.error("Max length 300 characters");
+                    if (e.target.value.length > 249) {
+                      toast.error("Upgrade plan to type more than 250 characters");
                     }
                   }}
                 />
