@@ -324,7 +324,7 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/yilongmusk.mp4"
@@ -334,7 +334,7 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/donaldtrump.mp4"
@@ -344,7 +344,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kimkardashian.mp4"
@@ -354,7 +355,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/joebiden.mp4"
@@ -364,7 +366,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/aoc.mp4"
@@ -374,7 +377,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kanyewest.mp4"
@@ -384,7 +388,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/tuckercarlson.mp4"
@@ -394,7 +399,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/stephenasmith.mp4"
@@ -404,7 +410,8 @@ export default function Home() {
               <video
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
-                controls loading="lazy"
+                controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/loganpaul.mp4"
