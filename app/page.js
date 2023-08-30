@@ -335,6 +335,7 @@ export default function Home() {
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
                 controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/donaldtrump.mp4"
