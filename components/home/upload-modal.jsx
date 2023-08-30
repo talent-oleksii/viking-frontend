@@ -20,7 +20,7 @@ import { Toaster, toast } from "sonner";
 import { BeatLoader } from "react-spinners";
 import Balancer from "react-wrap-balancer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import va from '@vercel/analytics';
+import va from "@vercel/analytics";
 
 const people = [
   {
@@ -95,112 +95,119 @@ const people = [
   },
   {
     id: 11,
+    name: "Stephen A. Smith",
+    voice: "xQykWcqmct968YH61VAV",
+    avatar:
+      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/StephenASmith.png",
+  },
+  {
+    id: 12,
     name: "Dave Chappelle",
     voice: "Ux3zQNOEa6p5OrVDvDQg",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/DaveChappelle.png",
   },
   {
-    id: 12,
+    id: 13,
     name: "David Attenborough",
     voice: "darvxZ8nbegIsml3JzHE",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/DavidAttenborough.png",
   },
   {
-    id: 13,
+    id: 14,
     name: "Mr. Beast",
     voice: "8tLZVGiprGSE6loUugVn",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/MrBeast.png",
   },
   {
-    id: 14,
+    id: 15,
     name: "PewDiePie",
     voice: "UGyPczvPYUG4Y9LggyfP",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/PewDiePie.png",
   },
   {
-    id: 15,
+    id: 16,
     name: "Tyler1",
     voice: "Dv1BOCBQlnc8M4ScVami",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Tyler1.png",
   },
   {
-    id: 16,
+    id: 17,
     name: "Rhett",
     voice: "CoUWMfWqybep0ohr7ovz",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Rhett.png",
   },
   {
-    id: 17,
+    id: 18,
     name: "Link",
     voice: "KLkUYLGguaZpj1DphApp",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Link.png",
   },
   {
-    id: 18,
+    id: 19,
     name: "Rick (Rick and Morty)",
     voice: "TroRXDONusuG2rSlJzad",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/RickSanchez.png",
   },
   {
-    id: 19,
+    id: 20,
     name: "Cartman (South Park)",
     voice: "zGyBxNBnX49YaKNIjSUV",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Cartman.png",
   },
   {
-    id: 20,
+    id: 21,
     name: "Peter (Family Guy)",
     voice: "mUfA3cGcljTCdjbdwvWe",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Peter.png",
   },
   {
-    id: 21,
+    id: 22,
     name: "Goku (DragonBall)",
     voice: "wwbPutfxYldkBoau8Tje",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Goku.png",
   },
   {
-    id: 22,
+    id: 23,
     name: "Sam Bankman-Fried",
     voice: "hljHFmiJdSi6Dj1mvKL1",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/SamBankmanFried.png",
   },
   {
-    id: 23,
+    id: 24,
     name: "Elizabeth Holmes",
     voice: "ykAlY5SOqHlTI0g3805B",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/ElizabethHolmes.png",
   },
   {
-    id: 24,
+    id: 25,
     name: "British Dude",
     voice: "p4QIF9bdt8tfF7wOT9hd",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/BritishDude.png",
   },
   {
-    id: 25,
+    id: 26,
     name: "Narrator Dude",
     voice: "ziJHcegLub9IYwGTwR6h",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/NarratorDude.png",
   },
   {
-    id: 26,
-    name: "Girlfriend (18+)",
+    id: 27,
+    name: "Girlfriend (19+)",
     voice: "CYblCq7uaxtBek0cNmMF",
     avatar:
       "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Girlfriend.png",
@@ -648,13 +655,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   };
 
   const saveURL = async (videoURL) => {
-    const { data, error } = await supabase
-    .from("videos")
-    .insert({
+    const { data, error } = await supabase.from("videos").insert({
       email: session.user.email,
       url: videoURL,
     });
-  }
+  };
 
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
@@ -905,7 +910,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   onChange={(e) => {
                     setMessage(e.target.value);
                     if (e.target.value.length > 249) {
-                      toast.error("Upgrade plan to type more than 250 characters");
+                      toast.error(
+                        "Upgrade plan to type more than 250 characters"
+                      );
                     }
                   }}
                 />

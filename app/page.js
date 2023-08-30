@@ -347,39 +347,39 @@ export default function Home() {
                 controls
                 controlsList="noplaybackrate nodownload"
                 playsInline
+                src="/videos/stephenasmith_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/joebiden_landing.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
+                src="/videos/trump.mp4"
+                poster="/images/trump1.png"
+                className="rounded-xl mb-5 sm:mb-6"
+              />
+              <video
+                controls
+                controlsList="noplaybackrate nodownload"
+                playsInline
                 src="/videos/kanyewest_landing.mp4"
-                poster="/images/trump1.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                controls
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="/videos/trump.mp4"
-                poster="/images/trump1.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                controls
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="/videos/trump.mp4"
-                poster="/images/trump1.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                controls
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="/videos/trump.mp4"
-                poster="/images/trump1.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                controls
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="/videos/trump.mp4"
                 poster="/images/trump1.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
