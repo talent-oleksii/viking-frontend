@@ -325,10 +325,11 @@ export default function Home() {
                 // onMouseEnter={handleMouseEnter}
                 // onMouseLeave={handleMouseLeave}
                 controls
+                loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/yilongmusk.mp4"
-                poster="/images/landing/yilongmusk.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/yilongmusk.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -339,7 +340,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/donaldtrump.mp4"
-                poster="/images/landing/donaldtrump.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/donaldtrump.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -350,7 +351,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kimkardashian.mp4"
-                poster="/images/landing/kimkardashian.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/kimkardashian.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -361,7 +362,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/joebiden.mp4"
-                poster="/images/landing/joebiden.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/joebiden.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -372,7 +373,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/aoc.mp4"
-                poster="/images/landing/aoc.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/aoc.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -383,7 +384,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/kanyewest.mp4"
-                poster="/images/landing/kanyewest.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/kanyewest.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -394,7 +395,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/tuckercarlson.mp4"
-                poster="/images/landing/tuckercarlson.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/tuckercarlson.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -405,7 +406,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/stephenasmith.mp4"
-                poster="/images/landing/stephenasmith.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/stephenasmith.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -416,7 +417,7 @@ export default function Home() {
                 controlsList="noplaybackrate nodownload"
                 playsInline
                 src="/videos/landing/loganpaul.mp4"
-                poster="/images/landing/loganpaul.png"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/loganpaul.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
             </Masonry>

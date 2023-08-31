@@ -16,7 +16,7 @@ export async function POST(request) {
         input: {
           face: image,
           audio: audio,
-          pads: "0 14 0 0"
+          pads: "0 16 0 0"
         },
       }
     );

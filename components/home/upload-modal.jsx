@@ -369,47 +369,47 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const images = [
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/yilongmusk.mp4",
-      thumbnail: "/images/modal/yilongmusk.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/yilongmusk.png",
       id: "yilongmusk",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/donaldtrump.mp4",
-      thumbnail: "/images/modal/donaldtrump.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/donaldtrump.png",
       id: "donaldtrump",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kimkardashian.mp4",
-      thumbnail: "/images/modal/kimkardashian.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kimkardashian.png",
       id: "kimkardashian",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/joebiden.mp4",
-      thumbnail: "/images/modal/joebiden.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/joebiden.png",
       id: "joebiden",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/aoc.mp4",
-      thumbnail: "/images/modal/aoc.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/aoc.png",
       id: "aoc",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kanyewest.mp4",
-      thumbnail: "/images/modal/kanyewest.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kanyewest.png",
       id: "kanyewest",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/tuckercarlson.mp4",
-      thumbnail: "/images/modal/tuckercarlson.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/tuckercarlson.png",
       id: "tuckercarlson",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/stephenasmith.mp4",
-      thumbnail: "/images/modal/stephenasmith.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/stephenasmith.png",
       id: "stephenasmith",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/loganpaul.mp4",
-      thumbnail: "/images/modal/loganpaul.png",
+      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/loganpaul.png",
       id: "loganpaul",
     },
   ];
@@ -518,6 +518,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     const { data, error } = await supabase.storage
       .from("uploads")
       .upload(`${file.name}`, file, {
+        cacheControl: '3600',
         upsert: true,
       });
 
@@ -744,8 +745,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
           <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
-              <Image
-                src="/images/logo.png"
+              <img
+                src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-0 mb-2"
                 width={20}
@@ -754,12 +755,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Select sample media, or upload your own.
+              Select sample video, or upload your own.
               <span className="hidden sm:inline">
                 <br />
               </span>
               <span className="hidden sm:inline">
-                Works with images and videos.
+                Both images and videos work.
               </span>
             </Balancer>
           </div>
@@ -793,7 +794,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               </div>
               {imageUploaded ? (
                 <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
-                  Image Uploaded ✅
+                  File Uploaded ✅
                 </div>
               ) : uploadingVideo ? (
                 <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
@@ -861,8 +862,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
           <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
-              <Image
-                src="/images/logo.png"
+              <img
+                src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-0 mb-2"
                 width={20}
