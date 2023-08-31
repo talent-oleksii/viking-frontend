@@ -293,7 +293,7 @@ export default function Home() {
             className="-mb-3 sm:-mb-3"
           >
             <button
-              className="group mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
+              className="group mx-auto mt-6 sm:mt-7 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => {
                 if (session) {
                   setShowUploadModal(true);
@@ -312,7 +312,7 @@ export default function Home() {
             </p>
           </motion.div>
           <motion.div
-            className="mt-10 w-full"
+            className="mt-11 sm:mt-12 w-full"
             // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
