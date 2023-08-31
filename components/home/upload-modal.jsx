@@ -369,47 +369,56 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const images = [
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/yilongmusk.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/yilongmusk.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/yilongmusk.png",
       id: "yilongmusk",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/donaldtrump.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/donaldtrump.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/donaldtrump.png",
       id: "donaldtrump",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kimkardashian.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kimkardashian.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kimkardashian.png",
       id: "kimkardashian",
     },
     {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/joebiden.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/joebiden.png",
-      id: "joebiden",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/tuckercarlson.mp4",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/tuckercarlson.png",
+      id: "tuckercarlson",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/aoc.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/aoc.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/aoc.png",
       id: "aoc",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kanyewest.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kanyewest.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kanyewest.png",
       id: "kanyewest",
     },
     {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/tuckercarlson.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/tuckercarlson.png",
-      id: "tuckercarlson",
+      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/joebiden.mp4",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/joebiden.png",
+      id: "joebiden",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/stephenasmith.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/stephenasmith.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/stephenasmith.png",
       id: "stephenasmith",
     },
     {
       link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/loganpaul.mp4",
-      thumbnail: "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/loganpaul.png",
+      thumbnail:
+        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/loganpaul.png",
       id: "loganpaul",
     },
   ];
@@ -518,7 +527,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     const { data, error } = await supabase.storage
       .from("uploads")
       .upload(`${file.name}`, file, {
-        cacheControl: '3600',
+        cacheControl: "3600",
         upsert: true,
       });
 

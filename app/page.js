@@ -361,8 +361,8 @@ export default function Home() {
                 loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/joebiden.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/joebiden.png"
+                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/tuckercarlson.mp4"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/tuckercarlson.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
@@ -394,8 +394,8 @@ export default function Home() {
                 loading="lazy"
                 controlsList="noplaybackrate nodownload"
                 playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/tuckercarlson.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/tuckercarlson.png"
+                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/joebiden.mp4"
+                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/joebiden.png"
                 className="rounded-xl mb-5 sm:mb-6"
               />
               <video
