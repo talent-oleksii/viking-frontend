@@ -487,9 +487,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [audioUploaded, setAudioUploaded] = useState(false);
 
-  const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [mommyUploaded, setMommyUploaded] = useState(false);
+  const [daddyUploaded, setDaddyUploaded] = useState(false);
 
-  const onImageDrop = useCallback(
+  const [mommyImage, setMommyImage] = useState(null);
+  const [daddyImage, setDaddyImage] = useState(null);
+
+  const onImageDrop1 = useCallback(
     (acceptedFiles) => {
       acceptedFiles.forEach((file) => {
         // Validate file size
@@ -505,36 +509,58 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           return;
         }
 
-        va.track("Upload custom media");
-        setUploadingVideo(true);
-        uploadVideo(file);
+        setMommyUploaded(true);
+        setMommyImage(file);
       });
     },
     [userInfo]
   );
 
-  const uploadVideo = async (file) => {
-    console.log(file.name);
-    const { data, error } = await supabase.storage
-      .from("uploads")
-      .upload(`${file.name}`, file, {
-        cacheControl: "3600",
-        upsert: true,
+  const onImageDrop2 = useCallback(
+    (acceptedFiles) => {
+      acceptedFiles.forEach((file) => {
+        // Validate file size
+        if (file.size > 5242880) {
+          toast.error("File size exceeds the 5MB size limit");
+          return;
+        }
+
+        // Validate file type
+        console.log(file.type);
+        if (!file.type.startsWith("image/")) {
+          toast.error("Please only upload image files");
+          return;
+        }
+
+        setDaddyUploaded(true);
+        setDaddyImage(file);
       });
+    },
+    [userInfo]
+  );
 
-    console.log(data);
-    console.log(error);
+  // const uploadVideo = async (file) => {
+  //   console.log(file.name);
+  //   const { data, error } = await supabase.storage
+  //     .from("uploads")
+  //     .upload(`${file.name}`, file, {
+  //       cacheControl: "3600",
+  //       upsert: true,
+  //     });
 
-    console.log(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
-    );
-    setVideoLink(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
-    );
-    setImageUploaded(true);
-    setImageButton(true);
-    setUploadingVideo(false);
-  };
+  //   console.log(data);
+  //   console.log(error);
+
+  //   console.log(
+  //     `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
+  //   );
+  //   setVideoLink(
+  //     `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
+  //   );
+  //   setImageUploaded(true);
+  //   setImageButton(true);
+  //   setUploadingVideo(false);
+  // };
 
   // const onImageDrop = useCallback((acceptedFiles) => {
   //   if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
@@ -573,74 +599,78 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const [base64Audio, setBase64Audio] = useState(null);
 
-  const onAudioDrop = useCallback(
-    (acceptedFiles) => {
-      if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
-        toast.error("Upgrade your plan to upload custom files");
-        console.log(userInfo.variant_id);
-        return;
-      } else {
-        acceptedFiles.forEach((file) => {
-          // Validate file type
-          console.log(file.type);
-          if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-            toast.error("Please only upload MP3 files");
-            return;
-          }
+  // const onAudioDrop = useCallback(
+  //   (acceptedFiles) => {
+  //     if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
+  //       toast.error("Upgrade your plan to upload custom files");
+  //       console.log(userInfo.variant_id);
+  //       return;
+  //     } else {
+  //       acceptedFiles.forEach((file) => {
+  //         // Validate file type
+  //         console.log(file.type);
+  //         if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
+  //           toast.error("Please only upload MP3 files");
+  //           return;
+  //         }
 
-          va.track("Upload custom audio");
+  //         va.track("Upload custom audio");
 
-          // setAudioUploading(true);
-          const reader = new FileReader();
+  //         // setAudioUploading(true);
+  //         const reader = new FileReader();
 
-          reader.onload = async () => {
-            const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
+  //         reader.onload = async () => {
+  //           const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
 
-            // Create an AudioContext
-            const audioContext = new (window.AudioContext ||
-              window.webkitAudioContext)();
+  //           // Create an AudioContext
+  //           const audioContext = new (window.AudioContext ||
+  //             window.webkitAudioContext)();
 
-            // Convert Base64 to ArrayBuffer
-            const base64 = dataUrl.split(",")[1];
-            const binaryString = atob(base64);
-            const len = binaryString.length;
-            const bytes = new Uint8Array(len);
-            for (let i = 0; i < len; i++) {
-              bytes[i] = binaryString.charCodeAt(i);
-            }
+  //           // Convert Base64 to ArrayBuffer
+  //           const base64 = dataUrl.split(",")[1];
+  //           const binaryString = atob(base64);
+  //           const len = binaryString.length;
+  //           const bytes = new Uint8Array(len);
+  //           for (let i = 0; i < len; i++) {
+  //             bytes[i] = binaryString.charCodeAt(i);
+  //           }
 
-            // Decode the audio data
-            audioContext
-              .decodeAudioData(bytes.buffer)
-              .then((audioBuffer) => {
-                const duration = audioBuffer.duration; // Get duration in seconds
-                if (duration >= 20) {
-                  toast.error("Upgrade to upload MP3 longer than 20 seconds");
-                  return;
-                }
+  //           // Decode the audio data
+  //           audioContext
+  //             .decodeAudioData(bytes.buffer)
+  //             .then((audioBuffer) => {
+  //               const duration = audioBuffer.duration; // Get duration in seconds
+  //               if (duration >= 20) {
+  //                 toast.error("Upgrade to upload MP3 longer than 20 seconds");
+  //                 return;
+  //               }
 
-                // Update audio state
-                setBase64Audio(dataUrl); // Store the Data URI in the state
-                setAudioUploaded(true);
-                // setAudioUploading(false);
-              })
-              .catch((error) => {
-                toast.error("Failed to decode audio file.");
-                console.error(error);
-              });
-          };
-          reader.readAsDataURL(file); // Read the file as a Data URL
-        });
-      }
-    },
-    [userInfo]
-  );
+  //               // Update audio state
+  //               setBase64Audio(dataUrl); // Store the Data URI in the state
+  //               setAudioUploaded(true);
+  //               // setAudioUploading(false);
+  //             })
+  //             .catch((error) => {
+  //               toast.error("Failed to decode audio file.");
+  //               console.error(error);
+  //             });
+  //         };
+  //         reader.readAsDataURL(file); // Read the file as a Data URL
+  //       });
+  //     }
+  //   },
+  //   [userInfo]
+  // );
 
-  const { getRootProps: getImageRootProps, getInputProps: getImageInputProps } =
-    useDropzone({ onDrop: onImageDrop });
+  const {
+    getRootProps: getImageRootProps1,
+    getInputProps: getImageInputProps1,
+  } = useDropzone({ onDrop: onImageDrop1 });
 
-  const { getRootProps: getAudioRootProps, getInputProps: getAudioInputProps } =
-    useDropzone({ onDrop: onAudioDrop });
+  const {
+    getRootProps: getImageRootProps2,
+    getInputProps: getImageInputProps2,
+  } = useDropzone({ onDrop: onImageDrop2 });
 
   const [shouldReplicate, setShouldReplicate] = useState(false);
 
@@ -748,6 +778,84 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setEmail(event.target.value);
   };
 
+  const [mommyLink, setMommyLink] = useState("");
+  const [daddyLink, setDaddyLink] = useState("");
+
+  const uploadMommyImage = async () => {
+    const emailPrefix = email.split("@")[0];
+    const newFileName = `mom_${emailPrefix}`;
+    console.log(emailPrefix);
+    console.log(newFileName);
+
+    const { data, error } = await supabase.storage
+      .from("uploads")
+      .upload(newFileName, mommyImage, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
+    console.log(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+    );
+    setMommyLink(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+    );
+    uploadDaddyImage();
+  };
+
+  const uploadDaddyImage = async () => {
+    const emailPrefix = email.split("@")[0];
+    const newFileName = `dad_${emailPrefix}`;
+    console.log(emailPrefix);
+    console.log(newFileName);
+
+    const { data, error } = await supabase.storage
+      .from("uploads")
+      .upload(newFileName, daddyImage, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
+    console.log(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+    );
+    setDaddyLink(
+      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+    );
+    // updateTable();
+  };
+
+  const updateTable = async () => {
+    console.log(mommyLink);
+    console.log(daddyLink);
+
+    const { data, error } = await supabase
+      .from("users")
+      .upsert({
+        email: email,
+        order: orderOption,
+        mom: mommyLink,
+        dad: daddyLink,
+      })
+      .select();
+
+    console.log(data);
+    console.log(error);
+  };
+
+  const clickBuyLink1 = () => {
+    LemonSqueezy.Url.Open(
+      "https://stockimage.lemonsqueezy.com/checkout/buy/e162129e-c41d-400d-8208-e3ff3582486c?embed=1"
+    );
+  };
+
+  const clickBuyLink2 = () => {
+    LemonSqueezy.Url.Open(
+      "https://stockimage.lemonsqueezy.com/checkout/buy/e162129e-c41d-400d-8208-e3ff3582486c?embed=1"
+    );
+  };
+
+
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
       <Toaster richColors position="top-right" />
@@ -775,17 +883,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   Mommy's photo
                 </p>
               </div>
-              {imageUploaded ? (
+              {mommyUploaded ? (
                 <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅
                 </div>
-              ) : uploadingVideo ? (
-                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
-                  Uploading...
-                </div>
               ) : (
                 <label
-                  {...getImageRootProps()}
+                  {...getImageRootProps1()}
                   htmlFor="dropzone-file"
                   className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
@@ -808,7 +912,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     <p className="text-xs text-gray-400">Upload File</p>
                   </div>
                   <input
-                    {...getImageInputProps()}
+                    {...getImageInputProps1()}
                     id="dropzone-file"
                     type="file"
                     className="hidden"
@@ -823,17 +927,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   Daddy's photo
                 </p>
               </div>
-              {imageUploaded ? (
+              {daddyUploaded ? (
                 <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅
                 </div>
-              ) : uploadingVideo ? (
-                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
-                  Uploading...
-                </div>
               ) : (
                 <label
-                  {...getImageRootProps()}
+                  {...getImageRootProps2()}
                   htmlFor="dropzone-file"
                   className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
@@ -856,7 +956,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     <p className="text-xs text-gray-400">Upload File</p>
                   </div>
                   <input
-                    {...getImageInputProps()}
+                    {...getImageInputProps2()}
                     id="dropzone-file"
                     type="file"
                     className="hidden"
@@ -866,7 +966,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div>
 
             <button
-              disabled={!imageButton}
+              disabled={!mommyUploaded || !daddyUploaded}
               onClick={() => {
                 event.preventDefault();
                 if (currentStep === "image") {
@@ -875,7 +975,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !imageButton
+                !mommyUploaded || !daddyUploaded
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
@@ -908,17 +1008,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
             <div id="email" className="">
-              <label
-                for="small-input"
-                class="block mb-2 text-sm font-medium text-gray-900"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900">
                 Your email
               </label>
               <input
                 type="text"
-                autocomplete="off"
+                autoComplete="off"
                 id="small-input"
-                class="block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
+                className="block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
                 value={email}
                 onChange={handleChange}
               />
@@ -965,14 +1062,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               disabled={email.length === 0 || orderOption.length === 0}
               onClick={() => {
                 event.preventDefault();
-                if (userInfo.tokens > 0) {
-                  setGenerating(true);
-                  message.trim() ? TTS() : replicate();
-                  va.track("Generate Button");
-                } else {
-                  router.push("/pricing");
-                  va.track("Generate Button - No Credits");
-                }
+                uploadMommyImage();
+                clickBuyLink1();
+                setShowUploadModal(false);
+                console.log("clicked");
               }}
               className={`${
                 email.length === 0 || orderOption.length === 0

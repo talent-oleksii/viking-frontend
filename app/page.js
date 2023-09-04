@@ -169,8 +169,8 @@ export default function Home() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => {
-                handleGoogle();
-                va.track("Sign Up Button");
+                setShowUploadModal(true);
+                va.track("Place Order Button");
               }}
               className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
             >
