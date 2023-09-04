@@ -491,33 +491,24 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onImageDrop = useCallback(
     (acceptedFiles) => {
-      if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
-        toast.error("Upgrade your plan to upload custom files");
-        console.log(userInfo.variant_id);
-        return;
-      } else {
-        acceptedFiles.forEach((file) => {
-          // Validate file size
-          if (file.size > 52428800) {
-            toast.error("File size exceeds the 50MB size limit");
-            return;
-          }
+      acceptedFiles.forEach((file) => {
+        // Validate file size
+        if (file.size > 5242880) {
+          toast.error("File size exceeds the 5MB size limit");
+          return;
+        }
 
-          // Validate file type
-          console.log(file.type);
-          if (
-            !file.type.startsWith("image/") &&
-            !file.type.startsWith("video/")
-          ) {
-            toast.error("Please only upload image or video files");
-            return;
-          }
+        // Validate file type
+        console.log(file.type);
+        if (!file.type.startsWith("image/")) {
+          toast.error("Please only upload image files");
+          return;
+        }
 
-          va.track("Upload custom media");
-          setUploadingVideo(true);
-          uploadVideo(file);
-        });
-      }
+        va.track("Upload custom media");
+        setUploadingVideo(true);
+        uploadVideo(file);
+      });
     },
     [userInfo]
   );
@@ -747,58 +738,89 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     });
   };
 
+  const [clickedDiv, setClickedDiv] = useState(null);
+  const [orderOption, setOrderOption] = useState("");
+
+  const [email, setEmail] = useState("");
+
+  // Function to handle input change
+  const handleChange = (event) => {
+    setEmail(event.target.value);
+  };
+
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
       <Toaster richColors position="top-right" />
       {currentStep === "image" ? (
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
-          <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
+          <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
                 src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
                 alt="Logo"
-                className="h-10 w-10 rounded-full sm:mb-0 mb-2"
+                className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
                 height={20}
               />
             </a>
-            <h3 className="font-clash text-2xl font-bold">Choose Media</h3>
+            <h3 className="font-clash text-2xl font-bold">Parent Photos</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Select sample video, or upload your own.
-              <span className="hidden sm:inline">
-                <br />
-              </span>
-              <span className="hidden sm:inline">
-                Both images and videos work.
-              </span>
+              Upload a single photo from each parent.
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
-            <div id="select image" className="">
-              <p className="block text-sm font-medium text-gray-700 mb-2">
-                Select video
-              </p>
-              <div className="grid grid-cols-3 gap-2">
-                {images.map((image) => (
-                  <img
-                    key={image.id} // Add this line
-                    src={image.thumbnail}
-                    alt=""
-                    className={`rounded-md w-full cursor-pointer ${
-                      selectedLink && selectedLink !== image.link
-                        ? "opacity-30"
-                        : "opacity-100"
-                    }`}
-                    onClick={() => handleVideoClick(image.link)}
-                  />
-                ))}
+            <div>
+              <div className="flex items-center justify-between">
+                <p className="block text-sm font-medium text-gray-700 mb-2">
+                  Mommy's photo
+                </p>
               </div>
+              {imageUploaded ? (
+                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                  File Uploaded ✅
+                </div>
+              ) : uploadingVideo ? (
+                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                  Uploading...
+                </div>
+              ) : (
+                <label
+                  {...getImageRootProps()}
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                >
+                  <div className="flex sm:flex-col items-center justify-center">
+                    <svg
+                      aria-hidden="true"
+                      className="w-6 h-6 mb-1 text-gray-400 hidden sm:block"
+                      fill="none"
+                      stroke="#b5c6d1"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="text-xs text-gray-400">Upload File</p>
+                  </div>
+                  <input
+                    {...getImageInputProps()}
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                  />
+                </label>
+              )}
             </div>
 
             <div>
               <div className="flex items-center justify-between">
                 <p className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload (optional)
+                  Daddy's photo
                 </p>
               </div>
               {imageUploaded ? (
@@ -869,194 +891,78 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         </div>
       ) : (
         <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200">
-          <div className="flex flex-col items-center justify-center space-y-1.5 sm:space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
+          <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
                 src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
                 alt="Logo"
-                className="h-10 w-10 rounded-full sm:mb-0 mb-2"
+                className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
                 height={20}
               />
             </a>
-            <h3 className="font-clash text-2xl font-bold">Add Voice</h3>
+            <h3 className="font-clash text-2xl font-bold">Order Details</h3>
             <p className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Generate audio clips, or upload your own.
+              Please make sure to enter the correct email.
             </p>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
-            <div id="select voice" className="">
-              <Listbox value={selected} onChange={setSelected}>
-                {({ open }) => (
-                  <>
-                    <Listbox.Label className="block text-sm font-medium text-gray-700 mb-2">
-                      Select voice
-                    </Listbox.Label>
-                    <div className="relative">
-                      <Listbox.Button className="bg-white border pl-3 py-2.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-newblue focus:border-newblue block w-full">
-                        <span className="flex items-center">
-                          <img
-                            src={selected.avatar}
-                            alt=""
-                            className="h-5 w-5 flex-shrink-0 rounded-full"
-                          />
-                          <span className="ml-3 block truncate">
-                            {selected.name}
-                          </span>
-                        </span>
-                        <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                          <ChevronUpDownIcon
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </Listbox.Button>
-
-                      <Transition
-                        show={open}
-                        as={Fragment}
-                        leave="transition ease-in duration-100"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                      >
-                        <Listbox.Options className="absolute z-10 mt-1 max-h-[290px] sm:max-h-[380px] w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                          {people.map((person) => (
-                            <Listbox.Option
-                              key={person.id}
-                              className={({ active }) =>
-                                classNames(
-                                  active
-                                    ? "bg-indigo-600 text-white"
-                                    : "text-gray-900",
-                                  "relative cursor-default select-none py-2 pl-3 pr-9"
-                                )
-                              }
-                              value={person}
-                            >
-                              {({ selected, active }) => (
-                                <>
-                                  <div className="flex items-center">
-                                    <img
-                                      src={person.avatar}
-                                      alt=""
-                                      className="h-5 w-5 flex-shrink-0 rounded-full"
-                                    />
-                                    <span
-                                      className={classNames(
-                                        selected
-                                          ? "font-semibold"
-                                          : "font-normal",
-                                        "ml-3 block truncate"
-                                      )}
-                                    >
-                                      {person.name}
-                                    </span>
-                                  </div>
-
-                                  {selected ? (
-                                    <span
-                                      className={classNames(
-                                        active
-                                          ? "text-white"
-                                          : "text-indigo-600",
-                                        "absolute inset-y-0 right-0 flex items-center pr-4"
-                                      )}
-                                    >
-                                      <CheckIcon
-                                        className="h-5 w-5"
-                                        aria-hidden="true"
-                                      />
-                                    </span>
-                                  ) : null}
-                                </>
-                              )}
-                            </Listbox.Option>
-                          ))}
-                        </Listbox.Options>
-                      </Transition>
-                    </div>
-                  </>
-                )}
-              </Listbox>
+            <div id="email" className="">
+              <label
+                for="small-input"
+                class="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Your email
+              </label>
+              <input
+                type="text"
+                autocomplete="off"
+                id="small-input"
+                class="block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
+                value={email}
+                onChange={handleChange}
+              />
             </div>
 
-            <div id="message" className="">
+            <div id="order" className="">
               <div className="flex justify-between items-center mb-2">
                 <label
-                  htmlFor="message"
+                  htmlFor="order"
                   className="block text-sm font-medium text-gray-900"
                 >
-                  What do you want to say?
+                  Order options
                 </label>
               </div>
-              <div className="relative">
-                <textarea
-                  id="message"
-                  rows="6"
-                  maxLength="250"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-0 focus:ring-0"
-                  placeholder="You can generate speech in any language!"
-                  ref={textRef}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                    if (e.target.value.length > 249) {
-                      toast.error(
-                        "Upgrade plan to type more than 250 characters"
-                      );
-                    }
+              <div id="select" className="flex flex-col gap-2">
+                <div
+                  className={`border ${
+                    clickedDiv === 1 ? "border-black" : "border-gray-300"
+                  } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  onClick={() => {
+                    setClickedDiv(clickedDiv === 1 ? null : 1);
+                    setOrderOption(9);
                   }}
-                />
-              </div>
-            </div>
-
-            <div id="upload audio">
-              <div className="flex items-center justify-between mb-2">
-                <p className="block text-sm font-medium text-gray-700">
-                  Upload audio (optional)
-                </p>
-              </div>
-              {audioUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
-                  Audio Uploaded ✅
-                </div>
-              ) : (
-                <label
-                  {...getAudioRootProps()}
-                  htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
-                  <div className="flex flex-col items-center justify-center">
-                    <svg
-                      aria-hidden="true"
-                      className="w-6 h-6 mb-1 text-gray-400 hidden sm:block"
-                      fill="none"
-                      stroke="#b5c6d1"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      ></path>
-                    </svg>
-                    <p className="text-xs text-gray-400">
-                      Tip: Clone any voice at voice-clone.ai
-                    </p>
-                  </div>
-                  <input
-                    {...getAudioInputProps()}
-                    id="dropzone-file"
-                    type="file"
-                    className="hidden"
-                  />
-                </label>
-              )}
+                  <div className="">2 Photos → 1 Boy + 1 Girl</div>
+                  <div className="">$9</div>
+                </div>
+                <div
+                  className={`border ${
+                    clickedDiv === 2 ? "border-black" : "border-gray-300"
+                  } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  onClick={() => {
+                    setClickedDiv(clickedDiv === 2 ? null : 2);
+                    setOrderOption(19);
+                  }}
+                >
+                  <div className="">10 Photos → 5 Boys + 5 Girls</div>
+                  <div className="">$19</div>
+                </div>
+              </div>
             </div>
 
             <button
-              disabled={!base64Audio && !message.trim()}
+              disabled={email.length === 0 || orderOption.length === 0}
               onClick={() => {
                 event.preventDefault();
                 if (userInfo.tokens > 0) {
@@ -1069,7 +975,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !base64Audio && !message.trim()
+                email.length === 0 || orderOption.length === 0
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
@@ -1077,7 +983,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               {generating ? (
                 <BeatLoader size={8} color="#898989" />
               ) : (
-                <p className="text-sm">Generate</p>
+                <p className="text-sm">Submit Order</p>
               )}
             </button>
           </form>

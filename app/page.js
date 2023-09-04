@@ -153,7 +153,10 @@ export default function Home() {
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          <Link href="/" className="flex items-center font-clash text-2xl">
+          <Link
+            href="/"
+            className="flex items-center font-dm font-bold text-2xl"
+          >
             <Image
               src="/images/logo.png"
               alt="Logo image of a chat bubble"
@@ -161,70 +164,18 @@ export default function Home() {
               height="30"
               className="mr-2 rounded-sm"
             ></Image>
-            <p>Deepfake.Pics</p>
+            <p>FutureBaby</p>
           </Link>
           <div className="flex items-center space-x-4">
             <button
               onClick={() => {
-                router.push("/pricing");
-                va.track("Pricing Button");
+                handleGoogle();
+                va.track("Sign Up Button");
               }}
-              className="hidden sm:block px-4 py-1.5 text-black border border-gray-400 rounded-lg text-sm"
+              className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
             >
-              Pricing
+              Order Now
             </button>
-            {userInfo.variant_id == "111140" ? (
-              <button
-                onClick={() => {
-                  router.push("/pricing");
-                  va.track("Credits Button");
-                }}
-                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
-              >
-                Unlimited
-              </button>
-            ) : subscription ? (
-              <button
-                onClick={() => {
-                  router.push("/pricing");
-                  va.track("Credits Button");
-                }}
-                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
-              >
-                Credits: {userInfo.tokens}
-              </button>
-            ) : session ? (
-              <div>
-                <button
-                  onClick={() => {
-                    router.push("/pricing");
-                    va.track("Pricing Button");
-                  }}
-                  className="sm:hidden px-4 py-1.5 text-white border bg-black rounded-lg text-sm"
-                >
-                  Pricing
-                </button>
-                <button
-                  onClick={() => {
-                    router.push("/pricing");
-                    va.track("Credits Button");
-                  }}
-                  className="hidden sm:block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
-                >
-                  Credits: {userInfo.tokens}
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  handleGoogle();
-                  va.track("Sign Up Button");
-                }}
-                className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
-              >
-                Sign Up
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -266,14 +217,14 @@ export default function Home() {
               />
             </svg>
             <p className="text-sm font-semibold text-[#1d9bf0]">
-              Introducing Deepfake
+              Meet FutureBaby
             </p>
           </motion.a>
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Balancer>Deepfakes from any image</Balancer>
+            <Balancer>See your future baby photos with AI</Balancer>
           </motion.h1>
           <motion.p
             className="mt-5 text-center text-gray-500 md:text-xl"
@@ -281,10 +232,10 @@ export default function Home() {
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Make anyone say anything. Just upload image.
+                Upload a single photo from each parent.
               </span>
               <span className="hidden sm:inline">
-                Make anyone say anything. Just upload an image.
+                Upload a single photo from each parent.
               </span>
             </Balancer>
           </motion.p>
@@ -295,132 +246,23 @@ export default function Home() {
             <button
               className="group mx-auto mt-6 sm:mt-7 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => {
-                if (session) {
                   setShowUploadModal(true);
                   va.track("Image / Video");
-                } else {
-                  handleGoogle();
-                  va.track("Image / Video - Sign Up");
-                }
               }}
             >
               <Upload className="h-5 w-5 text-white" />
-              <p>Image / Video</p>
+              <p>Upload Photo</p>
             </button>
             <p className="mt-2.5 text-center text-xs text-gray-500">
-              120.4K deepfakes generated and counting!
+              11,000+ baby photos generated so far!
             </p>
           </motion.div>
           <motion.div
-            className="mt-11 sm:mt-12 w-full"
+            className="mt-11 sm:mt-20 w-full"
             // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Masonry
-              breakpointCols={{ default: 3, 1100: 2, 700: 1 }}
-              className="w-full flex justify-around gap-5 sm:gap-6 sm:px-6"
-              columnClassName="my-masonry-grid_column"
-            >
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/yilongmusk.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/yilongmusk.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/donaldtrump.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/donaldtrump.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/kimkardashian.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/kimkardashian.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/tuckercarlson.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/tuckercarlson.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/aoc.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/aoc.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/kanyewest.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/kanyewest.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/joebiden.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/joebiden.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/stephenasmith.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/stephenasmith.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-              <video
-                // onMouseEnter={handleMouseEnter}
-                // onMouseLeave={handleMouseLeave}
-                controls
-                loading="lazy"
-                controlsList="noplaybackrate nodownload"
-                playsInline
-                src="https://auth.deepfake.pics/storage/v1/object/public/landing_videos/loganpaul.mp4"
-                poster="https://auth.deepfake.pics/storage/v1/object/public/landing_posters/loganpaul.png"
-                className="rounded-xl mb-5 sm:mb-6"
-              />
-            </Masonry>
+            <img src="/images/elon_aoc.png" alt="" />
           </motion.div>
         </motion.div>
         <motion.div></motion.div>
