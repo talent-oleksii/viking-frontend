@@ -92,12 +92,14 @@ function PredictionPage({ params }) {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
             className="cursor-pointer mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"
             onClick={() => {
-              navigator.clipboard.writeText('FRIEND25');
-              toast.success('Discount code copied to clipboard');
+              navigator.clipboard.writeText("FRIEND25");
+              toast.success("Discount code copied to clipboard");
               va.track("Give Friend Discount");
             }}
           >
-            <p className="text-sm font-semibold text-[#1d9bf0]">Give a friend 25% discount</p>
+            <p className="text-sm font-semibold text-[#1d9bf0]">
+              Give a friend 25% discount
+            </p>
           </motion.div>
           <motion.h1
             className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
@@ -111,10 +113,13 @@ function PredictionPage({ params }) {
           >
             <Balancer>
               <span className="sm:hidden">
-              Your photos will appear here when ready.
+                Your photos will appear here when ready.
+                <br />
+                Could take up to 2 hours.
               </span>
               <span className="hidden sm:inline">
-                Your photos will appear here once they are ready.
+                Your photos will appear here once they are ready. <br />
+                Could take up to 2 hours.
               </span>
             </Balancer>
           </motion.p>
