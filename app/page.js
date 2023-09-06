@@ -113,7 +113,7 @@ export default function Home() {
             </p>
           </motion.a>
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-[2.6rem] leading-[2.74rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-[2.5rem] leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer>See your future baby photos with AI</Balancer>
