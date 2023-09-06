@@ -167,13 +167,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const clickBuyLink1 = () => {
     LemonSqueezy.Url.Open(
-      "https://stockimage.lemonsqueezy.com/checkout/buy/e162129e-c41d-400d-8208-e3ff3582486c?embed=1"
+      "https://talkblog.lemonsqueezy.com/checkout/buy/a90ae3e9-8417-47c1-b982-865baee81eeb?embed=1"
     );
   };
 
   const clickBuyLink2 = () => {
     LemonSqueezy.Url.Open(
-      "https://stockimage.lemonsqueezy.com/checkout/buy/e162129e-c41d-400d-8208-e3ff3582486c?embed=1"
+      "https://talkblog.lemonsqueezy.com/checkout/buy/4bf9b323-f658-4127-9961-9e11276567d3?embed=1"
     );
   };
 
