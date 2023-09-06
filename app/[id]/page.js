@@ -102,7 +102,7 @@ function PredictionPage({ params }) {
             </p>
           </motion.div>
           <motion.h1
-            className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-clash text-5xl font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-[2.6rem] leading-[2.74rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm sm::text-7xl sm:leading-[5rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div>View your photos</div>
@@ -127,6 +127,8 @@ function PredictionPage({ params }) {
             className="max-w-[1000px] mt-10 sm:mt-16 grid sm:grid-cols-2 gap-6 sm:gap-4"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
+            <img src={image1} alt="" className="rounded-2xl" />
+            <img src={image1} alt="" className="rounded-2xl" />
             <img src={image1} alt="" className="rounded-2xl" />
             <img src={image1} alt="" className="rounded-2xl" />
             <img src={image3} alt="" className="rounded-2xl" />
