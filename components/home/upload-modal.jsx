@@ -40,7 +40,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onImageDrop1 = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      console.log("inside");
+      // console.log("inside");
       // Validate file size
       if (file.size > 5242880) {
         toast.error("File size exceeds the 5MB size limit");
@@ -108,7 +108,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setLoading(true);
     const emailPrefix = email.split("@")[0];
     const newFileName = `mom_${emailPrefix}`;
-    console.log(emailPrefix);
+    // console.log(emailPrefix);
     console.log(newFileName);
 
     const { data, error } = await supabase.storage
@@ -119,10 +119,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(data);
+    console.log(error);
 
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    )
+    );
+
     setMommyLink(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
@@ -131,15 +133,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   useEffect(() => {
     if (mommyLink) {
       // assuming mommyLink is the state variable being set
-      uploadDaddyImage();
       console.log("mommy uploaded");
+      uploadDaddyImage();
     }
   }, [mommyLink]);
 
   const uploadDaddyImage = async () => {
     const emailPrefix = email.split("@")[0];
     const newFileName = `dad_${emailPrefix}`;
-    console.log(emailPrefix);
+    // console.log(emailPrefix);
     console.log(newFileName);
 
     const { data, error } = await supabase.storage
@@ -150,10 +152,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(data);
+    console.log(error);
 
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    )
+    );
     setDaddyLink(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
@@ -162,24 +165,28 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   useEffect(() => {
     if (daddyLink) {
       // assuming mommyLink is the state variable being set
-      updateTable();
       console.log("daddy uploaded");
+      updateTable();
     }
   }, [daddyLink]);
 
   const updateTable = async () => {
+    console.log("inside update table");
     console.log(mommyLink);
     console.log(daddyLink);
 
     const { data, error } = await supabase
       .from("users")
-      .upsert({
-        email: email,
-        order: orderOption,
-        // mom: mommyLink,
-        // dad: daddyLink,
-      })
+      // .upsert({
+      //   email: email,
+      //   order: orderOption,
+      //   mom: mommyLink,
+      //   dad: daddyLink,
+      // })
       .select();
+
+    console.log(data);
+    console.log(error);
 
     setLoading(false);
     // setShowUploadModal(false);
@@ -189,9 +196,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     // } else {
     //   clickBuyLink2();
     // }
-
-    console.log(data);
-    console.log(error);
   };
 
   const clickBuyLink1 = () => {
@@ -408,7 +412,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               onClick={() => {
                 event.preventDefault();
                 uploadMommyImage();
-                console.log("clicked");
+                // console.log("clicked");
               }}
               className={`${
                 email.length === 0 || orderOption.length === 0
