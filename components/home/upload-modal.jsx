@@ -119,11 +119,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(data);
-    console.log(error);
 
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    );
+    )
     setMommyLink(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
@@ -151,11 +150,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(data);
-    console.log(error);
 
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    );
+    )
     setDaddyLink(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
