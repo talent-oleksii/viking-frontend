@@ -63,7 +63,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const {
     getRootProps: getImageRootProps1,
     getInputProps: getImageInputProps1,
-  } = useDropzone({ onDrop: onImageDrop1 });
+  } = useDropzone({ onDrop: onImageDrop1, noDragEventsBubbling: true, });
 
   const onImageDrop2 = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -88,7 +88,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const {
     getRootProps: getImageRootProps2,
     getInputProps: getImageInputProps2,
-  } = useDropzone({ onDrop: onImageDrop2 });
+  } = useDropzone({ onDrop: onImageDrop2, noDragEventsBubbling: true, });
 
   const [clickedDiv, setClickedDiv] = useState(null);
   const [orderOption, setOrderOption] = useState("");
