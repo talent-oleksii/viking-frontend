@@ -113,12 +113,12 @@ function PredictionPage({ params }) {
           >
             <Balancer>
               <span className="sm:hidden">
-                Your photos will appear here when ready.
+                Baby photos will appear here when ready.
                 <br />
                 Could take up to 2 hours.
               </span>
               <span className="hidden sm:inline">
-                Your photos will appear here once they are ready. <br />
+                Baby photos will appear here once they are ready. <br />
                 Could take up to 2 hours.
               </span>
             </Balancer>
@@ -127,8 +127,16 @@ function PredictionPage({ params }) {
             className="max-w-[1000px] mt-10 sm:mt-16 grid sm:grid-cols-2 gap-6 sm:gap-4"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <img src={image1} alt="" className="rounded-2xl" />
-            <img src={image1} alt="" className="rounded-2xl" />
+            <img
+              src={`https://auth.deepfake.pics/storage/v1/object/public/uploads/mom_${params.id}`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://auth.deepfake.pics/storage/v1/object/public/uploads/dad_${params.id}`}
+              alt=""
+              className="rounded-2xl"
+            />
             <img src={image1} alt="" className="rounded-2xl" />
             <img src={image1} alt="" className="rounded-2xl" />
             <img src={image3} alt="" className="rounded-2xl" />
