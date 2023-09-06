@@ -118,6 +118,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         upsert: true,
       });
 
+    console.log(data);
+    console.log(error);
+
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
@@ -146,6 +149,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         cacheControl: "3600",
         upsert: true,
       });
+
+    console.log(data);
+    console.log(error);
 
     console.log(
       `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
