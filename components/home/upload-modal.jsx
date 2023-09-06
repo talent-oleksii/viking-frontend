@@ -182,7 +182,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       .select();
 
     setLoading(false);
-    setShowUploadModal(false);
+    // setShowUploadModal(false);
 
     if (orderOption === 9) {
       clickBuyLink1();
