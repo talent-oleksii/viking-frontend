@@ -884,14 +884,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </p>
               </div>
               {mommyUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                <div className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅
                 </div>
               ) : (
                 <label
                   {...getImageRootProps1()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                  className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
                   <div className="flex sm:flex-col items-center justify-center">
                     <svg
@@ -928,14 +928,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </p>
               </div>
               {daddyUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                <div className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅
                 </div>
               ) : (
                 <label
                   {...getImageRootProps2()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-12 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                  className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
                   <div className="flex sm:flex-col items-center justify-center">
                     <svg
