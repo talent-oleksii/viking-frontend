@@ -176,7 +176,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       .upsert({
         email: email,
         order: orderOption,
-        mom: mommyLink,
+        // mom: mommyLink,
         // dad: daddyLink,
       })
       .select();
