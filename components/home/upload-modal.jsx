@@ -177,26 +177,25 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     const { data, error } = await supabase
       .from("users")
+      .upsert({
+        email: email,
+        order: orderOption,
+        mom: mommyLink,
+        dad: daddyLink,
+      })
       .select();
-      // .upsert({
-      //   email: email,
-      //   order: orderOption,
-      //   mom: mommyLink,
-      //   dad: daddyLink,
-      // })
-      // .select();
 
     console.log(data);
     console.log(error);
 
     setLoading(false);
-    // setShowUploadModal(false);
+    setShowUploadModal(false);
 
-    // if (orderOption === 9) {
-    //   clickBuyLink1();
-    // } else {
-    //   clickBuyLink2();
-    // }
+    if (orderOption === 9) {
+      clickBuyLink1();
+    } else {
+      clickBuyLink2();
+    }
   };
 
   const clickBuyLink1 = () => {
