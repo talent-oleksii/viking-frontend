@@ -177,7 +177,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         email: email,
         order: orderOption,
         mom: mommyLink,
-        dad: daddyLink,
+        // dad: daddyLink,
       })
       .select();
 
