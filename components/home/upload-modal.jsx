@@ -227,111 +227,6 @@ function classNames(...classes) {
 
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const supabase = createClientComponentClient();
-  const [session, setSession] = useState(null);
-  const [isSessionLoaded, setIsSessionLoaded] = useState(false);
-  const [subscription, setSubscription] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
-  const [lemonURL, setLemonURL] = useState("");
-
-  useEffect(() => {
-    // Get the initial session state when component first loads
-    setSession(supabase.auth.session);
-
-    // Subscribe to session changes (logged in or logged out)
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, newSession) => {
-        // console.log('New session:', newSession);
-        setSession(newSession);
-        setIsSessionLoaded(true); // Setting the session as loaded
-      }
-    );
-
-    // Unsubscribe when unmounting the component
-    // return () => {
-    //   authListener.unsubscribe();
-    // };
-  }, []);
-
-  useEffect(() => {
-    checkSubscription();
-    getUserData();
-  }, [session]);
-
-  const handleGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-  };
-
-  const checkSubscription = async () => {
-    if (!session || !session.user) {
-      console.log("No session or user found");
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("users")
-      .select("is_active")
-      .eq("email", session.user.email);
-
-    console.log(session.user.email);
-
-    // console.log(data);
-    // console.log(data[0].is_active);
-
-    if (data[0].is_active === true) {
-      setSubscription(true);
-      console.log("Subscription is active");
-    } else {
-      setSubscription(false);
-      console.log("Subscription is not active");
-    }
-  };
-
-  const getUserData = async () => {
-    if (!session) {
-      console.log("No session found");
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("users")
-      .select()
-      .eq("email", session.user.email);
-
-    console.log(session.user.email);
-    console.log(data);
-    console.log(data[0].tokens);
-
-    setUserInfo(data[0]);
-  };
-
-  const reduceTokens = async () => {
-    let newTokenValue = userInfo.tokens - 1;
-    let email = userInfo.email;
-
-    try {
-      const response = await fetch("/api/reduceTokens", {
-        method: "POST",
-        body: JSON.stringify({
-          newTokenValue,
-          email,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(
-          `Server responded with ${response.status} for reduceAmount`
-        );
-      }
-
-      const data = await response.json();
-      setUserInfo(data);
-    } catch (error) {
-      console.log(error.message);
-      toast.error("reduceAmount error");
-    }
-  };
 
   const router = useRouter();
   const [data, setData] = useState({
@@ -423,62 +318,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     },
   ];
 
-  const [imageFormData, setImageFormData] = useState(null);
-  const [audioFormData, setAudioFormData] = useState(null);
-
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const [base64Image, setBase64Image] = useState(null);
-
   // const [imageLoading, setImageLoading] = useState(false);
   const [imageButton, setImageButton] = useState(false);
   const [generating, setGenerating] = useState(false);
 
-  const [selectedLink, setSelectedLink] = useState(null);
-  const [videoLink, setVideoLink] = useState(null);
-
-  const handleVideoClick = async (link) => {
-    setImageButton(true);
-    setSelectedLink(link);
-    setVideoLink(link);
-  };
-
-  // const handleImageClick = async (imageSrc) => {
-  //   // setImageLoading(true);
-  //   setImageButton(true);
-
-  //   console.log(`Image Source URL: ${imageSrc}`);
-  //   setSelectedImage(imageSrc);
-
-  //   const imgElement = new window.Image(); // use window.Image here
-  //   imgElement.src = imageSrc;
-
-  //   imgElement.onload = () => {
-  //     const canvas = document.createElement("canvas");
-  //     canvas.width = imgElement.width;
-  //     canvas.height = imgElement.height;
-
-  //     const ctx = canvas.getContext("2d");
-  //     ctx.drawImage(imgElement, 0, 0);
-
-  //     // Convert canvas to base64 data URI
-  //     const base64Image = canvas.toDataURL("image/jpeg");
-
-  //     // Store the base64 encoded image in state
-  //     setBase64Image(base64Image);
-  //     console.log(`Base64 Image: ${base64Image}`);
-
-  //     // setImageLoading(false);
-  //   };
-  // };
-
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
 
-  const [selected, setSelected] = useState(people[0]);
-  useEffect(() => {
-    voiceRef.current = selected.voice;
-    console.log(selected.voice);
-  }, [selected]);
 
   const voiceRef = useRef();
   const textRef = useRef();
@@ -496,6 +341,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const onImageDrop1 = useCallback(
     (acceptedFiles) => {
       acceptedFiles.forEach((file) => {
+        console.log('inside')
         // Validate file size
         if (file.size > 5242880) {
           toast.error("File size exceeds the 5MB size limit");
@@ -513,7 +359,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         setMommyImage(file);
       });
     },
-    [userInfo]
+    []
   );
 
   const onImageDrop2 = useCallback(
@@ -536,131 +382,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         setDaddyImage(file);
       });
     },
-    [userInfo]
+    []
   );
-
-  // const uploadVideo = async (file) => {
-  //   console.log(file.name);
-  //   const { data, error } = await supabase.storage
-  //     .from("uploads")
-  //     .upload(`${file.name}`, file, {
-  //       cacheControl: "3600",
-  //       upsert: true,
-  //     });
-
-  //   console.log(data);
-  //   console.log(error);
-
-  //   console.log(
-  //     `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
-  //   );
-  //   setVideoLink(
-  //     `https://auth.deepfake.pics/storage/v1/object/public/uploads/${file.name}`
-  //   );
-  //   setImageUploaded(true);
-  //   setImageButton(true);
-  //   setUploadingVideo(false);
-  // };
-
-  // const onImageDrop = useCallback((acceptedFiles) => {
-  //   if (userInfo.variant_id !== 111139 && userInfo.variant_id !== 111140) {
-  //     toast.error("Upgrade your plan to upload custom files");
-  //     console.log(userInfo.variant_id);
-  //     return;
-  //   } else {
-  //     acceptedFiles.forEach((file) => {
-  //       // Validate file type
-  //       console.log(file.type);
-  //       if (!file.type.startsWith("image/")) {
-  //         toast.error("Please only upload image files under 4MB");
-  //         return;
-  //       }
-
-  //       va.track("Upload custom media");
-
-  //       const reader = new FileReader();
-
-  //       reader.onload = async () => {
-  //         const dataUrl = reader.result;
-
-  //         // Now dataUrl is a Base64 encoded Data URL you can use
-  //         // Update state or send to server as needed
-  //         setBase64Image(dataUrl);
-  //         setImageUploaded(true);
-
-  //         // Log base64 image content for debugging
-  //         console.log(`Base64 Image: ${dataUrl}`);
-  //       };
-
-  //       reader.readAsDataURL(file);
-  //     });
-  //   }
-  // }, []);
-
-  const [base64Audio, setBase64Audio] = useState(null);
-
-  // const onAudioDrop = useCallback(
-  //   (acceptedFiles) => {
-  //     if (userInfo.variant_id != 111139 && userInfo.variant_id != 111140) {
-  //       toast.error("Upgrade your plan to upload custom files");
-  //       console.log(userInfo.variant_id);
-  //       return;
-  //     } else {
-  //       acceptedFiles.forEach((file) => {
-  //         // Validate file type
-  //         console.log(file.type);
-  //         if (file.type !== "audio/mpeg" && file.type !== "audio/mp3") {
-  //           toast.error("Please only upload MP3 files");
-  //           return;
-  //         }
-
-  //         va.track("Upload custom audio");
-
-  //         // setAudioUploading(true);
-  //         const reader = new FileReader();
-
-  //         reader.onload = async () => {
-  //           const dataUrl = reader.result; // This will contain the Base64-encoded Data URI
-
-  //           // Create an AudioContext
-  //           const audioContext = new (window.AudioContext ||
-  //             window.webkitAudioContext)();
-
-  //           // Convert Base64 to ArrayBuffer
-  //           const base64 = dataUrl.split(",")[1];
-  //           const binaryString = atob(base64);
-  //           const len = binaryString.length;
-  //           const bytes = new Uint8Array(len);
-  //           for (let i = 0; i < len; i++) {
-  //             bytes[i] = binaryString.charCodeAt(i);
-  //           }
-
-  //           // Decode the audio data
-  //           audioContext
-  //             .decodeAudioData(bytes.buffer)
-  //             .then((audioBuffer) => {
-  //               const duration = audioBuffer.duration; // Get duration in seconds
-  //               if (duration >= 20) {
-  //                 toast.error("Upgrade to upload MP3 longer than 20 seconds");
-  //                 return;
-  //               }
-
-  //               // Update audio state
-  //               setBase64Audio(dataUrl); // Store the Data URI in the state
-  //               setAudioUploaded(true);
-  //               // setAudioUploading(false);
-  //             })
-  //             .catch((error) => {
-  //               toast.error("Failed to decode audio file.");
-  //               console.error(error);
-  //             });
-  //         };
-  //         reader.readAsDataURL(file); // Read the file as a Data URL
-  //       });
-  //     }
-  //   },
-  //   [userInfo]
-  // );
 
   const {
     getRootProps: getImageRootProps1,
@@ -671,102 +394,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     getRootProps: getImageRootProps2,
     getInputProps: getImageInputProps2,
   } = useDropzone({ onDrop: onImageDrop2 });
-
-  const [shouldReplicate, setShouldReplicate] = useState(false);
-
-  useEffect(() => {
-    if (base64Audio && shouldReplicate) {
-      replicate();
-      setShouldReplicate(false); // Reset the flag
-    }
-  }, [base64Audio, shouldReplicate]);
-
-  const TTS = async () => {
-    const text = textRef.current.value;
-    const selectedVoice = voiceRef.current;
-
-    console.log(text);
-    console.log(selectedVoice);
-
-    try {
-      const response = await fetch("/api/TTS", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: text,
-          voice: selectedVoice,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-
-      // Create a blob from the response
-      const audioBlob = await response.blob();
-
-      // Convert blob to Base64 Data URI
-      const reader = new FileReader();
-      reader.readAsDataURL(audioBlob);
-      reader.onloadend = () => {
-        const base64Audio = reader.result;
-
-        // Save the Base64 audio Data URI into state
-        setBase64Audio(base64Audio);
-        setShouldReplicate(true);
-
-        // // Optionally, play the audio
-        // const audioElement = new Audio(base64Audio);
-        // audioElement.play();
-      };
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      // setTTSLoading(false);
-    }
-  };
-
-  const replicate = async () => {
-    console.log("inside replicate");
-
-    try {
-      const response = await fetch("/api/predictions", {
-        method: "POST",
-        body: JSON.stringify({
-          image: videoLink,
-          audio: base64Audio,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Replicate failed");
-      }
-
-      await reduceTokens();
-
-      // Handle response data here
-      const videoURL = await response.json(); // Assuming the server returns just the video URL
-      console.log(videoURL);
-      saveURL(videoURL);
-
-      const parts = videoURL.split("/");
-      const videoID = parts[parts.length - 2]; // Extract the unique ID from the URL
-
-      router.push(`/${videoID}`);
-    } catch (error) {
-      console.log(error.message);
-      toast.error("Error processing. Please try again.");
-    }
-  };
-
-  const saveURL = async (videoURL) => {
-    const { data, error } = await supabase.from("videos").insert({
-      email: session.user.email,
-      url: videoURL,
-    });
-  };
 
   const [clickedDiv, setClickedDiv] = useState(null);
   const [orderOption, setOrderOption] = useState("");
