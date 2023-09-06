@@ -50,13 +50,13 @@ function PredictionPage({ params }) {
             href="/"
             className="flex items-center font-dm font-bold text-2xl"
           >
-            <Image
+            <img
               src="/images/logo.png"
               alt="Logo image of a chat bubble"
               width="30"
               height="30"
               className="mr-2 rounded-sm"
-            ></Image>
+            ></img>
             <p>FutureBaby</p>
           </Link>
           <div className="flex items-center space-x-4">
@@ -128,12 +128,12 @@ function PredictionPage({ params }) {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <img
-              src={`https://auth.deepfake.pics/storage/v1/object/public/uploads/mom_${params.id}`}
+              src={`https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/mom_${params.id}`}
               alt=""
               className="rounded-2xl"
             />
             <img
-              src={`https://auth.deepfake.pics/storage/v1/object/public/uploads/dad_${params.id}`}
+              src={`https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/dad_${params.id}`}
               alt=""
               className="rounded-2xl"
             />

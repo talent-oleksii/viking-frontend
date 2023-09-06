@@ -20,114 +20,6 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const supabase = createClientComponentClient();
-  const [session, setSession] = useState(null);
-  const [isSessionLoaded, setIsSessionLoaded] = useState(false);
-  const [subscription, setSubscription] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
-  const [lemonURL, setLemonURL] = useState("");
-  const router = useRouter();
-
-  useEffect(() => {
-    // Get the initial session state when component first loads
-    setSession(supabase.auth.session);
-
-    // Subscribe to session changes (logged in or logged out)
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, newSession) => {
-        // console.log('New session:', newSession);
-        setSession(newSession);
-        setIsSessionLoaded(true); // Setting the session as loaded
-      }
-    );
-
-    // Unsubscribe when unmounting the component
-    // return () => {
-    //   authListener.unsubscribe();
-    // };
-  }, []);
-
-  useEffect(() => {
-    checkSubscription();
-    getUserData();
-  }, [session]);
-
-  const handleGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-  };
-
-  const checkSubscription = async () => {
-    if (!session || !session.user) {
-      console.log("No session or user found");
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("users")
-      .select("is_active")
-      .eq("email", session.user.email);
-
-    console.log(session.user.email);
-
-    // console.log(data);
-    // console.log(data[0].is_active);
-
-    if (data[0].is_active === true) {
-      setSubscription(true);
-      console.log("Subscription is active");
-    } else {
-      setSubscription(false);
-      console.log("Subscription is not active");
-    }
-  };
-
-  const getUserData = async () => {
-    if (!session) {
-      console.log("No session found");
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("users")
-      .select()
-      .eq("email", session.user.email);
-
-    console.log(session.user.email);
-    console.log(session);
-    console.log(data);
-    console.log(data[0].tokens);
-
-    setUserInfo(data[0]);
-  };
-
-  const reduceTokens = async (reduceAmount) => {
-    let newTokenValue = userInfo.tokens - reduceAmount.value;
-    let email = userInfo.email;
-
-    try {
-      const response = await fetch("/api/reduceTokens", {
-        method: "POST",
-        body: JSON.stringify({
-          newTokenValue,
-          email,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(
-          `Server responded with ${response.status} for reduceAmount`
-        );
-      }
-
-      const data = await response.json();
-      return data;
-      setUserInfo(data);
-    } catch (error) {
-      console.log(error.message);
-      toast.error("reduceAmount error");
-    }
-  };
 
   const scrolled = useScroll(50);
   const { UploadModal, setShowUploadModal } = useUploadModal();
@@ -157,13 +49,13 @@ export default function Home() {
             href="/"
             className="flex items-center font-dm font-bold text-2xl"
           >
-            <Image
-              src="/images/logo.png"
+            <img
+              src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logo.png"
               alt="Logo image of a chat bubble"
               width="30"
               height="30"
               className="mr-2 rounded-sm"
-            ></Image>
+            ></img>
             <p>FutureBaby</p>
           </Link>
           <div className="flex items-center space-x-4">
@@ -262,7 +154,7 @@ export default function Home() {
             // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <img src="/images/elon_aoc.png" alt="" />
+            <img src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/elon_aoc.png" alt="" />
           </motion.div>
           <motion.div>
             {/* <div class="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border max-w-xl">

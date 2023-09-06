@@ -29,7 +29,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   // const [imageLoading, setImageLoading] = useState(false);
   const [imageButton, setImageButton] = useState(false);
-  const [generating, setGenerating] = useState(false);
 
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
 
@@ -63,7 +62,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const {
     getRootProps: getImageRootProps1,
     getInputProps: getImageInputProps1,
-  } = useDropzone({ onDrop: onImageDrop1, noDragEventsBubbling: true, });
+  } = useDropzone({ onDrop: onImageDrop1, noDragEventsBubbling: true });
 
   const onImageDrop2 = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -88,7 +87,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const {
     getRootProps: getImageRootProps2,
     getInputProps: getImageInputProps2,
-  } = useDropzone({ onDrop: onImageDrop2, noDragEventsBubbling: true, });
+  } = useDropzone({ onDrop: onImageDrop2, noDragEventsBubbling: true });
 
   const [clickedDiv, setClickedDiv] = useState(null);
   const [orderOption, setOrderOption] = useState("");
@@ -103,7 +102,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [mommyLink, setMommyLink] = useState("");
   const [daddyLink, setDaddyLink] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const uploadMommyImage = async () => {
+    setLoading(true);
     const emailPrefix = email.split("@")[0];
     const newFileName = `mom_${emailPrefix}`;
     console.log(emailPrefix);
@@ -117,13 +119,20 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
     setMommyLink(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
-    uploadDaddyImage();
   };
+
+  useEffect(() => {
+    if (mommyLink) {
+      // assuming mommyLink is the state variable being set
+      uploadDaddyImage();
+      console.log("mommy uploaded");
+    }
+  }, [mommyLink]);
 
   const uploadDaddyImage = async () => {
     const emailPrefix = email.split("@")[0];
@@ -139,13 +148,20 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       });
 
     console.log(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
     setDaddyLink(
-      `https://auth.deepfake.pics/storage/v1/object/public/uploads/${newFileName}`
+      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
     );
-    // updateTable();
   };
+
+  useEffect(() => {
+    if (daddyLink) {
+      // assuming mommyLink is the state variable being set
+      updateTable();
+      console.log("daddy uploaded");
+    }
+  }, [daddyLink]);
 
   const updateTable = async () => {
     console.log(mommyLink);
@@ -161,19 +177,28 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       })
       .select();
 
+    setLoading(false);
+    setShowUploadModal(false);
+
+    if (orderOption === 9) {
+      clickBuyLink1();
+    } else {
+      clickBuyLink2();
+    }
+
     console.log(data);
     console.log(error);
   };
 
   const clickBuyLink1 = () => {
     LemonSqueezy.Url.Open(
-      "https://talkblog.lemonsqueezy.com/checkout/buy/a90ae3e9-8417-47c1-b982-865baee81eeb?embed=1"
+      "https://futurebaby.lemonsqueezy.com/checkout/buy/c1755095-3c27-471a-b10d-d47e4d5adc07?embed=1"
     );
   };
 
   const clickBuyLink2 = () => {
     LemonSqueezy.Url.Open(
-      "https://talkblog.lemonsqueezy.com/checkout/buy/4bf9b323-f658-4127-9961-9e11276567d3?embed=1"
+      "https://futurebaby.lemonsqueezy.com/checkout/buy/079c4a46-a961-4ed7-ae5e-94ba3db77ee2?embed=1"
     );
   };
 
@@ -185,7 +210,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
+                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
@@ -310,7 +335,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://auth.deepfake.pics/storage/v1/object/public/modal_posters/logo.png"
+                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
@@ -379,8 +404,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               onClick={() => {
                 event.preventDefault();
                 uploadMommyImage();
-                clickBuyLink1();
-                setShowUploadModal(false);
                 console.log("clicked");
               }}
               className={`${
@@ -389,7 +412,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
-              {generating ? (
+              {loading ? (
                 <BeatLoader size={8} color="#898989" />
               ) : (
                 <p className="text-sm">Submit Order</p>
