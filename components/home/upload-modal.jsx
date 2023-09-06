@@ -177,13 +177,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     const { data, error } = await supabase
       .from("users")
+      .select();
       // .upsert({
       //   email: email,
       //   order: orderOption,
       //   mom: mommyLink,
       //   dad: daddyLink,
       // })
-      .select();
+      // .select();
 
     console.log(data);
     console.log(error);
