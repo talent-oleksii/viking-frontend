@@ -22,301 +22,10 @@ import Balancer from "react-wrap-balancer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import va from "@vercel/analytics";
 
-const people = [
-  {
-    id: 1,
-    name: "Donald Trump",
-    voice: "E5TC2TzJpUIjQRDauan9",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/DonaldTrump.png",
-  },
-  {
-    id: 2,
-    name: "Joe Biden",
-    voice: "kpYWTjYU8l7h9F4Q5rgF",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/JoeBiden.png",
-  },
-  {
-    id: 3,
-    name: "Barack Obama",
-    voice: "BMrscVX7eiwr7cGoWnx2",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/BarackObama.png",
-  },
-  {
-    id: 4,
-    name: "Hillary Clinton",
-    voice: "QehRPxYW9AgtVuUDRahc",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/HillaryClinton.png",
-  },
-  {
-    id: 5,
-    name: "AOC",
-    voice: "y21LDcuFRgPGbl72mTPG",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/AOC.png",
-  },
-  {
-    id: 6,
-    name: "Tucker Carlson",
-    voice: "H6NVzDsPUDoK4bBgAts3",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/TuckerCarlson.png",
-  },
-  {
-    id: 7,
-    name: "Joe Rogan",
-    voice: "5IhD23A0QTLC3YTeT6fp",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/JoeRogan.png",
-  },
-  {
-    id: 8,
-    name: "Elon Musk",
-    voice: "aI1cKUH3kXwhUuQMap7X",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/ElonMusk.png",
-  },
-  {
-    id: 9,
-    name: "Kanye West",
-    voice: "Ext1QmHVUpMABOcWpESB",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/KanyeWest.png",
-  },
-  {
-    id: 10,
-    name: "Kim Kardashian",
-    voice: "oiXPdrDkdNTFZJ1IxxPh",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/KimKardashian.png",
-  },
-  {
-    id: 11,
-    name: "Stephen A. Smith",
-    voice: "WhkICMWc7j2ap0fJVHMR",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/StephenASmith.png",
-  },
-  {
-    id: 12,
-    name: "Dave Chappelle",
-    voice: "Ux3zQNOEa6p5OrVDvDQg",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/DaveChappelle.png",
-  },
-  {
-    id: 13,
-    name: "David Attenborough",
-    voice: "darvxZ8nbegIsml3JzHE",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/DavidAttenborough.png",
-  },
-  {
-    id: 14,
-    name: "Logan Paul",
-    voice: "FsKi3TxVF6yhGDQeV5vY",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/LoganPaul.png",
-  },
-  {
-    id: 15,
-    name: "Mr. Beast",
-    voice: "8tLZVGiprGSE6loUugVn",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/MrBeast.png",
-  },
-  {
-    id: 16,
-    name: "PewDiePie",
-    voice: "UGyPczvPYUG4Y9LggyfP",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/PewDiePie.png",
-  },
-  {
-    id: 17,
-    name: "Tyler1",
-    voice: "Dv1BOCBQlnc8M4ScVami",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Tyler1.png",
-  },
-  {
-    id: 18,
-    name: "Rhett",
-    voice: "CoUWMfWqybep0ohr7ovz",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Rhett.png",
-  },
-  {
-    id: 19,
-    name: "Link",
-    voice: "KLkUYLGguaZpj1DphApp",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Link.png",
-  },
-  {
-    id: 20,
-    name: "Rick (Rick and Morty)",
-    voice: "TroRXDONusuG2rSlJzad",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/RickSanchez.png",
-  },
-  {
-    id: 21,
-    name: "Cartman (South Park)",
-    voice: "zGyBxNBnX49YaKNIjSUV",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Cartman.png",
-  },
-  {
-    id: 22,
-    name: "Peter (Family Guy)",
-    voice: "mUfA3cGcljTCdjbdwvWe",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Peter.png",
-  },
-  {
-    id: 23,
-    name: "Goku (DragonBall)",
-    voice: "wwbPutfxYldkBoau8Tje",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Goku.png",
-  },
-  {
-    id: 24,
-    name: "Sam Bankman-Fried",
-    voice: "hljHFmiJdSi6Dj1mvKL1",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/SamBankmanFried.png",
-  },
-  {
-    id: 25,
-    name: "Elizabeth Holmes",
-    voice: "ykAlY5SOqHlTI0g3805B",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/ElizabethHolmes.png",
-  },
-  {
-    id: 26,
-    name: "British Dude",
-    voice: "p4QIF9bdt8tfF7wOT9hd",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/BritishDude.png",
-  },
-  {
-    id: 27,
-    name: "Narrator Dude",
-    voice: "ziJHcegLub9IYwGTwR6h",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/NarratorDude.png",
-  },
-  {
-    id: 28,
-    name: "Girlfriend (19+)",
-    voice: "CYblCq7uaxtBek0cNmMF",
-    avatar:
-      "https://auth.voice-clone.ai/storage/v1/object/public/avatars/Girlfriend.png",
-  },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const supabase = createClientComponentClient();
 
   const router = useRouter();
-  const [data, setData] = useState({
-    image: null,
-  });
-  const [fileSizeTooBig, setFileSizeTooBig] = useState(true);
-
-  const [dragActive, setDragActive] = useState(false);
-
-  const onChangePicture = useCallback(
-    (event) => {
-      setFileSizeTooBig(false);
-      const file = event.currentTarget.files && event.currentTarget.files[0];
-      if (file) {
-        if (file.size / 1024 / 1024 > 5) {
-          setFileSizeTooBig(true);
-        } else {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            setData((prev) => ({ ...prev, image: e.target?.result }));
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-    },
-    [setData]
-  );
-
-  const [saving, setSaving] = useState(false);
-
-  const saveDisabled = useMemo(() => {
-    return !data.image || saving;
-  }, [data.image, saving]);
-
-  const images = [
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/yilongmusk.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/yilongmusk.png",
-      id: "yilongmusk",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/donaldtrump.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/donaldtrump.png",
-      id: "donaldtrump",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kimkardashian.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kimkardashian.png",
-      id: "kimkardashian",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/tuckercarlson.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/tuckercarlson.png",
-      id: "tuckercarlson",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/aoc.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/aoc.png",
-      id: "aoc",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/kanyewest.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/kanyewest.png",
-      id: "kanyewest",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/joebiden.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/joebiden.png",
-      id: "joebiden",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/stephenasmith.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/stephenasmith.png",
-      id: "stephenasmith",
-    },
-    {
-      link: "https://auth.deepfake.pics/storage/v1/object/public/watermark/loganpaul.mp4",
-      thumbnail:
-        "https://auth.deepfake.pics/storage/v1/object/public/modal_posters/loganpaul.png",
-      id: "loganpaul",
-    },
-  ];
 
   // const [imageLoading, setImageLoading] = useState(false);
   const [imageButton, setImageButton] = useState(false);
@@ -324,71 +33,57 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
 
-
-  const voiceRef = useRef();
-  const textRef = useRef();
-  const [message, setMessage] = useState("");
-
-  const [imageUploaded, setImageUploaded] = useState(false);
-  const [audioUploaded, setAudioUploaded] = useState(false);
-
   const [mommyUploaded, setMommyUploaded] = useState(false);
   const [daddyUploaded, setDaddyUploaded] = useState(false);
 
   const [mommyImage, setMommyImage] = useState(null);
   const [daddyImage, setDaddyImage] = useState(null);
 
-  const onImageDrop1 = useCallback(
-    (acceptedFiles) => {
-      acceptedFiles.forEach((file) => {
-        console.log('inside')
-        // Validate file size
-        if (file.size > 5242880) {
-          toast.error("File size exceeds the 5MB size limit");
-          return;
-        }
+  const onImageDrop1 = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      console.log("inside");
+      // Validate file size
+      if (file.size > 5242880) {
+        toast.error("File size exceeds the 5MB size limit");
+        return;
+      }
 
-        // Validate file type
-        console.log(file.type);
-        if (!file.type.startsWith("image/")) {
-          toast.error("Please only upload image files");
-          return;
-        }
+      // Validate file type
+      console.log(file.type);
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please only upload image files");
+        return;
+      }
 
-        setMommyUploaded(true);
-        setMommyImage(file);
-      });
-    },
-    []
-  );
-
-  const onImageDrop2 = useCallback(
-    (acceptedFiles) => {
-      acceptedFiles.forEach((file) => {
-        // Validate file size
-        if (file.size > 5242880) {
-          toast.error("File size exceeds the 5MB size limit");
-          return;
-        }
-
-        // Validate file type
-        console.log(file.type);
-        if (!file.type.startsWith("image/")) {
-          toast.error("Please only upload image files");
-          return;
-        }
-
-        setDaddyUploaded(true);
-        setDaddyImage(file);
-      });
-    },
-    []
-  );
+      setMommyUploaded(true);
+      setMommyImage(file);
+    });
+  }, []);
 
   const {
     getRootProps: getImageRootProps1,
     getInputProps: getImageInputProps1,
   } = useDropzone({ onDrop: onImageDrop1 });
+
+  const onImageDrop2 = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      // Validate file size
+      if (file.size > 5242880) {
+        toast.error("File size exceeds the 5MB size limit");
+        return;
+      }
+
+      // Validate file type
+      console.log(file.type);
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please only upload image files");
+        return;
+      }
+
+      setDaddyUploaded(true);
+      setDaddyImage(file);
+    });
+  }, []);
 
   const {
     getRootProps: getImageRootProps2,
@@ -481,7 +176,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       "https://stockimage.lemonsqueezy.com/checkout/buy/e162129e-c41d-400d-8208-e3ff3582486c?embed=1"
     );
   };
-
 
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
@@ -608,11 +302,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               <p className="text-sm">Next step</p>
-              {/* {imageLoading ? (
-                <BeatLoader size="8" color="#808080" />
-              ) : (
-                <p className="text-sm">Next step</p>
-              )} */}
             </button>
           </form>
         </div>
