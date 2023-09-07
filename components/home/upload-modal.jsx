@@ -221,7 +221,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logo.png"
+                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
@@ -346,7 +346,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logo.png"
+                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
