@@ -174,6 +174,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log("inside update table");
     console.log(mommyLink);
     console.log(daddyLink);
+    const emailPrefix = email.split("@")[0];
+    console.log(emailPrefix);
 
     const { data, error } = await supabase
       .from("users")
@@ -182,6 +184,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         order: orderOption,
         mom: mommyLink,
         dad: daddyLink,
+        partial: emailPrefix, 
       })
       .select();
 
