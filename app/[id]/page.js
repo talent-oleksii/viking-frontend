@@ -163,14 +163,14 @@ function PredictionPage({ params }) {
               className="rounded-2xl"
             />
             <img src={image1} alt="" className="rounded-2xl" />
-            <img src={image2} alt="" className="rounded-2xl" />
-            <img src={image3} alt="" className="rounded-2xl" />
-            <img src={image4} alt="" className="rounded-2xl" />
-            <img src={image5} alt="" className="rounded-2xl" />
             <img src={image6} alt="" className="rounded-2xl" />
+            <img src={image2} alt="" className="rounded-2xl" />
             <img src={image7} alt="" className="rounded-2xl" />
+            <img src={image3} alt="" className="rounded-2xl" />
             <img src={image8} alt="" className="rounded-2xl" />
+            <img src={image4} alt="" className="rounded-2xl" />
             <img src={image9} alt="" className="rounded-2xl" />
+            <img src={image5} alt="" className="rounded-2xl" />
             <img src={image10} alt="" className="rounded-2xl" />
           </motion.div>
         </motion.div>
