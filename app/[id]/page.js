@@ -76,11 +76,10 @@ function PredictionPage({ params }) {
             className="flex items-center font-dm font-bold text-2xl"
           >
             <img
-              src="/images/logo.png"
-              alt="Logo image of a chat bubble"
+              src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
               width="30"
               height="30"
-              className="mr-2 rounded-sm"
+              className="mr-2.5 rounded-sm"
             ></img>
             <p>FutureBaby</p>
           </Link>
