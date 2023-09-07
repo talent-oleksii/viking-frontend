@@ -18,16 +18,41 @@ import { Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 function PredictionPage({ params }) {
-  const image1 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_1.png`;
-  const image2 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_2.png`;
-  const image3 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_3.png`;
-  const image4 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_4.png`;
-  const image5 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_5.png`;
-  const image6 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_6.png`;
-  const image7 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_7.png`;
-  const image8 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_8.png`;
-  const image9 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_9.png`;
-  const image10 = `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/results/${params.id}_10.png`;
+  const supabase = createClientComponentClient();
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
+  const [image4, setImage4] = useState("");
+  const [image5, setImage5] = useState("");
+  const [image6, setImage6] = useState("");
+  const [image7, setImage7] = useState("");
+  const [image8, setImage8] = useState("");
+  const [image9, setImage9] = useState("");
+  const [image10, setImage10] = useState("");
+
+  const fetchImages = async () => {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("partial", params.id);
+
+    console.log(data);
+    console.log(data[0].image1);
+    setImage1(data[0].image1);
+    setImage2(data[0].image2);
+    setImage3(data[0].image3);
+    setImage4(data[0].image4);
+    setImage5(data[0].image5);
+    setImage6(data[0].image6);
+    setImage7(data[0].image7);
+    setImage8(data[0].image8);
+    setImage9(data[0].image9);
+    setImage10(data[0].image10);
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   console.log(params);
 
