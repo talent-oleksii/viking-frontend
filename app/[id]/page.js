@@ -140,11 +140,11 @@ function PredictionPage({ params }) {
               <span className="sm:hidden">
                 Baby photos will appear here when ready.
                 <br />
-                Could take up to 2 hours.
+                Could take up to 1 hour.
               </span>
               <span className="hidden sm:inline">
                 Baby photos will appear here once they are ready. <br />
-                Could take up to 2 hours.
+                Could take up to 1 hour.
               </span>
             </Balancer>
           </motion.p>
