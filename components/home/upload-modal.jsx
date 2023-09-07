@@ -96,7 +96,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   // Function to handle input change
   const handleChange = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.toLowerCase());
   };
 
   const [mommyLink, setMommyLink] = useState("");

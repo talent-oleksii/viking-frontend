@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "FutureBaby: See Your Future Baby In AI-Generated Photos",
   description:
-    "FutureBaby uses artificial intelligence to predict what your future child's appearance. Upload a photo from each parent to see what your future child looks like.",
+    "FutureBaby uses artificial intelligence to predict your future child's appearance. Upload a photo from each parent to see what your future child looks like.",
   viewport: {
     width: "device-width",
     initialScale: 1,

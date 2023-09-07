@@ -26,7 +26,7 @@ export default function Home() {
 
   // Function to handle input change
   const handleChange = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.toLowerCase());
   };
 
   return (
@@ -102,9 +102,7 @@ export default function Home() {
                 router.push(`/${email.split("@")[0]}`);
               }}
               className={`${
-                !email
-                  ? "cursor-not-allowed"
-                  : ""
+                !email ? "cursor-not-allowed" : ""
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1 border-black bg-black text-white`}
             >
               <p className="text-sm">View Photos</p>
