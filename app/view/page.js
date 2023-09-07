@@ -22,6 +22,13 @@ export default function Home() {
   const scrolled = useScroll(50);
   const router = useRouter();
 
+  const [email, setEmail] = useState("");
+
+  // Function to handle input change
+  const handleChange = (event) => {
+    setEmail(event.target.value);
+  };
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div
@@ -53,14 +60,14 @@ export default function Home() {
               }}
               className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
             >
-              Instructions
+              View Photos
             </button>
           </div>
         </div>
       </div>
-      <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+      <main className="flex min-h-screen w-full flex-col items-center justify-center">
         <motion.div
-          className="z-10 max-w-2xl px-5 xl:px-0"
+          className="z-10 w-full flex items-center justify-center max-w-2xl px-5 xl:px-0 "
           initial="hidden"
           whileInView="show"
           animate="show"
@@ -75,28 +82,36 @@ export default function Home() {
           }}
         >
           <motion.p
-            className="border border-[#1d9bf0] w-full sm:max-w-xl mt-10 text-center rounded-2xl px-4 py-12 sm:py-20 text-[#1d9bf0] bg-blue-100 flex flex-col gap-8 sm:gap-8"
+            className="w-full sm:w-[400px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <div>
-              <span className="sm:hidden text-sm">
-                Your photos will be accessible at <br />
-                www.futurebaby.pics/your_email_before_@_sign.
-              </span>
-              <span className="hidden sm:block text-lg">
-                Your photos will be accessible at
-                www.futurebaby.pics/your_email_before_@_sign.
-              </span>
-            </div>
-            <div>
-              <span className="text-xs sm:text-sm">
-                (e.g. If your email is toby@gmail.com, then go to
-                www.futurebaby.pics/toby)
-              </span>
-            </div>
+            <label className="w-full block mb-2 font-medium text-gray-900">
+              Your email
+            </label>
+            <input
+              type="text"
+              autoComplete="off"
+              id="small-input"
+              className="mb-4 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md bg-white  focus:outline-0 focus:ring-0"
+              value={email}
+              onChange={handleChange}
+              placeholder="e.g. toby@gmail.com"
+            />
+            <button
+              disabled={!email}
+              onClick={() => {
+                router.push(`/${email.split("@")[0]}`);
+              }}
+              className={`${
+                !email
+                  ? "cursor-not-allowed"
+                  : ""
+              } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1 border-black bg-black text-white`}
+            >
+              <p className="text-sm">View Photos</p>
+            </button>
           </motion.p>
         </motion.div>
-        <motion.div></motion.div>
       </main>
     </div>
   );
