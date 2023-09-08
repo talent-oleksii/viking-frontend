@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily :{
         'dm': ['DM Sans', 'sans-serif'],
+        'Norse': ['Norse', 'sans-serif'],
       },
     },
   },

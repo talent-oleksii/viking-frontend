@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Norse;
+  src: url("/fonts/Norsebold.otf") format("opentype");
+}
+
 @keyframes text-shimmer {
     0% {
       background-position: 0 0;

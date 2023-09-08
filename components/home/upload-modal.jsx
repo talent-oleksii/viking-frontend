@@ -221,34 +221,34 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
+                src="/images/vikinglogo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
                 height={20}
               />
             </a>
-            <h3 className="font-clash text-2xl font-bold">Parent Photos</h3>
+            <h3 className="font-clash text-2xl font-bold">Upload Photos</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Upload a single photo from each parent.
+              Choose 3 to 5 photos of yourself.
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
             <div>
               <div className="flex items-center justify-between">
                 <p className="block text-sm font-medium text-gray-700 mb-2">
-                  Mommy's photo
+                  Your photos
                 </p>
               </div>
               {mommyUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
+                <div className="flex flex-col items-center justify-center w-full h-20 sm:h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅
                 </div>
               ) : (
                 <div
                   {...getImageRootProps1()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
+                  className="flex flex-col items-center justify-center w-full h-20 sm:h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
                 >
                   <div className="flex sm:flex-col items-center justify-center">
                     <svg
@@ -278,7 +278,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               )}
             </div>
 
-            <div>
+            {/* <div>
               <div className="flex items-center justify-between">
                 <p className="block text-sm font-medium text-gray-700 mb-2">
                   Daddy's photo
@@ -320,7 +320,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   />
                 </div>
               )}
-            </div>
+            </div> */}
 
             <button
               disabled={!mommyUploaded || !daddyUploaded}

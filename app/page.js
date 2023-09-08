@@ -36,12 +36,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
+      {/* <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" /> */}
+      {/* <div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#000000_1px)] bg-[size:20px_20px]"></div> */}
       <div
         className={`fixed top-0 w-full ${
-          scrolled
-            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-            : "bg-white/0"
+          scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
@@ -50,12 +49,12 @@ export default function Home() {
             className="flex items-center font-dm font-bold text-2xl"
           >
             <img
-              src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
+              src="/images/vikinglogo.png"
               width="30"
               height="30"
               className="mr-2.5 rounded-sm"
             ></img>
-            <p>FutureBaby</p>
+            <div className="text-white font-medium">Viking.ai</div>
           </Link>
           <div className="flex items-center space-x-4">
             <button
@@ -63,7 +62,7 @@ export default function Home() {
                 setShowUploadModal(true);
                 va.track("Place Order Button");
               }}
-              className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
+              className="block px-4 py-1.5 text-white rounded-lg text-sm"
             >
               Order Now
             </button>
@@ -87,7 +86,7 @@ export default function Home() {
             },
           }}
         >
-          <motion.a
+          {/* <motion.a
             variants={FADE_DOWN_ANIMATION_VARIANTS}
             href="https://www.futurebaby.pics/"
             target="_blank"
@@ -110,23 +109,23 @@ export default function Home() {
             <p className="text-sm font-semibold text-[#1d9bf0]">
               Meet FutureBaby
             </p>
-          </motion.a>
+          </motion.a> */}
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-[2.5rem] leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-[2.5rem] leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Balancer>See your future baby photos with AI</Balancer>
+            <Balancer>become a viking</Balancer>
           </motion.h1>
           <motion.p
-            className="mt-5 text-center text-gray-500 md:text-xl"
+            className="mt-5 text-center text-white/50 md:text-xl"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Upload a single photo from each parent.
+                Transform yourself into a Viking.
               </span>
               <span className="hidden sm:inline">
-                Upload a single photo from each parent.
+                Transform yourself into a Viking.
               </span>
             </Balancer>
           </motion.p>
@@ -135,17 +134,17 @@ export default function Home() {
             className="-mb-3 sm:-mb-3"
           >
             <button
-              className="group mx-auto mt-6 sm:mt-7 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors"
+              className="group mx-auto mt-6 sm:mt-7 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#3E3E3E] bg-black px-5 py-2 text-sm text-white transition-colors"
               onClick={() => {
                 setShowUploadModal(true);
                 va.track("Image / Video");
               }}
             >
-              <Upload className="h-5 w-5 text-white" />
-              <p>Upload Photo</p>
+              <Upload className="h-5 w-5 text-white/80" />
+              <div className="text-white/80">Upload Photo</div>
             </button>
-            <p className="mt-2.5 text-center text-xs text-gray-500">
-              11,000+ baby photos generated so far!
+            <p className="mt-2.5 text-center text-xs text-white/50">
+              11,000+ viking photos generated so far!
             </p>
           </motion.div>
           <motion.div
@@ -153,9 +152,17 @@ export default function Home() {
             // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <img src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/elon_aoc.png" alt="" />
+            <div className="grid grid-cols-3 gap-4">
+              <img className="rounded-xl" src="/images/elonviking4.png" alt="" />
+              <img className="rounded-xl" src="/images/elonviking3.png" alt="" />
+              <img className="rounded-xl" src="/images/elonviking5.png" alt="" />
+              <img className="rounded-xl" src="/images/elonviking1.png" alt="" />
+              <img className="rounded-xl" src="/images/elonviking6.png" alt="" />
+              <img className="rounded-xl" src="/images/elonviking2.png" alt="" />
+            </div>
           </motion.div>
-          <motion.div>
+          <motion.div className="">
+            {/* <img src="/images/vikinggroup.png" alt="" /> */}
             {/* <div class="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border max-w-xl">
               <div class="flex justify-between">
                 <div class="flex items-center">
