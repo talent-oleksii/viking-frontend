@@ -146,6 +146,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(data);
     console.log(error);
 
+    // Open a new tab to /emailPrefix
+    window.open(`/${emailPrefix}`, "_blank");
+
     await fetch("https://viking-zh8k.onrender.com/trigger-training", {
       method: "POST",
       headers: {
@@ -153,9 +156,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       },
       body: JSON.stringify({ emailPrefix }), // Send the email as JSON data
     });
-
-    // Open a new tab to /emailPrefix
-    window.open(`/${emailPrefix}`, "_blank");
 
     setLoading(false);
     setShowUploadModal(false);
