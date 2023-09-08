@@ -153,12 +153,12 @@ export default function Home() {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div className="grid sm:grid-cols-3 gap-4">
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking4.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking3.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking5.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking1.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking6.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking2.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking3.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking6.png" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking2.png" alt="" />
             </div>
           </motion.div>
           <motion.div className="">
