@@ -155,7 +155,7 @@ export default function Home() {
             <div className="grid sm:grid-cols-3 gap-4">
               <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking4.png" alt="" />
               <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking3.png" alt="" />
-              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking5.png.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking5.png" alt="" />
               <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking1.png" alt="" />
               <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking6.png" alt="" />
               <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking2.png" alt="" />

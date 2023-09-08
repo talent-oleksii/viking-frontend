@@ -5,9 +5,9 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "FutureBaby: See Your Future Baby In AI-Generated Photos",
+  title: "Viking: Turn yourself into a Viking.",
   description:
-    "FutureBaby uses artificial intelligence to predict your future child's appearance. Upload a photo from each parent to see what your future child looks like.",
+    "Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos and we'll do the rest!",
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -25,11 +25,11 @@ export default function RootLayout({ children }) {
         <meta name="twitter:site" content="Deepfake" />
         <meta
           name="twitter:title"
-          content="FutureBaby: See Your Future Baby In AI-Generated Photos"
+          content="Viking: Turn yourself into a Viking."
         />
         <meta
           name="twitter:description"
-          content="FutureBaby uses artificial intelligence to predict what your future child's appearance. Upload a photo from each parent to see what your future child looks like."
+          content="Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos and we'll do the rest!"
         />
         <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
         <link
