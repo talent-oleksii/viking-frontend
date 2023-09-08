@@ -41,15 +41,15 @@ export default function Home() {
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link
             href="/"
-            className="flex items-center font-dm font-bold text-2xl"
+            className="flex items-center font-dm font-bold text-xl sm:text-2xl"
           >
             <img
-              src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
+              src="/images/vikinglogo.png"
               width="30"
               height="30"
               className="mr-2.5 rounded-sm"
             ></img>
-            <p>FutureBaby</p>
+            <div className="text-white font-medium">Viking.ai</div>
           </Link>
           <div className="flex items-center space-x-4">
             <button
@@ -81,10 +81,10 @@ export default function Home() {
           }}
         >
           <motion.p
-            className="w-full sm:w-[400px]"
+            className="w-full sm:w-[400px] mb-7"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <label className="w-full block mb-2 font-medium text-gray-900">
+            <label className="w-full block mb-2 font-medium text-white">
               Your email
             </label>
             <input
@@ -103,7 +103,7 @@ export default function Home() {
               }}
               className={`${
                 !email ? "cursor-not-allowed" : ""
-              } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1 border-black bg-black text-white`}
+              } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1 border-white/20 bg-black text-white`}
             >
               <p className="text-sm">View Photos</p>
             </button>
