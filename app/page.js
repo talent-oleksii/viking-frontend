@@ -111,7 +111,7 @@ export default function Home() {
             </p>
           </motion.a> */}
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-[2.5rem] leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer>become a viking</Balancer>
@@ -152,7 +152,7 @@ export default function Home() {
             // className="group relative mx-auto mt-10 h-[350px] w-full overflow-hidden rounded-2xl border border-gray-200 sm:h-[600px] sm:w-[600px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-3 gap-4">
               <img className="rounded-xl" src="/images/elonviking4.png" alt="" />
               <img className="rounded-xl" src="/images/elonviking3.png" alt="" />
               <img className="rounded-xl" src="/images/elonviking5.png" alt="" />

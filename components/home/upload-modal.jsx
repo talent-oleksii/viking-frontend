@@ -323,7 +323,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div> */}
 
             <button
-              disabled={!mommyUploaded || !daddyUploaded}
+              disabled={!mommyUploaded}
               onClick={() => {
                 event.preventDefault();
                 if (currentStep === "image") {
@@ -332,7 +332,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !mommyUploaded || !daddyUploaded
+                !mommyUploaded
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
@@ -346,7 +346,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           <div className="flex flex-col items-center justify-center space-y-1.5 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center md:px-16">
             <a href="https://extrapolate.app">
               <img
-                src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
+                src="/images/vikinglogo.png"
                 alt="Logo"
                 className="h-10 w-10 rounded-full sm:mb-2 mb-2"
                 width={20}
@@ -392,8 +392,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     setOrderOption(9);
                   }}
                 >
-                  <div className="">2 Photos → 1 Boy + 1 Girl</div>
-                  <div className="">$9</div>
+                  <div className="">2 Viking Photos</div>
+                  <div className="">$8</div>
                 </div>
                 <div
                   className={`border ${
@@ -404,8 +404,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     setOrderOption(19);
                   }}
                 >
-                  <div className="">10 Photos → 5 Boys + 5 Girls</div>
-                  <div className="">$19</div>
+                  <div className="">20 Viking Photos</div>
+                  <div className="">$20</div>
                 </div>
               </div>
             </div>
