@@ -21,42 +21,53 @@ import { BeatLoader } from "react-spinners";
 import Balancer from "react-wrap-balancer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import va from "@vercel/analytics";
+import JSZip from "jszip";
 
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const supabase = createClientComponentClient();
-
   const router = useRouter();
 
-  // const [imageLoading, setImageLoading] = useState(false);
-  const [imageButton, setImageButton] = useState(false);
-
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
-
   const [mommyUploaded, setMommyUploaded] = useState(false);
-  const [daddyUploaded, setDaddyUploaded] = useState(false);
+  const [zipContent, setZipContent] = useState(null);
 
-  const [mommyImage, setMommyImage] = useState(null);
-  const [daddyImage, setDaddyImage] = useState(null);
+  const onImageDrop1 = useCallback(async (acceptedFiles) => {
+    const zip = new JSZip();
 
-  const onImageDrop1 = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      // console.log("inside");
-      // Validate file size
-      if (file.size > 5242880) {
-        toast.error("File size exceeds the 5MB size limit");
-        return;
-      }
+    // Check if at least 3 files have been uploaded
+    if (acceptedFiles.length < 3) {
+      toast.error("Please upload at least 3 photos");
+      return;
+    }
 
-      // Validate file type
-      console.log(file.type);
-      if (!file.type.startsWith("image/")) {
-        toast.error("Please only upload image files");
-        return;
-      }
+    // Use Promise.all to make sure all files are processed before ZIP generation
+    await Promise.all(
+      acceptedFiles.map(async (file) => {
+        // Validate file size
+        if (file.size > 5242880) {
+          toast.error("File size exceeds the 5MB size limit");
+          return;
+        }
 
-      setMommyUploaded(true);
-      setMommyImage(file);
-    });
+        // Validate file type
+        if (!file.type.startsWith("image/")) {
+          toast.error("Please only upload image files");
+          return;
+        }
+
+        setMommyUploaded(true);
+
+        const fileData = await file.arrayBuffer();
+        zip.file(file.name, fileData);
+      })
+    );
+
+    console.log("Number of files in ZIP: ", Object.keys(zip.files).length);
+
+    // Generate the ZIP file
+    const content = await zip.generateAsync({ type: "blob" });
+    // Set ZIP content in state
+    setZipContent(content);
   }, []);
 
   const {
@@ -64,34 +75,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     getInputProps: getImageInputProps1,
   } = useDropzone({ onDrop: onImageDrop1, noDragEventsBubbling: true });
 
-  const onImageDrop2 = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      // Validate file size
-      if (file.size > 5242880) {
-        toast.error("File size exceeds the 5MB size limit");
-        return;
-      }
-
-      // Validate file type
-      console.log(file.type);
-      if (!file.type.startsWith("image/")) {
-        toast.error("Please only upload image files");
-        return;
-      }
-
-      setDaddyUploaded(true);
-      setDaddyImage(file);
-    });
-  }, []);
-
-  const {
-    getRootProps: getImageRootProps2,
-    getInputProps: getImageInputProps2,
-  } = useDropzone({ onDrop: onImageDrop2, noDragEventsBubbling: true });
-
   const [clickedDiv, setClickedDiv] = useState(null);
   const [orderOption, setOrderOption] = useState("");
-
   const [email, setEmail] = useState("");
 
   // Function to handle input change
@@ -100,20 +85,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   };
 
   const [mommyLink, setMommyLink] = useState("");
-  const [daddyLink, setDaddyLink] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const uploadMommyImage = async () => {
     setLoading(true);
     const emailPrefix = email.split("@")[0];
-    const newFileName = `mom_${emailPrefix}`;
-    // console.log(emailPrefix);
-    console.log(newFileName);
 
     const { data, error } = await supabase.storage
       .from("uploads")
-      .upload(newFileName, mommyImage, {
+      .upload(emailPrefix, zipContent, {
         cacheControl: "3600",
         upsert: true,
       });
@@ -122,58 +102,25 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(error);
 
     console.log(
-      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
+      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}`
     );
 
     setMommyLink(
-      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
+      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}`
     );
   };
 
   useEffect(() => {
     if (mommyLink) {
       // assuming mommyLink is the state variable being set
-      console.log("mommy uploaded");
-      uploadDaddyImage();
-    }
-  }, [mommyLink]);
-
-  const uploadDaddyImage = async () => {
-    const emailPrefix = email.split("@")[0];
-    const newFileName = `dad_${emailPrefix}`;
-    // console.log(emailPrefix);
-    console.log(newFileName);
-
-    const { data, error } = await supabase.storage
-      .from("uploads")
-      .upload(newFileName, daddyImage, {
-        cacheControl: "3600",
-        upsert: true,
-      });
-
-    console.log(data);
-    console.log(error);
-
-    console.log(
-      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    );
-    setDaddyLink(
-      `https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/uploads/${newFileName}`
-    );
-  };
-
-  useEffect(() => {
-    if (daddyLink) {
-      // assuming mommyLink is the state variable being set
-      console.log("daddy uploaded");
+      console.log("zip uploaded");
       updateTable();
     }
-  }, [daddyLink]);
+  }, [mommyLink]);
 
   const updateTable = async () => {
     console.log("inside update table");
     console.log(mommyLink);
-    console.log(daddyLink);
     const emailPrefix = email.split("@")[0];
     console.log(emailPrefix);
 
@@ -181,11 +128,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       .from("users")
       .upsert({
         email: email,
+        partial: emailPrefix,
         order: orderOption,
-        mom: mommyLink,
-        dad: daddyLink,
-        partial: emailPrefix, 
-      })
+        zip: mommyLink,
+      },
+      { onConflict: 'email' })
       .select();
 
     console.log(data);
@@ -194,7 +141,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setLoading(false);
     setShowUploadModal(false);
 
-    if (orderOption === 9) {
+    if (orderOption === 8) {
       clickBuyLink1();
     } else {
       clickBuyLink2();
@@ -278,50 +225,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               )}
             </div>
 
-            {/* <div>
-              <div className="flex items-center justify-between">
-                <p className="block text-sm font-medium text-gray-700 mb-2">
-                  Daddy's photo
-                </p>
-              </div>
-              {daddyUploaded ? (
-                <div className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
-                  File Uploaded ✅
-                </div>
-              ) : (
-                <div
-                  {...getImageRootProps2()}
-                  htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-16 sm:h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
-                >
-                  <div className="flex sm:flex-col items-center justify-center">
-                    <svg
-                      aria-hidden="true"
-                      className="w-6 h-6 mb-1 text-gray-400 hidden sm:block"
-                      fill="none"
-                      stroke="#b5c6d1"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                      ></path>
-                    </svg>
-                    <p className="text-xs text-gray-400">Upload File</p>
-                  </div>
-                  <input
-                    {...getImageInputProps2()}
-                    id="dropzone-file"
-                    type="file"
-                    className="hidden"
-                  />
-                </div>
-              )}
-            </div> */}
-
             <button
               disabled={!mommyUploaded}
               onClick={() => {
@@ -389,7 +292,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
                     setClickedDiv(clickedDiv === 1 ? null : 1);
-                    setOrderOption(9);
+                    setOrderOption(8);
                   }}
                 >
                   <div className="">2 Viking Photos</div>
@@ -401,7 +304,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
                     setClickedDiv(clickedDiv === 2 ? null : 2);
-                    setOrderOption(19);
+                    setOrderOption(20);
                   }}
                 >
                   <div className="">20 Viking Photos</div>

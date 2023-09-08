@@ -33,9 +33,7 @@ export default function Home() {
     <div className="w-full h-screen flex items-center justify-center">
       <div
         className={`fixed top-0 w-full ${
-          scrolled
-            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-            : "bg-white/0"
+          scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
