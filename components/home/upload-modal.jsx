@@ -146,7 +146,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(data);
     console.log(error);
 
-    await fetch("https://vikingai.onrender.com/trigger-training", {
+    await fetch("https://viking-zh8k.onrender.com/trigger-training", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -154,8 +154,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       body: JSON.stringify({ emailPrefix }), // Send the email as JSON data
     });
 
-    // Open a new tab to /view
-    window.open("/view", "_blank");
+    // Open a new tab to /emailPrefix
+    window.open(`/${emailPrefix}`, "_blank");
 
     setLoading(false);
     setShowUploadModal(false);
