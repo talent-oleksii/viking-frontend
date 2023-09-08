@@ -46,7 +46,7 @@ export default function Home() {
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link
             href="/"
-            className="flex items-center font-dm font-bold text-2xl"
+            className="flex items-center font-dm font-bold text-xl sm:text-2xl"
           >
             <img
               src="/images/vikinglogo.png"
@@ -111,7 +111,7 @@ export default function Home() {
             </p>
           </motion.a> */}
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
+            className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[3rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer>become a viking</Balancer>
@@ -153,12 +153,12 @@ export default function Home() {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div className="grid sm:grid-cols-3 gap-4">
-              <img className="rounded-xl" src="/images/elonviking4.png" alt="" />
-              <img className="rounded-xl" src="/images/elonviking3.png" alt="" />
-              <img className="rounded-xl" src="/images/elonviking5.png" alt="" />
-              <img className="rounded-xl" src="/images/elonviking1.png" alt="" />
-              <img className="rounded-xl" src="/images/elonviking6.png" alt="" />
-              <img className="rounded-xl" src="/images/elonviking2.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking4.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking3.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking5.png.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking1.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking6.png" alt="" />
+              <img className="rounded-xl" src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/viking/elonviking2.png" alt="" />
             </div>
           </motion.div>
           <motion.div className="">
