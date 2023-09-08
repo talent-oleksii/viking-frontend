@@ -48,8 +48,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        // className={`font-dm bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100`}
-        className={`font-dm absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#000000_1px)] bg-[size:20px_20px]`}
+         className={`font-dm absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#000000_1px)] bg-[size:20px_20px]`}
       >
         {children}
         <Analytics />

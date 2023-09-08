@@ -40,6 +40,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       return;
     }
 
+    // Check if more than 10 files have been uploaded
+    if (acceptedFiles.length > 10) {
+      toast.error("Please upload less than 10 photos");
+      return;
+    }
+
     // Use Promise.all to make sure all files are processed before ZIP generation
     await Promise.all(
       acceptedFiles.map(async (file) => {
@@ -93,7 +99,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     const { data, error } = await supabase.storage
       .from("uploads")
-      .upload(emailPrefix, zipContent, {
+      .upload(`${emailPrefix}.zip`, zipContent, {
         cacheControl: "3600",
         upsert: true,
       });
@@ -102,11 +108,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(error);
 
     console.log(
-      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}`
+      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}.zip`
     );
 
     setMommyLink(
-      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}`
+      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}.zip`
     );
   };
 
@@ -126,26 +132,39 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     const { data, error } = await supabase
       .from("users")
-      .upsert({
-        email: email,
-        partial: emailPrefix,
-        order: orderOption,
-        zip: mommyLink,
-      },
-      { onConflict: 'email' })
+      .upsert(
+        {
+          email: email,
+          partial: emailPrefix,
+          order: orderOption,
+          zip: mommyLink,
+        },
+        { onConflict: "email" }
+      )
       .select();
 
     console.log(data);
     console.log(error);
 
+    await fetch("https://vikingai.onrender.com/trigger-training", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ emailPrefix }), // Send the email as JSON data
+    });
+
+    // Open a new tab to /view
+    window.open("/view", "_blank");
+
     setLoading(false);
     setShowUploadModal(false);
 
-    if (orderOption === 8) {
-      clickBuyLink1();
-    } else {
-      clickBuyLink2();
-    }
+    // if (orderOption === 8) {
+    //   clickBuyLink1();
+    // } else {
+    //   clickBuyLink2();
+    // }
   };
 
   const clickBuyLink1 = () => {

@@ -30,29 +30,29 @@ function PredictionPage({ params }) {
   const [image9, setImage9] = useState("");
   const [image10, setImage10] = useState("");
 
-  const fetchImages = async () => {
-    const { data, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("partial", params.id);
+  // const fetchImages = async () => {
+  //   const { data, error } = await supabase
+  //     .from("users")
+  //     .select("*")
+  //     .eq("partial", params.id);
 
-    console.log(data);
-    console.log(data[0].image1);
-    setImage1(data[0].image1);
-    setImage2(data[0].image2);
-    setImage3(data[0].image3);
-    setImage4(data[0].image4);
-    setImage5(data[0].image5);
-    setImage6(data[0].image6);
-    setImage7(data[0].image7);
-    setImage8(data[0].image8);
-    setImage9(data[0].image9);
-    setImage10(data[0].image10);
-  };
+  //   console.log(data);
+  //   console.log(data[0].image1);
+  //   setImage1(data[0].image1);
+  //   setImage2(data[0].image2);
+  //   setImage3(data[0].image3);
+  //   setImage4(data[0].image4);
+  //   setImage5(data[0].image5);
+  //   setImage6(data[0].image6);
+  //   setImage7(data[0].image7);
+  //   setImage8(data[0].image8);
+  //   setImage9(data[0].image9);
+  //   setImage10(data[0].image10);
+  // };
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  // useEffect(() => {
+  //   fetchImages();
+  // }, []);
 
   console.log(params);
 
@@ -61,44 +61,41 @@ function PredictionPage({ params }) {
 
   return (
     <div className="">
-      <Toaster richColors position="top-center" />
-      <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" />
+      <Toaster position="top-center" />
       <div
         className={`fixed top-0 w-full ${
-          scrolled
-            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-            : "bg-white/0"
+          scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link
             href="/"
-            className="flex items-center font-dm font-bold text-2xl"
+            className="flex items-center font-dm font-bold text-xl sm:text-2xl"
           >
             <img
-              src="https://tghnhiheiaeenfaurxtp.supabase.co/storage/v1/object/public/meta/logoo.png"
+              src="/images/vikinglogo.png"
               width="30"
               height="30"
               className="mr-2.5 rounded-sm"
             ></img>
-            <p>FutureBaby</p>
+            <div className="text-white font-medium">Viking.ai</div>
           </Link>
           <div className="flex items-center space-x-4">
             <button
               onClick={() => {
-                router.push("/");
+                window.location.reload();
                 va.track("Place Order Button");
               }}
               className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
             >
-              Order Again
+              View Photos
             </button>
           </div>
         </div>
       </div>
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
         <motion.div
-          className="z-10 max-w-2xl px-5 xl:px-0"
+          className="z-10 max-w-3xl px-5 xl:px-0"
           initial="hidden"
           whileInView="show"
           animate="show"
@@ -114,35 +111,35 @@ function PredictionPage({ params }) {
         >
           <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
-            className="cursor-pointer mx-auto mb-5 flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-5 sm:px-5 py-2 transition-colors hover:bg-blue-200"
+            className="cursor-pointer mx-auto mb-10 flex max-w-fit items-center justify-center space-x-2 overflow-hidden transition-colors"
             onClick={() => {
               navigator.clipboard.writeText("FRIEND25");
               toast.success("Discount code copied to clipboard");
               va.track("Give Friend Discount");
             }}
           >
-            <p className="text-sm font-semibold text-[#1d9bf0]">
-              Give a friend 25% discount
-            </p>
+            <span className="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-white/50 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium text-white/70 backdrop-blur-3xl">
+              Give a friend 25% off
+            </span>
           </motion.div>
           <motion.h1
-            className="max-w-2xl mx-auto bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-dm text-[2.5rem] leading-[2.72rem] sm:text-5xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-7xl md:leading-[5rem] pb-[2px]"
+            className="max-w-4xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <div>View your photos</div>
+            <div>View Your Photos</div>
           </motion.h1>
           <motion.p
-            className="mt-5 text-center text-gray-500 md:text-xl"
+            className="mt-6 text-center text-white/50 md:text-xl"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <Balancer>
+            <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Baby photos will appear here when ready.
+                Your photos will appear here when ready.
                 <br />
                 Could take up to 1 hour.
               </span>
               <span className="hidden sm:inline">
-                Baby photos will appear here once they are ready. <br />
+                Your photos will appear here once they are ready. <br />
                 Could take up to 1 hour.
               </span>
             </Balancer>
