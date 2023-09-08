@@ -88,7 +88,7 @@ function PredictionPage({ params }) {
               }}
               className="block px-4 py-1.5 text-white bg-black rounded-lg text-sm"
             >
-              View Photos
+              Order Again
             </button>
           </div>
         </div>
