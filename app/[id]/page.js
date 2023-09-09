@@ -132,7 +132,7 @@ function PredictionPage({ params }) {
         >
           <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
-            className="cursor-pointer mx-auto mb-10 flex max-w-fit items-center justify-center space-x-2 overflow-hidden transition-colors"
+            className="cursor-pointer mx-auto mb-5 sm:mb-10 flex max-w-fit items-center justify-center space-x-2 overflow-hidden transition-colors"
             onClick={() => {
               navigator.clipboard.writeText("FRIEND25");
               toast.success("Discount code copied to clipboard");
@@ -144,13 +144,13 @@ function PredictionPage({ params }) {
             </span>
           </motion.div>
           <motion.h1
-            className="max-w-4xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-[3.65rem] leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
+            className="max-w-4xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-[3.65rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div>View Your Photos</div>
           </motion.h1>
           <motion.p
-            className="mt-6 text-center text-white/50 md:text-xl"
+            className="mt-1.5 sm:mt-6 text-center text-white/50 md:text-xl"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
