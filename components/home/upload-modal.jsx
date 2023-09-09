@@ -149,13 +149,25 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     // Open a new tab to /emailPrefix
     window.open(`/${emailPrefix}`, "_blank");
 
-    await fetch("https://viking-zh8k.onrender.com/trigger-training", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ emailPrefix }), // Send the email as JSON data
-    });
+    try {
+      const response = await fetch("https://viking-zh8k.onrender.com/trigger-training", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: emailPrefix }), // change emailPrefix to email
+      });
+    
+      if (!response.ok) {
+        console.error(`API request failed with status ${response.status}`);
+        // Handle the error appropriately, e.g., show an error message to the user
+      } else {
+        // Proceed with other actions here
+      }
+    } catch (error) {
+      console.error(`API request failed with error: ${error}`);
+      // Handle the error appropriately, e.g., show an error message to the user
+    }
 
     setLoading(false);
     setShowUploadModal(false);
