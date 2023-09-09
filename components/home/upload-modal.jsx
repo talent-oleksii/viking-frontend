@@ -152,8 +152,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(data);
     console.log(error);
 
-    // Open a new tab to /emailPrefix
-    window.open(`/${emailPrefix}`, "_blank");
+    // // Open a new tab to /emailPrefix
+    // window.open(`/${emailPrefix}`, "_blank");
 
     try {
       const response = await fetch("https://viking-zh8k.onrender.com/trigger-training", {
@@ -174,6 +174,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       console.error(`API request failed with error: ${error}`);
       // Handle the error appropriately, e.g., show an error message to the user
     }
+
+    // test
+    router.push(`/${emailPrefix}`);
 
     setLoading(false);
     setShowUploadModal(false);
