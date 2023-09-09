@@ -40,41 +40,42 @@ function PredictionPage({ params }) {
   const [image19, setImage19] = useState("");
   const [image20, setImage20] = useState("");
 
-  // const fetchImages = async () => {
-  //   const { data, error } = await supabase
-  //     .from("users")
-  //     .select("*")
-  //     .eq("partial", params.id);
+  const fetchImages = async () => {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("partial", params.id);
 
-  //   console.log(data);
-  //   console.log(data[0].result1);
-  //   setImage1(data[0].result1);
-  //   setImage2(data[0].result2);
-  //   setImage3(data[0].result3);
-  //   setImage4(data[0].result4);
-  //   setImage5(data[0].result5);
-  //   setImage6(data[0].result6);
-  //   setImage7(data[0].result7);
-  //   setImage8(data[0].result8);
-  //   setImage9(data[0].result9);
-  //   setImage10(data[0].result10);
-  //   setImage11(data[0].result11);
-  //   setImage12(data[0].result12);
-  //   setImage13(data[0].result13);
-  //   setImage14(data[0].result14);
-  //   setImage15(data[0].result15);
-  //   setImage16(data[0].result16);
-  //   setImage17(data[0].result17);
-  //   setImage18(data[0].result18);
-  //   setImage19(data[0].result19);
-  //   setImage20(data[0].result20);
-  // };
+    console.log(data);
+    console.log(data[0].result1);
 
-  // useEffect(() => {
-  //   fetchImages();
-  // }, []);
+    setImage1(data[0].result1);
+    setImage2(data[0].result2);
+    setImage3(data[0].result3);
+    setImage4(data[0].result4);
+    setImage5(data[0].result5);
+    setImage6(data[0].result6);
+    setImage7(data[0].result7);
+    setImage8(data[0].result8);
+    setImage9(data[0].result9);
+    setImage10(data[0].result10);
+    setImage11(data[0].result11);
+    setImage12(data[0].result12);
+    setImage13(data[0].result13);
+    setImage14(data[0].result14);
+    setImage15(data[0].result15);
+    setImage16(data[0].result16);
+    setImage17(data[0].result17);
+    setImage18(data[0].result18);
+    setImage19(data[0].result19);
+    setImage20(data[0].result20);
+  };
 
-  console.log(params);
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  console.log(params.id);
 
   const scrolled = useScroll(50);
   const router = useRouter();
