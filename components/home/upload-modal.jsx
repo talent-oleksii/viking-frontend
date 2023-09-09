@@ -41,8 +41,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     }
 
     // Check if more than 10 files have been uploaded
-    if (acceptedFiles.length > 10) {
-      toast.error("Please upload less than 10 photos");
+    if (acceptedFiles.length > 5) {
+      toast.error("Please upload less than 5 photos");
       return;
     }
 
@@ -50,8 +50,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     await Promise.all(
       acceptedFiles.map(async (file) => {
         // Validate file size
-        if (file.size > 5242880) {
-          toast.error("File size exceeds the 5MB size limit");
+        // if (file.size > 5242880) {
+        //   toast.error("File size exceeds the 5MB size limit");
+        //   return;
+        // }
+
+        // Validate file size
+        if (file.size > 8388608) {
+          toast.error("File size exceeds the 8MB size limit");
           return;
         }
 
