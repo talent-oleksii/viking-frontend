@@ -155,31 +155,35 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     // // Open a new tab to /emailPrefix
     // window.open(`/${emailPrefix}`, "_blank");
 
-    try {
-      const response = await fetch("https://viking-zh8k.onrender.com/trigger-training", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: emailPrefix }), // change emailPrefix to email
-      });
+    // try {
+    //   const response = await fetch("https://viking-zh8k.onrender.com/trigger-training", {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ email: emailPrefix }), // change emailPrefix to email
+    //   });
     
-      if (!response.ok) {
-        console.error(`API request failed with status ${response.status}`);
-        // Handle the error appropriately, e.g., show an error message to the user
-      } else {
-        // Proceed with other actions here
-      }
-    } catch (error) {
-      console.error(`API request failed with error: ${error}`);
-      // Handle the error appropriately, e.g., show an error message to the user
-    }
+    //   if (!response.ok) {
+    //     console.error(`API request failed with status ${response.status}`);
+    //     // Handle the error appropriately, e.g., show an error message to the user
+    //   } else {
+    //     // Proceed with other actions here
+    //   }
+    // } catch (error) {
+    //   console.error(`API request failed with error: ${error}`);
+    //   // Handle the error appropriately, e.g., show an error message to the user
+    // }
 
     // test
-    router.push(`/${emailPrefix}`);
+    if (orderOption == 8) {
+      router.push("https://buy.stripe.com/eVacNb6wK8666VafYZ");
+    } else {
+      router.push("https://buy.stripe.com/3csbJ7bR4bii2EU144");
+    };
 
-    setLoading(false);
-    setShowUploadModal(false);
+    // setLoading(false);
+    // setShowUploadModal(false);
 
     // if (orderOption === 8) {
     //   clickBuyLink1();
