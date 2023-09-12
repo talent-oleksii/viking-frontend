@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Viking: Turn yourself into a Viking.",
   description:
-    "Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos and we'll do the rest!",
+    "Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos of yourself and we'll do the rest!",
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         />
         <meta
           name="twitter:description"
-          content="Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos and we'll do the rest!"
+          content="Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos of yourself and we'll do the rest!"
         />
         <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
         <link
