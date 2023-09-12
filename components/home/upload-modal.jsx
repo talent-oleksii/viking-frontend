@@ -177,9 +177,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     // test
     if (orderOption == 8) {
-      router.push("https://buy.stripe.com/eVacNb6wK8666VafYZ");
+      router.push(`https://buy.stripe.com/eVacNb6wK8666VafYZ?prefilled_email=${email}`);
     } else {
-      router.push("https://buy.stripe.com/3csbJ7bR4bii2EU144");
+      router.push(`https://buy.stripe.com/3csbJ7bR4bii2EU144?prefilled_email=${email}`);
     };
 
     // setLoading(false);
@@ -302,7 +302,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Order Details</h3>
             <p className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Please make sure to enter the correct email.
+              Enter the same email as you payment email.
             </p>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
