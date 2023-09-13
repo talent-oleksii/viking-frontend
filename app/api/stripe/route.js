@@ -11,8 +11,8 @@ export async function POST(request) {
   console.log(orderOption);
 
   // Determine priceID
-  let priceID = 0;
-  if (orderOption == "8") {
+  let priceID;
+  if (orderOption == 8) {
     priceID = "price_1NpP52J0xJPb1lZKeUH1vw9i";
   } else {
     priceID = "price_1NpP64J0xJPb1lZKtqDfPTnZ";
@@ -33,6 +33,7 @@ export async function POST(request) {
 
     return new Response(JSON.stringify(session.url));
   } catch (error) {
+    console.log(error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });

@@ -169,10 +169,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const [stripeURL, setStripeURL] = useState("");
 
-  const getStripe = async (orderOption) => {
+  const getStripe = async (order) => {
     const emailPrefix = email.split("@")[0];
     console.log(emailPrefix);
-    console.log(orderOption);
+    console.log(order);
 
     setLoading(true);
 
@@ -182,7 +182,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         body: JSON.stringify({
           email: email,
           emailPrefix: emailPrefix,
-          order: orderOption,
+          orderOption: order,
         }),
       });
 
