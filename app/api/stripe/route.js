@@ -25,6 +25,7 @@ export async function POST(request) {
       line_items: [{ price: priceID, quantity: 1 }],
       mode: "payment",
       customer_email: email,
+      allow_promotion_codes: true,
     });
 
     // const data = await response.json();
