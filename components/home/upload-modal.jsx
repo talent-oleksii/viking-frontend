@@ -153,7 +153,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(data);
     console.log(error);
 
-    setShowModal(false);
+    setShowUploadModal(false);
 
     // // Open Stripe link
     // if (orderOption == 8) {
