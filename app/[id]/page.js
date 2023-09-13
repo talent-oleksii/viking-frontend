@@ -79,6 +79,55 @@ function PredictionPage({ params }) {
   //   fetchImages();
   // }, []);
 
+  // const [imageExists, setImageExists] = useState(false);
+
+  // useEffect(() => {
+  //   const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}1.png`;
+
+  //   fetch(imageUrl, { method: "HEAD" })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         setImageExists(true);
+  //       } else {
+  //         setImageExists(false);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error checking image:", error);
+  //       setImageExists(false);
+  //     });
+  // }, []);
+
+  const [existingImages, setExistingImages] = useState([]);
+
+  useEffect(() => {
+    const checkImages = async () => {
+      const promises = [];
+      const newExistingImages = [];
+
+      for (let i = 1; i <= 20; i++) {
+        const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}${i}.png`;
+
+        const promise = fetch(imageUrl, { method: "HEAD" })
+          .then((response) => {
+            if (response.ok) {
+              newExistingImages.push(imageUrl);
+            }
+          })
+          .catch((error) => {
+            console.error(`Error checking image ${i}:`, error);
+          });
+
+        promises.push(promise);
+      }
+
+      await Promise.all(promises);
+      setExistingImages(newExistingImages);
+    };
+
+    checkImages();
+  }, [params.id]); // Re-run the effect if params.id changes
+
   return (
     <div className="">
       <Toaster position="top-center" />
@@ -188,26 +237,121 @@ function PredictionPage({ params }) {
             <img src={image18} alt="" className="rounded-2xl" />
             <img src={image19} alt="" className="rounded-2xl" />
             <img src={image20} alt="" className="rounded-2xl" /> */}
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}1.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}2.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}3.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}4.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}5.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}6.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}7.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}8.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}9.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}10.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}11.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}12.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}13.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}14.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}15.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}16.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}17.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}18.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}19.png`} alt="" className="rounded-2xl" />
-            <img src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}20.png`} alt="" className="rounded-2xl" />
+            {/* {imageExists ? (
+              <div></div>
+            ) : (
+              <div className="text-white text-2xl">
+                Your photos are still being generated. Please check back in 1
+                hour.
+              </div>
+            )} */}
+            {existingImages.length > 0 ? (
+              existingImages.map((url, index) => (
+                <img className="rounded-2xl" key={index} src={url} alt={`Image ${index + 1}`} />
+              ))
+            ) : (
+              <p></p>
+            )}
+            {/* <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}1.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}2.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}3.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}4.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}5.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}6.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}7.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}8.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}9.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}10.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}11.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}12.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}13.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}14.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}15.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}16.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}17.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}18.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}19.png`}
+              alt=""
+              className="rounded-2xl"
+            />
+            <img
+              src={`https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}20.png`}
+              alt=""
+              className="rounded-2xl"
+            /> */}
           </motion.div>
         </motion.div>
         <motion.div></motion.div>
