@@ -35,14 +35,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     const zip = new JSZip();
 
     // Check if at least 3 files have been uploaded
-    if (acceptedFiles.length < 3) {
-      toast.error("Please upload at least 3 photos");
+    if (acceptedFiles.length < 5) {
+      toast.error("Please upload at least 5 photos");
       return;
     }
 
     // Check if more than 10 files have been uploaded
-    if (acceptedFiles.length > 5) {
-      toast.error("Please upload less than 5 photos");
+    if (acceptedFiles.length > 10) {
+      toast.error("Please upload less than 10 photos");
       return;
     }
 
@@ -56,8 +56,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         // }
 
         // Validate file size
-        if (file.size > 8388608) {
-          toast.error("File size exceeds the 8MB size limit");
+        if (file.size > 20971520) {
+          toast.error("File size exceeds the 20MB size limit");
           return;
         }
 
@@ -88,7 +88,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   } = useDropzone({ onDrop: onImageDrop1, noDragEventsBubbling: true });
 
   const [clickedDiv, setClickedDiv] = useState(null);
+  const [clickedButton, setClickedButton] = useState(null);
   const [orderOption, setOrderOption] = useState("");
+  const [sex, setSex] = useState("");
   const [email, setEmail] = useState("");
 
   // Function to handle input change
@@ -152,56 +154,49 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(data);
     console.log(error);
 
-    // // Open a new tab to /emailPrefix
-    // window.open(`/${emailPrefix}`, "_blank");
+    setShowModal(false);
 
-    // try {
-    //   const response = await fetch("https://viking-zh8k.onrender.com/trigger-training", {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ email: emailPrefix }), // change emailPrefix to email
-    //   });
-    
-    //   if (!response.ok) {
-    //     console.error(`API request failed with status ${response.status}`);
-    //     // Handle the error appropriately, e.g., show an error message to the user
-    //   } else {
-    //     // Proceed with other actions here
-    //   }
-    // } catch (error) {
-    //   console.error(`API request failed with error: ${error}`);
-    //   // Handle the error appropriately, e.g., show an error message to the user
-    // }
-
-    // test
-    if (orderOption == 8) {
-      router.push(`https://buy.stripe.com/eVacNb6wK8666VafYZ?prefilled_email=${email}`);
-    } else {
-      router.push(`https://buy.stripe.com/3csbJ7bR4bii2EU144?prefilled_email=${email}`);
-    };
-
-    // setLoading(false);
-    // setShowUploadModal(false);
-
-    // if (orderOption === 8) {
-    //   clickBuyLink1();
+    // // Open Stripe link
+    // if (orderOption == 8) {
+    //   router.push(
+    //     `https://buy.stripe.com/eVacNb6wK8666VafYZ?prefilled_email=${email}`
+    //   );
     // } else {
-    //   clickBuyLink2();
+    //   router.push(
+    //     `https://buy.stripe.com/3csbJ7bR4bii2EU144?prefilled_email=${email}`
+    //   );
     // }
   };
 
-  const clickBuyLink1 = () => {
-    LemonSqueezy.Url.Open(
-      "https://futurebaby.lemonsqueezy.com/checkout/buy/c1755095-3c27-471a-b10d-d47e4d5adc07?embed=1"
-    );
-  };
+  const [stripeURL, setStripeURL] = useState("");
 
-  const clickBuyLink2 = () => {
-    LemonSqueezy.Url.Open(
-      "https://futurebaby.lemonsqueezy.com/checkout/buy/079c4a46-a961-4ed7-ae5e-94ba3db77ee2?embed=1"
-    );
+  const getStripe = async (orderOption) => {
+    const emailPrefix = email.split("@")[0];
+    console.log(emailPrefix);
+    console.log(orderOption);
+
+    try {
+      const response = await fetch("/api/stripe", {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          emailPrefix: emailPrefix,
+          order: orderOption,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Server responded with ${response.status} for StripeLink`
+        );
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setStripeURL(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -221,7 +216,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Upload Photos</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              Choose 3 to 5 photos of yourself.
+              Choose 5 to 10 photos of yourself.
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
@@ -268,9 +263,39 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </div>
               )}
             </div>
-
+            <div className="">
+              <p className="block text-sm font-medium text-gray-700 mb-2">
+                Choose gender
+              </p>
+              <div className="flex gap-3 w-full">
+                <button
+                  onClick={() => {
+                    event.preventDefault();
+                    setClickedButton(clickedDiv === 1 ? null : 1);
+                    setSex("Man");
+                  }}
+                  className={`border ${
+                    clickedButton === 1 ? "border-black" : ""
+                  } w-full text-center text-sm py-2 rounded-lg bg-white`}
+                >
+                  Man
+                </button>
+                <button
+                  onClick={() => {
+                    event.preventDefault();
+                    setClickedButton(clickedDiv === 2 ? null : 2);
+                    setSex("Woman");
+                  }}
+                  className={`border ${
+                    clickedButton === 2 ? "border-black" : ""
+                  } w-full text-center text-sm py-2 rounded-lg bg-white`}
+                >
+                  Woman
+                </button>
+              </div>
+            </div>
             <button
-              disabled={!mommyUploaded}
+              disabled={!mommyUploaded || !sex}
               onClick={() => {
                 event.preventDefault();
                 if (currentStep === "image") {
@@ -279,7 +304,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
               }}
               className={`${
-                !mommyUploaded
+                !mommyUploaded || !sex
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
@@ -330,42 +355,47 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </label>
               </div>
               <div id="select" className="flex flex-col gap-2">
-                <div
+                <button
                   className={`border ${
                     clickedDiv === 1 ? "border-black" : "border-gray-300"
                   } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
+                    event.preventDefault();
                     setClickedDiv(clickedDiv === 1 ? null : 1);
                     setOrderOption(8);
+                    getStripe(8);
                   }}
                 >
                   <div className="">2 Viking Photos</div>
                   <div className="">$8</div>
-                </div>
-                <div
+                </button>
+                <button
                   className={`border ${
                     clickedDiv === 2 ? "border-black" : "border-gray-300"
                   } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
+                    event.preventDefault();
                     setClickedDiv(clickedDiv === 2 ? null : 2);
                     setOrderOption(20);
+                    getStripe(20);
                   }}
                 >
                   <div className="">20 Viking Photos</div>
                   <div className="">$20</div>
-                </div>
+                </button>
               </div>
             </div>
 
             <button
-              disabled={email.length === 0 || orderOption.length === 0}
+              disabled={email.length === 0 || orderOption.length === 0 || !stripeURL}
               onClick={() => {
                 event.preventDefault();
                 uploadMommyImage();
+                window.open(stripeURL, "_blank");
                 // console.log("clicked");
               }}
               className={`${
-                email.length === 0 || orderOption.length === 0
+                email.length === 0 || orderOption.length === 0 || !stripeURL
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                   : "border-black bg-black text-white"
               } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
