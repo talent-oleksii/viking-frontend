@@ -138,6 +138,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     const emailPrefix = email.split("@")[0];
     console.log(emailPrefix);
 
+    setLoading(false);
+
     const { data, error } = await supabase
       .from("users")
       .upsert(
