@@ -102,7 +102,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [loading, setLoading] = useState(false);
 
   const uploadMommyImage = async () => {
-    setLoading(true);
     const emailPrefix = email.split("@")[0];
 
     const { data, error } = await supabase.storage
@@ -137,8 +136,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(mommyLink);
     const emailPrefix = email.split("@")[0];
     console.log(emailPrefix);
-
-    setLoading(false);
 
     const { data, error } = await supabase
       .from("users")
@@ -177,6 +174,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(emailPrefix);
     console.log(orderOption);
 
+    setLoading(true);
+
     try {
       const response = await fetch("/api/stripe", {
         method: "POST",
@@ -200,6 +199,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    if (stripeURL) {
+      setLoading(false);
+    }
+  }, [stripeURL]);
 
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
