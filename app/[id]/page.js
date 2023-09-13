@@ -203,13 +203,13 @@ function PredictionPage({ params }) {
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Your photos will appear here when ready.
+                Your photos will appear here within 1 hour.
                 <br />
-                Could take up to 1 hour.
+                Feel free to come back later.
               </span>
               <span className="hidden sm:inline">
-                Your photos will appear here once they are ready. <br />
-                Could take up to 1 hour.
+                Your photos will appear here within one hour. <br />
+                Feel free to leave and come back later.
               </span>
             </Balancer>
           </motion.p>
