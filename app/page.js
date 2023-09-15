@@ -198,8 +198,13 @@ export default function Home() {
                 alt=""
               />
               <img
-                className="rounded-xl"
+                className="hidden sm:block rounded-xl"
                 src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png"
                 alt=""
               />
             </div>
