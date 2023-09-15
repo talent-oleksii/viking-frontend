@@ -145,6 +145,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           partial: emailPrefix,
           order: orderOption,
           zip: mommyLink,
+          sex: sex,
         },
         { onConflict: "email" }
       )
@@ -279,7 +280,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   onClick={() => {
                     event.preventDefault();
                     setClickedButton(clickedDiv === 1 ? null : 1);
-                    setSex("Man");
+                    setSex("man");
                   }}
                   className={`border ${
                     clickedButton === 1 ? "border-black" : ""
@@ -291,7 +292,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   onClick={() => {
                     event.preventDefault();
                     setClickedButton(clickedDiv === 2 ? null : 2);
-                    setSex("Woman");
+                    setSex("woman");
                   }}
                   className={`border ${
                     clickedButton === 2 ? "border-black" : ""
