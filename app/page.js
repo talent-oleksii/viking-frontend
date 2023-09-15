@@ -203,7 +203,7 @@ export default function Home() {
                 alt=""
               />
               <img
-                className="rounded-xl"
+                className="sm:hidden rounded-xl"
                 src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png"
                 alt=""
               />
