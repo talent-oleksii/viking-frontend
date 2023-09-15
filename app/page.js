@@ -189,17 +189,17 @@ export default function Home() {
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking6.png"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png"
                 alt=""
               />
               <img
                 className="rounded-xl"
                 src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking2.png"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png"
                 alt=""
               />
             </div>
