@@ -111,26 +111,26 @@ function PredictionPage() {
             className="mt-10 sm:mt-16 grid sm:grid-cols-2 gap-6 sm:gap-6"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang1.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang2.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang3.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang4.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang5.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang6.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang7.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang8.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang9.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang10.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang11.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang12.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang13.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang14.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang15.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang16.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang17.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang18.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang19.png" className="rounded-2xl" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/tobyyzhang20.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e1.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e2.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e3.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e4.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e5.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e6.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e7.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e8.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e9.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e10.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e11.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e12.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e13.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e14.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e15.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e16.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e17.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e18.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e19.png" className="rounded-2xl" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/e20.png" className="rounded-2xl" alt="" />
           </motion.div>
         </motion.div>
         <motion.div></motion.div>
