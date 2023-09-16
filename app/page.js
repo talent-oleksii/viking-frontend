@@ -93,7 +93,7 @@ export default function Home() {
             }}
           >
             <span className="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-white/50 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium text-white/70 backdrop-blur-3xl">
-              This website is for sale
+              Matthew Iversen is a scammer
             </span>
           </motion.div>
           {/* <motion.h1
