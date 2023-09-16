@@ -25,7 +25,7 @@ export default function Home() {
   const { UploadModal, setShowUploadModal } = useUploadModal();
 
   const handleMouseEnter = (e) => {
-    const video = e.currentTarget; // Use currentTarget to get the element the event is attached to
+    const video = e.currentTarget;
     video.setAttribute("controls", "controls");
   };
 
@@ -36,8 +36,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100" /> */}
-      {/* <div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#000000_1px)] bg-[size:20px_20px]"></div> */}
       <div
         className={`fixed top-0 w-full ${
           scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
@@ -152,7 +150,6 @@ export default function Home() {
               />
             </div>
           </motion.div>
-          <motion.div className=""></motion.div>
         </motion.div>
       </main>
     </>

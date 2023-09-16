@@ -33,52 +33,31 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onImageDrop1 = useCallback(async (acceptedFiles) => {
     const zip = new JSZip();
-
-    // Check if at least 3 files have been uploaded
     if (acceptedFiles.length < 10) {
       toast.error("Please upload at least 10 photos");
       return;
     }
-
-    // Check if more than 10 files have been uploaded
     if (acceptedFiles.length > 20) {
       toast.error("Please upload less than 20 photos");
       return;
     }
-
-    // Use Promise.all to make sure all files are processed before ZIP generation
     await Promise.all(
       acceptedFiles.map(async (file) => {
-        // Validate file size
-        // if (file.size > 5242880) {
-        //   toast.error("File size exceeds the 5MB size limit");
-        //   return;
-        // }
-
-        // Validate file size
         if (file.size > 40960000) {
           toast.error("File size exceeds the 40MB size limit");
           return;
         }
-
-        // Validate file type
         if (!file.type.startsWith("image/")) {
           toast.error("Please only upload image files");
           return;
         }
-
         setMommyUploaded(true);
-
         const fileData = await file.arrayBuffer();
         zip.file(file.name, fileData);
       })
     );
-
     console.log("Number of files in ZIP: ", Object.keys(zip.files).length);
-
-    // Generate the ZIP file
     const content = await zip.generateAsync({ type: "blob" });
-    // Set ZIP content in state
     setZipContent(content);
   }, []);
 
@@ -93,7 +72,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [sex, setSex] = useState("");
   const [email, setEmail] = useState("");
 
-  // Function to handle input change
   const handleChange = (event) => {
     setEmail(event.target.value.toLowerCase());
   };
@@ -125,7 +103,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   useEffect(() => {
     if (mommyLink) {
-      // assuming mommyLink is the state variable being set
       console.log("zip uploaded");
       updateTable();
     }
@@ -155,17 +132,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log(error);
 
     setShowUploadModal(false);
-
-    // // Open Stripe link
-    // if (orderOption == 8) {
-    //   router.push(
-    //     `https://buy.stripe.com/eVacNb6wK8666VafYZ?prefilled_email=${email}`
-    //   );
-    // } else {
-    //   router.push(
-    //     `https://buy.stripe.com/3csbJ7bR4bii2EU144?prefilled_email=${email}`
-    //   );
-    // }
   };
 
   const [stripeURL, setStripeURL] = useState("");

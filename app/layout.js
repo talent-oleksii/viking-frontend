@@ -21,17 +21,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="Deepfake" />
-        <meta
-          name="twitter:title"
-          content="Viking: Turn yourself into a Viking."
-        />
-        <meta
-          name="twitter:description"
-          content="Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos of yourself and we'll do the rest!"
-        />
-        <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap"
           rel="stylesheet"

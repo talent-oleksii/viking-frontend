@@ -21,27 +21,6 @@ function PredictionPage({ params }) {
   const supabase = createClientComponentClient();
   const scrolled = useScroll(50);
   const router = useRouter();
-  console.log(params.id);
-
-  // const [imageExists, setImageExists] = useState(false);
-
-  // useEffect(() => {
-  //   const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}1.png`;
-
-  //   fetch(imageUrl, { method: "HEAD" })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         setImageExists(true);
-  //       } else {
-  //         setImageExists(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error checking image:", error);
-  //       setImageExists(false);
-  //     });
-  // }, []);
-
   const [existingImages, setExistingImages] = useState([]);
 
   useEffect(() => {
@@ -70,7 +49,7 @@ function PredictionPage({ params }) {
     };
 
     checkImages();
-  }, [params.id]); // Re-run the effect if params.id changes
+  }, []);
 
   return (
     <div className="">
@@ -161,11 +140,6 @@ function PredictionPage({ params }) {
             className="mt-10 sm:mt-16 grid sm:grid-cols-2 gap-6 sm:gap-6"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            {/* {imageExists ? (
-              <div className="hidden"></div>
-            ) : (
-              <div className=""></div>
-            )} */}
             {existingImages.length > 0 ? (
               existingImages.map((url, index) => (
                 <img className="rounded-2xl" key={index} src={url} alt={`Image ${index + 1}`} />
@@ -175,7 +149,6 @@ function PredictionPage({ params }) {
             )}
           </motion.div>
         </motion.div>
-        <motion.div></motion.div>
       </main>
     </div>
   );
