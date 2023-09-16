@@ -123,117 +123,35 @@ export default function Home() {
               11,000+ viking photos generated so far!
             </p>
           </motion.div>
-          <motion.div
-            id="desktop arrow"
-            className="hidden sm:flex mt-20 w-full justify-center"
-            variants={FADE_DOWN_ANIMATION_VARIANTS}
-          >
-            <div className="flex gap-4 items-center">
-              <img
-                className="rounded-xl w-[317px]"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonnormal.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/arrow.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl w-[317px]"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking3.png"
-                alt=""
-              />
-            </div>
+          <motion.div id="desktop" className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonn.png" alt="" />
+            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/womann.png" alt="" />
           </motion.div>
           <motion.div
-            id="mobile arrow"
-            className="max-w-full sm:hidden mt-20 justify-center"
-            variants={FADE_DOWN_ANIMATION_VARIANTS}
-          >
-            <div className="grid grid-cols-2 gap-4 items-center">
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonnormal.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png"
-                alt=""
-              />
-            </div>
-            <div className="w-full flex justify-center -mt-2">
-              <img
-                className="rounded-xl w-[70px]"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/arrowsm.png"
-                alt=""
-              />
-            </div>
-          </motion.div>
-          <motion.div
-            // className="mt-11 sm:mt-20 w-full"
-            className="mt-4 sm:mt-4 w-full"
+            className="mt-8 sm:mt-4 w-full"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div className="grid sm:grid-cols-3 gap-4">
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero1.JPEG" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero2.JPEG" alt="" />
+              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero3.JPEG" alt="" />
               <img
-                className="sm:hidden rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png"
-                alt=""
-              />
-              <img
-                className="sm:hidden rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking3.png"
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero4.JPEG"
                 alt=""
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero5.JPEG"
                 alt=""
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking2.png"
-                alt=""
-              />
-              <img
-                className="hidden sm:block rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png"
-                alt=""
-              />
-              <img
-                className="sm:hidden rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero6.JPEG"
                 alt=""
               />
             </div>
           </motion.div>
-          {/* <motion.div
-            className="mt-11 sm:mt-20 w-full"
-            variants={FADE_DOWN_ANIMATION_VARIANTS}
-          >
-            <div className="grid sm:grid-cols-3 gap-4">
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png" alt="" />
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking3.png" alt="" />
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking5.png" alt="" />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking1.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking6.png"
-                alt=""
-              />
-              <img
-                className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking2.png"
-                alt=""
-              />
-            </div>
-          </motion.div> */}
           <motion.div className=""></motion.div>
         </motion.div>
       </main>
