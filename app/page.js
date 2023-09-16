@@ -192,12 +192,12 @@ export default function Home() {
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero2.JPEG"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking4.png"
                 alt=""
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero3.JPEG"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero5.JPEG"
                 alt=""
               />
               <img
@@ -207,7 +207,7 @@ export default function Home() {
               />
               <img
                 className="rounded-xl"
-                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero5.JPEG"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonviking3.png"
                 alt=""
               />
               <img
