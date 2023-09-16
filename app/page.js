@@ -121,7 +121,7 @@ export default function Home() {
               11,000+ viking photos generated so far!
             </p>
           </motion.div>
-          <motion.div id="desktop" className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
+          <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
             <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonn.png" alt="" />
             <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/womann.png" alt="" />
           </motion.div>
