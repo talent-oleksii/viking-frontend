@@ -29,7 +29,7 @@ function PredictionPage({ params }) {
       const newExistingImages = [];
 
       for (let i = 1; i <= 20; i++) {
-        const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}${i}.png`;
+        const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}${i}.png?${new Date().getTime()}`;
 
         const promise = fetch(imageUrl, { method: "HEAD" })
           .then((response) => {

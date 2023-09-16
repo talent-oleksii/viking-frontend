@@ -190,7 +190,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </a>
             <h3 className="font-clash text-2xl font-bold">Upload Photos</h3>
             <Balancer className="text-sm text-gray-500 leading-6 sm:pb-0 pb-0.5">
-              10 to 20 selfies with plain background.
+              At least 10 selfies with plain background. <br />
+              Make sure entire head is in frame.
             </Balancer>
           </div>
           <form className="grid gap-5 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
