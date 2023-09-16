@@ -15,7 +15,7 @@ import { useUploadModal } from "@/components/home/upload-modal";
 import { motion } from "framer-motion";
 import Balancer from "react-wrap-balancer";
 import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
-import { Upload } from "lucide-react";
+import { Router, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -84,6 +84,18 @@ export default function Home() {
             },
           }}
         >
+          <motion.div
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className="cursor-pointer mx-auto mb-5 sm:mb-10 flex max-w-fit items-center justify-center space-x-2 overflow-hidden transition-colors"
+            onClick={() => {
+              console.log("clicked");
+              // router.push("/gallery");
+            }}
+          >
+            <span className="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-white/50 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium text-white/70 backdrop-blur-3xl">
+              This website is for sale
+            </span>
+          </motion.div>
           <motion.h1
             className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
@@ -121,18 +133,73 @@ export default function Home() {
               11,000+ viking photos generated so far!
             </p>
           </motion.div>
-          <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonn.png" alt="" />
-            <img src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/womann.png" alt="" />
+          {/* <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
+            <img
+              src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonn.png"
+              alt=""
+            />
+            <img
+              src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/womann.png"
+              alt=""
+            />
           </motion.div>
           <motion.div
             className="mt-8 sm:mt-4 w-full"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <div className="grid sm:grid-cols-3 gap-4">
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero1.JPEG" alt="" />
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero2.JPEG" alt="" />
-              <img className="rounded-xl" src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero3.JPEG" alt="" />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero1.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero2.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero3.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero4.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero5.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero6.JPEG"
+                alt=""
+              />
+            </div>
+          </motion.div> */}
+          <motion.div
+            className="mt-11 sm:mt-20 w-full"
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+          >
+            <div className="grid sm:grid-cols-3 gap-4">
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero1.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero2.JPEG"
+                alt=""
+              />
+              <img
+                className="rounded-xl"
+                src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero3.JPEG"
+                alt=""
+              />
               <img
                 className="rounded-xl"
                 src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/hero4.JPEG"

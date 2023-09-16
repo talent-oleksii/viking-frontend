@@ -51,7 +51,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           toast.error("Please only upload image files");
           return;
         }
-        setMommyUploaded(true);
         const fileData = await file.arrayBuffer();
         zip.file(file.name, fileData);
       })
@@ -59,6 +58,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     console.log("Number of files in ZIP: ", Object.keys(zip.files).length);
     const content = await zip.generateAsync({ type: "blob" });
     setZipContent(content);
+    setMommyUploaded(true);
   }, []);
 
   const {
