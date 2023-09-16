@@ -42,7 +42,7 @@ export default function Home() {
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          <Link
+          {/* <Link
             href="/"
             className="flex items-center font-dm font-bold text-xl sm:text-2xl"
           >
@@ -64,7 +64,7 @@ export default function Home() {
             >
               Order Now
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
