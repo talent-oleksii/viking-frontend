@@ -42,7 +42,7 @@ export default function Home() {
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          {/* <Link
+          <Link
             href="/"
             className="flex items-center font-dm font-bold text-xl sm:text-2xl"
           >
@@ -64,7 +64,7 @@ export default function Home() {
             >
               Order Now
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
@@ -84,7 +84,7 @@ export default function Home() {
             },
           }}
         >
-          <motion.div
+          {/* <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
             className="cursor-pointer mx-auto mb-5 sm:mb-10 flex max-w-fit items-center justify-center space-x-2 overflow-hidden transition-colors"
             onClick={() => {
@@ -95,8 +95,8 @@ export default function Home() {
             <span className="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-white/50 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-3 py-1 text-sm font-medium text-white/70 backdrop-blur-3xl">
               Matthew Iversen is a scammer
             </span>
-          </motion.div>
-          {/* <motion.h1
+          </motion.div> */}
+          <motion.h1
             className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
@@ -114,8 +114,8 @@ export default function Home() {
                 Transform yourself into a Viking.
               </span>
             </Balancer>
-          </motion.p> */}
-          {/* <motion.div
+          </motion.p>
+          <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
             className="-mb-3 sm:-mb-3"
           >
@@ -132,8 +132,8 @@ export default function Home() {
             <p className="mt-2.5 text-center text-xs text-white/50">
               11,000+ viking photos generated so far!
             </p>
-          </motion.div> */}
-          {/* <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
+          </motion.div>
+          <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-4">
             <img
               src="https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/other/elonn.png"
               alt=""
@@ -179,7 +179,7 @@ export default function Home() {
                 alt=""
               />
             </div>
-          </motion.div> */}
+          </motion.div>
           {/* <motion.div
             className="mt-11 sm:mt-20 w-full"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
