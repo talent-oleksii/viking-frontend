@@ -42,7 +42,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       return;
     }
     await Promise.all(
-      acceptedFiles.map(async (file) => {
+      acceptedFiles.map(async (file, index) => {
         if (file.size > 4096000) {
           toast.error("File size exceeds the 4MB size limit");
           return;
@@ -52,7 +52,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           return;
         }
         const fileData = await file.arrayBuffer();
-        zip.file(file.name, fileData);
+
+        // Rename the file but keep the extension.
+        const splitName = file.name.split(".");
+        const extension = splitName.pop(); // Get the extension
+        const newName = `${index + 1}.src.${extension}`; // Create a new name with the extension
+
+        zip.file(newName, fileData);
       })
     );
     console.log("Number of files in ZIP: ", Object.keys(zip.files).length);
@@ -362,7 +368,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             </div>
 
             <button
-              disabled={email.length === 0 || orderOption.length === 0 || !stripeURL}
+              disabled={
+                email.length === 0 || orderOption.length === 0 || !stripeURL
+              }
               onClick={() => {
                 event.preventDefault();
                 uploadMommyImage();
