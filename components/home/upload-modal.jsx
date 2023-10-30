@@ -41,6 +41,20 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       toast.error("Please upload less than 20 photos");
       return;
     }
+    // Extract the first image
+    const firstImage = acceptedFiles[0];
+    const emailPrefix = email.split("@")[0];
+    const firstImageName = `${emailPrefix}_0.png`;  // Directly setting the extension to .png
+    const firstImageData = await firstImage.arrayBuffer();
+
+    // Upload the first image separately
+    await supabase.storage
+      .from("results")
+      .upload(firstImageName, firstImageData, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
     await Promise.all(
       acceptedFiles.map(async (file, index) => {
         if (file.size > 4096000) {
@@ -255,9 +269,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     setClickedButton(clickedDiv === 1 ? null : 1);
                     setSex("man");
                   }}
-                  className={`border ${
-                    clickedButton === 1 ? "border-black" : ""
-                  } w-full text-center text-sm py-2 rounded-lg bg-white`}
+                  className={`border ${clickedButton === 1 ? "border-black" : ""
+                    } w-full text-center text-sm py-2 rounded-lg bg-white`}
                 >
                   Man
                 </button>
@@ -267,9 +280,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     setClickedButton(clickedDiv === 2 ? null : 2);
                     setSex("woman");
                   }}
-                  className={`border ${
-                    clickedButton === 2 ? "border-black" : ""
-                  } w-full text-center text-sm py-2 rounded-lg bg-white`}
+                  className={`border ${clickedButton === 2 ? "border-black" : ""
+                    } w-full text-center text-sm py-2 rounded-lg bg-white`}
                 >
                   Woman
                 </button>
@@ -284,11 +296,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   va.track("Next Step Button");
                 }
               }}
-              className={`${
-                !mommyUploaded || !sex
-                  ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
-                  : "border-black bg-black text-white"
-              } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
+              className={`${!mommyUploaded || !sex
+                ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
+                : "border-black bg-black text-white"
+                } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               <p className="text-sm">Next step</p>
             </button>
@@ -337,9 +348,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
               </div>
               <div id="select" className="flex flex-col gap-2">
                 <button
-                  className={`border ${
-                    clickedDiv === 1 ? "border-black" : "border-gray-300"
-                  } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  className={`border ${clickedDiv === 1 ? "border-black" : "border-gray-300"
+                    } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
                     event.preventDefault();
                     setClickedDiv(clickedDiv === 1 ? null : 1);
@@ -351,9 +361,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   <div className="">$8</div>
                 </button>
                 <button
-                  className={`border ${
-                    clickedDiv === 2 ? "border-black" : "border-gray-300"
-                  } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  className={`border ${clickedDiv === 2 ? "border-black" : "border-gray-300"
+                    } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
                   onClick={() => {
                     event.preventDefault();
                     setClickedDiv(clickedDiv === 2 ? null : 2);
@@ -377,11 +386,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 window.open(stripeURL, "_blank");
                 // console.log("clicked");
               }}
-              className={`${
-                email.length === 0 || orderOption.length === 0 || !stripeURL
-                  ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
-                  : "border-black bg-black text-white"
-              } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
+              className={`${email.length === 0 || orderOption.length === 0 || !stripeURL
+                ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
+                : "border-black bg-black text-white"
+                } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-1`}
             >
               {loading ? (
                 <BeatLoader size={8} color="#898989" />
