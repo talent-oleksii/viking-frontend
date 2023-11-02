@@ -28,8 +28,17 @@ function PredictionPage({ params }) {
       const promises = [];
       const newExistingImages = [];
 
+      const { data } = await supabase
+      .from('users')
+      .select()
+      .eq('training_id', params.id);
+
+      console.log('dat:', data);
+
+      const partial = data[0].partial;
+
       for (let i = 1; i <= 20; i++) {
-        const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${params.id}${i}.png?${new Date().getTime()}`;
+        const imageUrl = `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/results/${partial}${i}.png?${new Date().getTime()}`;
 
         const promise = fetch(imageUrl, { method: "HEAD" })
           .then((response) => {

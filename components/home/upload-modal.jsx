@@ -23,6 +23,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import va from "@vercel/analytics";
 import JSZip from "jszip";
 
+const uuid = require('uuid');
+
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -33,14 +35,14 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const onImageDrop1 = useCallback(async (acceptedFiles) => {
     const zip = new JSZip();
-    if (acceptedFiles.length < 10) {
-      toast.error("Please upload at least 10 photos");
-      return;
-    }
-    if (acceptedFiles.length > 20) {
-      toast.error("Please upload less than 20 photos");
-      return;
-    }
+    // if (acceptedFiles.length < 10) {
+    //   toast.error("Please upload at least 10 photos");
+    //   return;
+    // }
+    // if (acceptedFiles.length > 20) {
+    //   toast.error("Please upload less than 20 photos");
+    //   return;
+    // }
     // Extract the first image
     const firstImage = acceptedFiles[0];
     const emailPrefix = email.split("@")[0];
@@ -163,6 +165,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
     setLoading(true);
 
+    const uuid4 = uuid.v4();
+    await supabase
+      .from("users")
+      .update({ training_id: uuid4 })
+      .eq("email", email);
+
     try {
       const response = await fetch("/api/stripe", {
         method: "POST",
@@ -170,6 +178,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           email: email,
           emailPrefix: emailPrefix,
           orderOption: order,
+          randomUrl: uuid4,
         }),
       });
 
