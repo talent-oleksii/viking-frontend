@@ -33,8 +33,6 @@ function PredictionPage({ params }) {
       .select()
       .eq('training_id', params.id);
 
-      console.log('dat:', data);
-
       const partial = data[0].partial;
 
       for (let i = 1; i <= 20; i++) {
