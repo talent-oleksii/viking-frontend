@@ -166,10 +166,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setLoading(true);
 
     const uuid4 = uuid.v4();
-    await supabase
+    console.log('uuid:', uuid4);
+    const { data, error } = await supabase
       .from("users")
       .update({ training_id: uuid4 })
       .eq("email", email);
+
+    console.log('updat training id error:', error);
 
     try {
       const response = await fetch("/api/stripe", {
