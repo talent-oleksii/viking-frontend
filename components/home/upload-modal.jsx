@@ -10,44 +10,51 @@ import {
   useRef,
   useEffect,
 } from "react";
-import Image from "next/image";
-import { UploadCloud } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useDropzone } from "react-dropzone";
 import { Toaster, toast } from "sonner";
 import { BeatLoader } from "react-spinners";
 import Balancer from "react-wrap-balancer";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import CustomDialog from "./CustomDialog";
 import va from "@vercel/analytics";
 import JSZip from "jszip";
+import axios from 'axios';
 
 const uuid = require('uuid');
 
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const supabase = createClientComponentClient();
-  const router = useRouter();
 
   const [currentStep, setCurrentStep] = useState("image"); // other possible value is "audio"
   const [mommyUploaded, setMommyUploaded] = useState(false);
   const [zipContent, setZipContent] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const onImageDrop1 = useCallback(async (acceptedFiles) => {
     const zip = new JSZip();
-    // if (acceptedFiles.length < 10) {
-    //   toast.error("Please upload at least 10 photos");
-    //   return;
-    // }
-    // if (acceptedFiles.length > 20) {
-    //   toast.error("Please upload less than 20 photos");
-    //   return;
-    // }
     // Extract the first image
     const firstImage = acceptedFiles[0];
     const emailPrefix = email.split("@")[0];
     const firstImageName = `${emailPrefix}_0.png`;  // Directly setting the extension to .png
     const firstImageData = await firstImage.arrayBuffer();
+
+    setShowModal(true);
+    // Check if this image can be 
+    const formData = new FormData();
+    formData.append('image', firstImage);
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-image`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+
+    if (response.data === 'impossible') {
+      alert("Your picture didn't work! Take another one and make sure your entire face can be seen with a plain background");
+      setShowModal(false);
+      return;
+    }
+
+    setShowModal(false);
 
     // Upload the first image separately
     await supabase.storage
@@ -110,13 +117,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         cacheControl: "3600",
         upsert: true,
       });
-
-    console.log(data);
-    console.log(error);
-
-    console.log(
-      `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}.zip`
-    );
 
     setMommyLink(
       `https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/uploads/${emailPrefix}.zip`
@@ -232,6 +232,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   Your photos
                 </p>
               </div>
+              <CustomDialog
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                loading={true}
+              />
               {mommyUploaded ? (
                 <div className="flex flex-col items-center justify-center w-full h-20 sm:h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white text-gray-400 text-xs">
                   File Uploaded ✅

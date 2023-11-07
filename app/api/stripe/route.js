@@ -18,7 +18,6 @@ export async function POST(request) {
   } else {
     priceID = process.env.PRICE_20;
   }
-  console.log("Price ID: ", priceID);
 
   try {
     const session = await stripe.checkout.sessions.create({
