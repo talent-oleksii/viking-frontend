@@ -1,13 +1,8 @@
 import Modal from "@/components/shared/modal";
 import {
   useState,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useMemo,
-  ChangeEvent,
-  Fragment,
-  useRef,
   useEffect,
 } from "react";
 import { useDropzone } from "react-dropzone";
@@ -29,6 +24,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [mommyUploaded, setMommyUploaded] = useState(false);
   const [zipContent, setZipContent] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [uid, setUid] = useState('');
 
   const onImageDrop1 = useCallback(async (acceptedFiles) => {
     const zip = new JSZip();
@@ -84,7 +80,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         zip.file(newName, fileData);
       })
     );
-    console.log("Number of files in ZIP: ", Object.keys(zip.files).length);
     const content = await zip.generateAsync({ type: "blob" });
     setZipContent(content);
     setMommyUploaded(true);
@@ -125,17 +120,13 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   useEffect(() => {
     if (mommyLink) {
-      console.log("zip uploaded");
       updateTable();
     }
   }, [mommyLink]);
 
   const updateTable = async () => {
-    console.log("inside update table");
-    console.log(mommyLink);
     const emailPrefix = email.split("@")[0];
-    console.log(emailPrefix);
-
+    
     const { data, error } = await supabase
       .from("users")
       .upsert(
@@ -145,13 +136,11 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           order: orderOption,
           zip: mommyLink,
           sex: sex,
+          training_id: uid,
         },
         { onConflict: "email" }
       )
       .select();
-
-    console.log(data);
-    console.log(error);
 
     setShowUploadModal(false);
   };
@@ -166,13 +155,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setLoading(true);
 
     const uuid4 = uuid.v4();
-    console.log('uuid:', uuid4);
-    const { data, error } = await supabase
-      .from("users")
-      .update({ training_id: uuid4 })
-      .eq("email", email);
-
-    console.log('updat training id error:', error);
+    setUid(uuid4);
 
     try {
       const response = await fetch("/api/stripe", {
@@ -366,6 +349,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <button
                   className={`border ${clickedDiv === 1 ? "border-black" : "border-gray-300"
                     } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  disabled={email.length <= 3}
                   onClick={() => {
                     event.preventDefault();
                     setClickedDiv(clickedDiv === 1 ? null : 1);
@@ -379,6 +363,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <button
                   className={`border ${clickedDiv === 2 ? "border-black" : "border-gray-300"
                     } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                  disabled={email.length <= 3}
                   onClick={() => {
                     event.preventDefault();
                     setClickedDiv(clickedDiv === 2 ? null : 2);

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import {ArrowLongDownIcon} from '@heroicons/react/20/solid';
 import va from "@vercel/analytics";
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
@@ -149,7 +150,23 @@ function PredictionPage({ params }) {
           >
             {existingImages.length > 0 ? (
               existingImages.map((url, index) => (
-                <img className="rounded-2xl" key={index} src={url} alt={`Image ${index + 1}`} />
+                <div className="relative" key={index}>
+                  <img className="rounded-2xl" src={url} alt={`Image ${index + 1}`} />
+                  <button
+                    className="absolute bottom-[10px] right-[10px] w-[30px] h-[30px] bg-[white] rounded-full flex justify-center items-center"
+                    onClick={async () => {
+                      const response = await fetch(url);
+                      const blob = await response.blob();
+
+                      const anchor = document.createElement('a');
+                      anchor.href = URL.createObjectURL(blob);
+                      anchor.download = 'downloaded-image.png';
+                      anchor.click();
+                    }}
+                  >
+                    <ArrowLongDownIcon className="w-[20px] h-[20px]" />
+                  </button>
+                </div>
               ))
             ) : (
               <p></p>
