@@ -370,7 +370,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   Email
                 </h2>
                 <input
-                  type="text"
+                  type="email"
                   autoComplete="off"
                   id="small-input"
                   className="block w-full px-3 py-2 text-gray-900 border border-black rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
