@@ -132,14 +132,15 @@ function PredictionPage({ params }) {
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              <span className="sm:hidden">
-                Your photos will appear here within 1 hour.
-                <br />
-                Feel free to come back later.
+              <span className="sm:hidden text-sm">
+                We will send you an email when your pictures are ready (usually 15 minutes).
+                <br />You can also refresh this page after 15 minutes.
+                <br />We’d love it if you used the hashtag #aiviking for when sharing on social media. Thanks!
               </span>
               <span className="hidden sm:inline">
-                Your photos will appear here within one hour. <br />
-                Feel free to leave and come back later.
+                We will send you an email when your pictures are ready (usually 15 minutes).
+                <br />You can also refresh this page after 15 minutes.
+                <br /> We’d love it if you used the hashtag #aiviking for when sharing on social media. Thanks!
               </span>
             </Balancer>
           </motion.p>
@@ -165,7 +166,7 @@ function PredictionPage({ params }) {
                   >
                     <ArrowLongDownIcon className="w-[20px] h-[20px]" />
                   </button>
-                  <div className="flex absolute z-10 bottom-[15px] left-[38%] items-center justify-center">
+                  <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center">
                     <img
                       src="/images/vikinglogo.png"
                       width="30"
@@ -181,6 +182,17 @@ function PredictionPage({ params }) {
             )}
           </motion.div>
         </motion.div>
+        <div className="mt-5 sm:mt-9">
+          <a href="mailto:support@aiviking.com" className="flex justify-center items-center">
+            <img
+              src="/images/vikinglogo.png"
+              width="30"
+              height="30"
+              className="mr-2.5 rounded-sm"
+            ></img>
+            <span className="text-white font-medium text-md">support@aiviking.com</span>
+          </a>
+        </div>
       </main>
     </div>
   );

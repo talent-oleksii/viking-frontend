@@ -306,13 +306,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </svg>
 
                 </button>
-                <div className="flex justify-between items-center mb-2">
-                  <label
-                    htmlFor="order"
-                    className="text-[20px] leading-6 text-black font-bold mb-3"
+                <div className="flex justify-center items-center mb-2">
+                  <h2
+                    className="text-[20px] leading-6 text-black font-bold mb-3 text-center"
                   >
                     How Many Pictures Do You Want?
-                  </label>
+                  </h2>
                 </div>
                 <div id="select" className="flex flex-col gap-2">
                   <button
