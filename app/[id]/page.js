@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import {ArrowLongDownIcon} from '@heroicons/react/20/solid';
+import { ArrowLongDownIcon } from '@heroicons/react/20/solid';
 import va from "@vercel/analytics";
 
 import { useEffect, useState, useRef, useContext, Fragment } from "react";
@@ -30,9 +30,9 @@ function PredictionPage({ params }) {
       const newExistingImages = [];
 
       const { data } = await supabase
-      .from('users')
-      .select()
-      .eq('training_id', params.id);
+        .from('users')
+        .select()
+        .eq('training_id', params.id);
 
       const partial = data[0].partial;
 
@@ -63,9 +63,8 @@ function PredictionPage({ params }) {
     <div className="">
       <Toaster position="top-center" />
       <div
-        className={`fixed top-0 w-full ${
-          scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
-        } z-30 transition-all`}
+        className={`fixed top-0 w-full ${scrolled ? " bg-white/10 backdrop-blur-xl" : "bg-white/0"
+          } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link
@@ -166,6 +165,15 @@ function PredictionPage({ params }) {
                   >
                     <ArrowLongDownIcon className="w-[20px] h-[20px]" />
                   </button>
+                  <div className="flex absolute z-10 bottom-[15px] left-[38%] items-center justify-center">
+                    <img
+                      src="/images/vikinglogo.png"
+                      width="30"
+                      height="30"
+                      className="mr-2.5 rounded-sm"
+                    ></img>
+                    <p className="text-white font-medium">Viking.ai</p>
+                  </div>
                 </div>
               ))
             ) : (
