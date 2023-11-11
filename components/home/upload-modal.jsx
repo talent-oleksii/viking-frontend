@@ -299,7 +299,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             currentStep === 'price' && <>
               <div id="order" className="">
 
-                <button className="absolute left-[20px] top-[20px]" onClick={() => setCurrentStep("gender")}>
+                <button className="absolute left-[20px] top-[20px]" onClick={() => setCurrentStep("picture")}>
                   <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="7.32034" y1="0.384111" x2="1.32034" y2="5.38411" stroke="black" />
                     <line x1="6.16915" y1="10.8763" x2="0.646471" y2="5.35358" stroke="black" />
@@ -360,7 +360,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
             currentStep === 'email' && <>
               <div id="email" className="">
 
-                <button className="absolute left-[20px] top-[20px]" onClick={() => setCurrentStep("gender")}>
+                <button className="absolute left-[20px] top-[20px]" onClick={() => setCurrentStep("price")}>
                   <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="7.32034" y1="0.384111" x2="1.32034" y2="5.38411" stroke="black" />
                     <line x1="6.16915" y1="10.8763" x2="0.646471" y2="5.35358" stroke="black" />
