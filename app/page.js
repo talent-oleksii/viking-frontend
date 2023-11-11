@@ -20,7 +20,7 @@ import { Router, Upload } from "lucide-react";
 const ImageWithLogo = ({ className, children }) => {
   return <div className={`relative ${className}`}>
     {children}
-    <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-[.65]">
+    <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-60">
       <img
         src="/images/vikinglogo.png"
         width="30"

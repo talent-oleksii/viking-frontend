@@ -135,12 +135,12 @@ function PredictionPage({ params }) {
               <span className="sm:hidden text-sm">
                 We will send you an email when your pictures are ready (usually 15 minutes).
                 <br />You can also refresh this page after 15 minutes.
-                <br />We’d love it if you used the hashtag #aiviking for when sharing on social media. Thanks!
+                <br />We’d love it if you used the hashtag #aiviking when sharing on social media. Thanks!
               </span>
               <span className="hidden sm:inline">
                 We will send you an email when your pictures are ready (usually 15 minutes).
                 <br />You can also refresh this page after 15 minutes.
-                <br /> We’d love it if you used the hashtag #aiviking for when sharing on social media. Thanks!
+                <br /> We’d love it if you used the hashtag #aiviking when sharing on social media. Thanks!
               </span>
             </Balancer>
           </motion.p>
@@ -153,7 +153,7 @@ function PredictionPage({ params }) {
                 <div className="relative" key={index}>
                   <img className="rounded-2xl" src={url} alt={`Image ${index + 1}`} />
                   <button
-                    className="absolute bottom-[10px] right-[10px] w-[30px] h-[30px] bg-[white] rounded-full flex justify-center items-center"
+                    className="absolute bottom-[10px] right-[10px] w-[30px] h-[30px] bg-[white] rounded-full flex justify-center items-center opacity-80"
                     onClick={async () => {
                       const response = await fetch(url);
                       const blob = await response.blob();
@@ -166,7 +166,7 @@ function PredictionPage({ params }) {
                   >
                     <ArrowLongDownIcon className="w-[20px] h-[20px]" />
                   </button>
-                  <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center">
+                  <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-70">
                     <img
                       src="/images/vikinglogo.png"
                       width="30"
