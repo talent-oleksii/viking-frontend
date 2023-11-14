@@ -10,14 +10,14 @@ const CustomDialog = ({ open, onClose, text, state }) => {
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={() => onClose()}
       >
-        <div className="min-h-screen px-6 text-center flex items-center justify-center">
+        <div className="min-h-screen px-6 text-center flex items-center justify-center bg-black/[.9]">
           <div className="relative inline-block align-middle px-14 py-9 text-left align-middle bg-white shadow-xl rounded-md flex items-center justify-center flex-col rounded-[20px] z-[100]">
             <Dialog.Title as="h3" className="text-[24px] leading-6 text-black font-bold">
               {state === 'error' ? 'Uh Oh!' : text}
             </Dialog.Title>
             {
               state === 'loading' &&
-              <img src="/images/loading.gif" className='w-[60px] mt-3' />
+              <img src="/images/loading.gif" className='w-[80px] mt-3' />
             }
             {
               state === 'error' &&
