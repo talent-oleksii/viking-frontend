@@ -20,7 +20,7 @@ import { Router, Upload } from "lucide-react";
 const ImageWithLogo = ({ className, children }) => {
   return <div className={`relative ${className}`}>
     {children}
-    <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-60">
+    {/* <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-60">
       <img
         src="/images/vikinglogo.png"
         width="30"
@@ -28,7 +28,7 @@ const ImageWithLogo = ({ className, children }) => {
         className="mr-2.5 rounded-sm"
       ></img>
       <p className="text-white font-medium">Viking.ai</p>
-    </div>
+    </div> */}
   </div>
 }
 
@@ -146,7 +146,7 @@ export default function Home() {
               <p className="mt-2.5 text-center text-xs text-white/50">
                 11,000+ viking photos generated so far!
               </p>
-              <p className="text-xs mt-[150px] text-white/50 text-center">All exmamples were created with AI Viking</p>
+              <p className="text-xs mt-[150px] text-white/50 text-center">All examples were created with AI Viking</p>
               <p className="text-xs text-white/50 text-center">from the shown portraits</p>
             </div>
           </motion.div>
@@ -237,7 +237,7 @@ export default function Home() {
                 src="/images/12.jpg"
                 className="border-[2px] border-white rounded-full h-[150px] w-[150px] object-cover object-top"
               />
-              <p className="text-md mt-4 text-white/50 text-center">All exmamples were created with AI Viking</p>
+              <p className="text-md mt-4 text-white/50 text-center">All examples were created with AI Viking</p>
               <p className="text-md text-white/50 text-center">from the shown portraits</p>
             </div>
             <div className="flex justify-center items-center mt-3">
@@ -248,7 +248,8 @@ export default function Home() {
                 <path d="M24.0785 16.4263L29.0013 16.4263C29.1941 16.4266 29.3827 16.4827 29.5444 16.5877C29.7061 16.6927 29.834 16.8421 29.9127 17.0181C29.9915 17.194 30.0177 17.389 29.9883 17.5795C29.9588 17.77 29.8749 17.9479 29.7467 18.0919L19.4009 29.6613C19.307 29.7678 19.1915 29.853 19.0621 29.9114C18.9328 29.9698 18.7924 30 18.6505 30C18.5085 30 18.3682 29.9698 18.2388 29.9114C18.1094 29.853 17.9939 29.7678 17.9001 29.6613L7.56425 18.0919C7.43603 17.9479 7.35215 17.77 7.32269 17.5795C7.29324 17.389 7.31946 17.194 7.3982 17.0181C7.47695 16.8421 7.60487 16.6927 7.76657 16.5877C7.92827 16.4827 8.11686 16.4266 8.30967 16.4263L13.2174 16.4263L13.2174 16.2062C13.2174 9.79875 8.21461 4.1366 0.710398 2.12583C0.614615 2.09785 0.523556 2.0557 0.440245 2.00078L0.395224 1.97078C0.31972 1.91543 0.252356 1.84977 0.195109 1.7757L0.165093 1.73568C0.110589 1.6586 0.0668265 1.57447 0.0350177 1.48559L0.0350177 1.41056C0.0201136 1.36815 0.00841015 1.32468 6.5198e-07 1.28051L6.46514e-07 1.15547C0.00104587 1.07787 0.0111186 1.00065 0.0300166 0.925376L0.0300166 0.900369L0.0300166 0.860351L0.0700385 0.755315L0.105061 0.680284L0.160088 0.590248L0.210118 0.520221L0.280158 0.445192L0.335189 0.390174C0.365597 0.366693 0.397336 0.34498 0.430243 0.325147L0.490275 0.285133C0.525921 0.266256 0.562674 0.249553 0.600337 0.235114L0.660369 0.210105C0.696557 0.199704 0.733306 0.191356 0.770434 0.185098C0.795449 0.185098 0.82046 0.185098 0.850478 0.185098C1.8464 0.0630067 2.84879 0.001199 3.85216 2.21238e-05C14.8633 -0.0149835 23.8284 7.32781 24.0785 16.4263Z" fill="#CCCCCC" />
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-1 flex items-center justify-center">
+            <div className="flex items-center justify-center">
+            <div className="grid grid-cols-2 gap-3 mt-1">
               <ImageWithLogo>
                 <img
                   src="/images/2.png"
@@ -261,6 +262,7 @@ export default function Home() {
                   className="rounded-[20px] h-[300px] object-cover object-top"
                 />
               </ImageWithLogo>
+            </div>
             </div>
             <div className="flex items-center justify-center sm:hidden mt-[40px] flex-col">
 
@@ -277,7 +279,8 @@ export default function Home() {
                 <path d="M24.0785 16.4263L29.0013 16.4263C29.1941 16.4266 29.3827 16.4827 29.5444 16.5877C29.7061 16.6927 29.834 16.8421 29.9127 17.0181C29.9915 17.194 30.0177 17.389 29.9883 17.5795C29.9588 17.77 29.8749 17.9479 29.7467 18.0919L19.4009 29.6613C19.307 29.7678 19.1915 29.853 19.0621 29.9114C18.9328 29.9698 18.7924 30 18.6505 30C18.5085 30 18.3682 29.9698 18.2388 29.9114C18.1094 29.853 17.9939 29.7678 17.9001 29.6613L7.56425 18.0919C7.43603 17.9479 7.35215 17.77 7.32269 17.5795C7.29324 17.389 7.31946 17.194 7.3982 17.0181C7.47695 16.8421 7.60487 16.6927 7.76657 16.5877C7.92827 16.4827 8.11686 16.4266 8.30967 16.4263L13.2174 16.4263L13.2174 16.2062C13.2174 9.79875 8.21461 4.1366 0.710398 2.12583C0.614615 2.09785 0.523556 2.0557 0.440245 2.00078L0.395224 1.97078C0.31972 1.91543 0.252356 1.84977 0.195109 1.7757L0.165093 1.73568C0.110589 1.6586 0.0668265 1.57447 0.0350177 1.48559L0.0350177 1.41056C0.0201136 1.36815 0.00841015 1.32468 6.5198e-07 1.28051L6.46514e-07 1.15547C0.00104587 1.07787 0.0111186 1.00065 0.0300166 0.925376L0.0300166 0.900369L0.0300166 0.860351L0.0700385 0.755315L0.105061 0.680284L0.160088 0.590248L0.210118 0.520221L0.280158 0.445192L0.335189 0.390174C0.365597 0.366693 0.397336 0.34498 0.430243 0.325147L0.490275 0.285133C0.525921 0.266256 0.562674 0.249553 0.600337 0.235114L0.660369 0.210105C0.696557 0.199704 0.733306 0.191356 0.770434 0.185098C0.795449 0.185098 0.82046 0.185098 0.850478 0.185098C1.8464 0.0630067 2.84879 0.001199 3.85216 2.21238e-05C14.8633 -0.0149835 23.8284 7.32781 24.0785 16.4263Z" fill="#CCCCCC" />
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-1 flex items-center justify-center">
+            <div className="flex items-center justify-center">
+            <div className="grid grid-cols-2 gap-3 mt-1">
               <ImageWithLogo>
                 <img
                   src="/images/7.png"
@@ -290,6 +293,7 @@ export default function Home() {
                   className="rounded-[20px] h-[300px] object-cover object-top"
                 />
               </ImageWithLogo>
+            </div>
             </div>
             <div className="mt-6 grid px-4 gap-6">
               <ImageWithLogo>

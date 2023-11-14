@@ -166,7 +166,7 @@ function PredictionPage({ params }) {
                   >
                     <ArrowLongDownIcon className="w-[20px] h-[20px]" />
                   </button>
-                  <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-70">
+                  {/* <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-70">
                     <img
                       src="/images/vikinglogo.png"
                       width="30"
@@ -174,7 +174,7 @@ function PredictionPage({ params }) {
                       className="mr-2.5 rounded-sm"
                     ></img>
                     <p className="text-white font-medium">Viking.ai</p>
-                  </div>
+                  </div> */}
                 </div>
               ))
             ) : (

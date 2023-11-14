@@ -17,7 +17,7 @@ const CustomDialog = ({ open, onClose, text, state }) => {
             </Dialog.Title>
             {
               state === 'loading' &&
-              <img src="/images/loading.png" className='w-[60px] mt-3' />
+              <img src="/images/loading.gif" className='w-[60px] mt-3' />
             }
             {
               state === 'error' &&
