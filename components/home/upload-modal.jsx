@@ -200,7 +200,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
       <Toaster richColors position="top-right" />
-      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 relative">
+      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 relative bg-black">
         <form className="grid gap-3 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
           {
             currentStep === 'gender' &&
@@ -371,7 +371,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </h2>
                 <input
                   type="email"
-                  // autoComplete="on"
+                  aria-label="email"
+                  name="email"
                   id="small-input"
                   className="block w-full px-3 py-2 text-gray-900 border border-black rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
                   value={email}

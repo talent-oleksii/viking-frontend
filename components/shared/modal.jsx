@@ -44,7 +44,7 @@ import {
                   <motion.div
                     ref={desktopModalRef}
                     key="desktop-modal"
-                    className="fixed inset-0 z-40 hidden min-h-screen items-center justify-center md:flex"
+                    className="fixed inset-0 z-40 hidden min-h-screen items-center justify-center md:flex bg-black/[.9]"
                     initial={{ scale: 0.95 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0.95 }}
