@@ -368,6 +368,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <input
                   type="email"
                   aria-label="email"
+                  autoComplete="on"
                   name="email"
                   id="small-input"
                   className="block w-full px-3 py-2 text-gray-900 border border-black rounded-md bg-white sm:text-sm focus:outline-0 focus:ring-0"
