@@ -114,6 +114,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const uploadMommyImage = async () => {
     const emailPrefix = email.split("@")[0];
 
+    for (let i = 0; i < 20; i++) {
+      await supabase.storage
+        .from("results")
+        .remove(`${emailPrefix}${i}.png`);
+    }
+
     const { data, error } = await supabase.storage
       .from("uploads")
       .upload(`${emailPrefix}.zip`, zipContent, {
@@ -157,10 +163,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
   const getStripe = async (order) => {
     const emailPrefix = email.split("@")[0];
-    console.log(emailPrefix);
-    console.log(order);
-
-    setLoading(true);
 
     const uuid4 = uuid.v4();
     setUid(uuid4);
@@ -190,12 +192,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
-    if (stripeURL) {
-      setLoading(false);
-    }
-  }, [stripeURL]);
 
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
@@ -385,9 +381,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 }
                 onClick={async () => {
                   event.preventDefault();
-                  uploadMommyImage();
+                  setLoading(true);
                   const url = await getStripe(orderOption);
-                  window.open(url, "_blank");
+                  await uploadMommyImage();
+                  setLoading(false);
+                  // window.open(url, "_blank");
+                  window.open(url, "_self");
                   // console.log("clicked");
                 }}
                 className={`${email.length === 0 || orderOption.length === 0
