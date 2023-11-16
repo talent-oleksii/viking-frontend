@@ -24,7 +24,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [showModal, setShowModal] = useState(false);
   const [state, setState] = useState('loading');
   const [showText, setShowText] = useState('Analysing...');
-  const [uid, setUid] = useState('');
 
   const onImageDrop1 = useCallback(async (acceptedFiles) => {
     const zip = new JSZip();
@@ -112,6 +111,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [loading, setLoading] = useState(false);
 
   const uploadMommyImage = async () => {
+
     const emailPrefix = email.split("@")[0];
 
     for (let i = 0; i < 20; i++) {
@@ -132,13 +132,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     );
   };
 
-  useEffect(() => {
-    if (mommyLink) {
-      updateTable();
-    }
-  }, [mommyLink]);
-
-  const updateTable = async () => {
+  const updateTable = async (uid) => {
     const emailPrefix = email.split("@")[0];
 
     const { data, error } = await supabase
@@ -155,17 +149,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
         { onConflict: "email" }
       )
       .select();
-
-    setShowUploadModal(false);
   };
-
-  const [stripeURL, setStripeURL] = useState("");
 
   const getStripe = async (order) => {
     const emailPrefix = email.split("@")[0];
 
     const uuid4 = uuid.v4();
-    setUid(uuid4);
 
     try {
       const response = await fetch("/api/stripe", {
@@ -186,8 +175,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
       const data = await response.json();
       console.log(data);
-      setStripeURL(data);
-      return data;
+      return {
+        url: data,
+        uid: uuid4,
+      };
     } catch (error) {
       console.log(error.message);
     }
@@ -383,11 +374,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 onClick={async () => {
                   event.preventDefault();
                   setLoading(true);
-                  const url = await getStripe(orderOption);
+                  const data = await getStripe(orderOption);
+                  await updateTable(data.uid);
                   await uploadMommyImage();
                   setLoading(false);
                   // window.open(url, "_blank");
-                  window.open(url, "_self");
+                  window.open(data.url, "_self");
                   // console.log("clicked");
                 }}
                 className={`${email.length === 0 || orderOption.length === 0
