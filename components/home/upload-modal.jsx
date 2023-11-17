@@ -65,7 +65,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     await Promise.all(
       acceptedFiles.map(async (file, index) => {
         if (file.size > 15360000) {
-          toast.error("File size exceeds the 4MB size limit");
+          toast.error("File size exceeds the 15MB size limit");
           return;
         }
         if (!file.type.startsWith("image/")) {
