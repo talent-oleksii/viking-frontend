@@ -77,7 +77,7 @@ function PredictionPage({ params }) {
               height="30"
               className="mr-2.5 rounded-sm"
             ></img>
-            <div className="text-white font-medium">Viking.ai</div>
+            <div className="text-white font-medium">AiViking.com</div>
           </Link>
           <div className="flex items-center space-x-4">
             <button

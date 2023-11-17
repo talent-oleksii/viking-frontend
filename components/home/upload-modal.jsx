@@ -13,6 +13,10 @@ import CustomDialog from "./CustomDialog";
 import JSZip from "jszip";
 import axios from 'axios';
 
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 const uuid = require('uuid');
 
 const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
@@ -151,7 +155,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
       .select();
   };
 
-  const getStripe = async (order) => {
+  const getStripe = async (order, referral) => {
     const emailPrefix = email.split("@")[0];
 
     const uuid4 = uuid.v4();
@@ -164,6 +168,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
           emailPrefix: emailPrefix,
           orderOption: order,
           randomUrl: uuid4,
+          referral,
         }),
       });
 
@@ -374,13 +379,17 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 onClick={async () => {
                   event.preventDefault();
                   setLoading(true);
-                  const data = await getStripe(orderOption);
+                  let data = undefined;
+                  if (window.Rewardful && window.Rewardful.referral) {
+                    data = await getStripe(orderOption, window.Rewardful.referral);
+                  } else {
+                    data = await getStripe(orderOption, '');
+                  }
+
                   await updateTable(data.uid);
                   await uploadMommyImage();
                   setLoading(false);
-                  // window.open(url, "_blank");
                   window.open(data.url, "_self");
-                  // console.log("clicked");
                 }}
                 className={`${email.length === 0 || orderOption.length === 0
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"

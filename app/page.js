@@ -65,7 +65,7 @@ export default function Home() {
               height="30"
               className="mr-2.5 rounded-sm"
             ></img>
-            <div className="text-white font-medium">Viking.ai</div>
+            <div className="text-white font-medium">AiViking.com</div>
           </Link>
           <div className="flex items-center space-x-4">
             <button
@@ -143,11 +143,11 @@ export default function Home() {
             </button>
 
             <div className="hidden sm:block">
-              <p className="mt-2.5 text-center text-xs text-white/50">
+              <p className="mt-2.5 text-center text-sm text-white/50">
                 11,000+ viking photos generated so far!
               </p>
-              <p className="text-xs mt-[150px] text-white/50 text-center">All examples were created with AI Viking</p>
-              <p className="text-xs text-white/50 text-center">from the shown portraits</p>
+              <p className="text-sm mt-[150px] text-white/50 text-center">All examples were created with AI Viking</p>
+              <p className="text-sm text-white/50 text-center">from the shown portraits</p>
             </div>
           </motion.div>
           <div className="hidden sm:block">
@@ -249,20 +249,20 @@ export default function Home() {
               </svg>
             </div>
             <div className="flex items-center justify-center">
-            <div className="grid grid-cols-2 gap-3 mt-1">
-              <ImageWithLogo>
-                <img
-                  src="/images/2.png"
-                  className="rounded-[20px] h-[300px] object-cover object-top"
-                />
-              </ImageWithLogo>
-              <ImageWithLogo>
-                <img
-                  src="/images/5.png"
-                  className="rounded-[20px] h-[300px] object-cover object-top"
-                />
-              </ImageWithLogo>
-            </div>
+              <div className="grid grid-cols-2 gap-3 mt-1">
+                <ImageWithLogo>
+                  <img
+                    src="/images/2.png"
+                    className="rounded-[20px] h-[300px] object-cover object-top"
+                  />
+                </ImageWithLogo>
+                <ImageWithLogo>
+                  <img
+                    src="/images/5.png"
+                    className="rounded-[20px] h-[300px] object-cover object-top"
+                  />
+                </ImageWithLogo>
+              </div>
             </div>
             <div className="flex items-center justify-center sm:hidden mt-[40px] flex-col">
 
@@ -280,20 +280,20 @@ export default function Home() {
               </svg>
             </div>
             <div className="flex items-center justify-center">
-            <div className="grid grid-cols-2 gap-3 mt-1">
-              <ImageWithLogo>
-                <img
-                  src="/images/7.png"
-                  className="rounded-[20px] h-[300px] object-cover object-top"
-                />
-              </ImageWithLogo>
-              <ImageWithLogo>
-                <img
-                  src="/images/8.png"
-                  className="rounded-[20px] h-[300px] object-cover object-top"
-                />
-              </ImageWithLogo>
-            </div>
+              <div className="grid grid-cols-2 gap-3 mt-1">
+                <ImageWithLogo>
+                  <img
+                    src="/images/7.png"
+                    className="rounded-[20px] h-[300px] object-cover object-top"
+                  />
+                </ImageWithLogo>
+                <ImageWithLogo>
+                  <img
+                    src="/images/8.png"
+                    className="rounded-[20px] h-[300px] object-cover object-top"
+                  />
+                </ImageWithLogo>
+              </div>
             </div>
             <div className="mt-6 grid px-4 gap-6">
               <ImageWithLogo>
