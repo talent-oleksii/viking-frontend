@@ -68,7 +68,7 @@ export default function Home() {
             <div className="text-white font-medium">AiViking.com</div>
           </Link>
           <div className="flex items-center space-x-4">
-            <button
+            {/* <button
               onClick={() => {
                 setShowUploadModal(true);
                 va.track("Place Order Button");
@@ -76,7 +76,14 @@ export default function Home() {
               className="block px-4 py-1.5 text-white rounded-lg text-sm"
             >
               Order Now
-            </button>
+            </button> */}
+            <a
+              className="block px-4 py-1.5 text-white rounded-lg text-sm"
+              href="https://ai-viking.getrewardful.com/signup"
+              target="_self"
+            >
+              Affiliate links
+            </a>
           </div>
         </div>
       </div>
