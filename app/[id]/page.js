@@ -152,21 +152,22 @@ function PredictionPage({ params }) {
               existingImages.map((url, index) => (
                 <div className="relative" key={index}>
                   <img className="rounded-2xl" src={url} alt={`Image ${index + 1}`} />
-                  <button
+                  <Link
                     className="absolute bottom-[10px] right-[10px] w-[30px] h-[30px] bg-[white] rounded-full flex justify-center items-center opacity-80"
-                    onClick={async () => {
-                      const response = await fetch(url);
-                      const blob = await response.blob();
+                    href={url}
+                  // onClick={async () => {
+                  //   const response = await fetch(url);
+                  //   const blob = await response.blob();
 
-                      const anchor = document.createElement('a');
-                      anchor.href = URL.createObjectURL(blob);
-                      anchor.download = 'downloaded-image.png';
-                      anchor.click();
-                    }}
+                  //   const anchor = document.createElement('a');
+                  //   anchor.href = URL.createObjectURL(blob);
+                  //   anchor.download = 'downloaded-image.png';
+                  //   anchor.click();
+                  // }}
                   >
                     <ArrowLongDownIcon className="w-[20px] h-[20px]" />
-                  </button>
-                  {/* <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-70">
+                  </Link>
+                  <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-70">
                     <img
                       src="/images/vikinglogo.png"
                       width="30"
@@ -174,7 +175,7 @@ function PredictionPage({ params }) {
                       className="mr-2.5 rounded-sm"
                     ></img>
                     <p className="text-white font-medium">Viking.ai</p>
-                  </div> */}
+                  </div>
                 </div>
               ))
             ) : (
