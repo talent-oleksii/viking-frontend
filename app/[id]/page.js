@@ -174,7 +174,7 @@ function PredictionPage({ params }) {
                       height="30"
                       className="mr-2.5 rounded-sm"
                     ></img>
-                    <p className="text-white font-medium">Viking.ai</p>
+                    <p className="text-white font-medium">AiViking.com</p>
                   </div>
                 </div>
               ))
