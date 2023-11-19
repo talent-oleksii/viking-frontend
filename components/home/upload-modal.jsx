@@ -389,7 +389,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   await updateTable(data.uid);
                   await uploadMommyImage();
                   setLoading(false);
-                  window.open(data.url, "_self");
+                  window.location.href = data.url;
+                  // window.open(data.url, "_self");
                 }}
                 className={`${email.length === 0 || orderOption.length === 0
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
