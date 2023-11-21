@@ -150,11 +150,11 @@ export default function Home() {
             </button>
 
             <div className="hidden sm:block">
-              <p className="mt-2.5 text-center text-sm text-white/50">
+              <p className="mt-2.5 text-center text-lg text-white/50">
                 11,000+ viking photos generated so far!
               </p>
-              <p className="text-sm mt-[150px] text-white/50 text-center">All examples were created with AI Viking</p>
-              <p className="text-sm text-white/50 text-center">from the shown portraits</p>
+              <p className="text-lg mt-[10px] text-white/50 text-center">All examples were created with AI Viking</p>
+              <p className="text-lg text-white/50 text-center">from the shown portraits</p>
             </div>
           </motion.div>
           <div className="hidden sm:block">

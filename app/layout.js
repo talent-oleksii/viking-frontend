@@ -5,9 +5,9 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Viking: Turn yourself into a Viking.",
+  title: "Turn yourself into a Viking.",
   description:
-    "Viking uses artificial intelligence to turn you into a real-life Viking. Just upload 3-5 photos of yourself and we'll do the rest!",
+    "Viking uses artificial intelligence to turn you into a real-life Viking. Just upload a clear selfie and we'll do the rest!",
   viewport: {
     width: "device-width",
     initialScale: 1,
