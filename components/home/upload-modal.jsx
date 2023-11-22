@@ -305,12 +305,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                               For best results:
                             </h3>
                             <p className='text-[15px] text-black w-[230px] mt-4'>
-                              -Upload one picture <br />
-                              -Neutral expression <br />
-                              -Remove glasses <br />
-                              -Look straight at the camera <br />
-                              -No blurry pictures <br />
-                              -Cature the entire face <br />
+                              {'\u2B24'} Upload one picture <br />
+                              {'\u2B24'} Neutral expression <br />
+                              {'\u2B24'} Remove glasses <br />
+                              {'\u2B24'} Look straight at the camera <br />
+                              {'\u2B24'} No blurry pictures <br />
+                              {'\u2B24'} Cature the entire face <br />
                             </p>
                             <div className='w-full text-center'>
                               <button
