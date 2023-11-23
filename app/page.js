@@ -128,10 +128,10 @@ export default function Home() {
           >
             <Balancer ratio={0.6}>
               <span className="sm:hidden">
-                Transform yourself into a Viking.
+                Find out what you would look like as a real viking!
               </span>
               <span className="hidden sm:inline">
-                Transform yourself into a Viking.
+                Find out what you would look like as a real viking!
               </span>
             </Balancer>
           </motion.p>
