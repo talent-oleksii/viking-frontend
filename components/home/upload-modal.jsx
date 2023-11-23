@@ -474,9 +474,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 disabled={
                   email.length === 0
                 }
-                onClick={() => {
+                onClick={async () => {
                   event.preventDefault();
                   setCurrentStep("price");
+                  await supabase
+                    .from("users")
+                    .upsert(
+                      {
+                        email: email
+                      });
                 }}
 
                 className={`${email.length === 0
