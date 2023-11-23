@@ -14,20 +14,28 @@ const PrevDialog = ({ open, loading, prevUrl, onClose }) => {
           <div className="relative inline-block align-middle px-14 py-9 text-left align-middle bg-transparent shadow-xl rounded-md flex items-center justify-center flex-col rounded-[20px] z-[100]">
             {
               loading &&
-              <img src="/loader.svg" alt="loading" className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10' />
+              <img src="/Loading.gif" alt="loading" className='absolute top-1/2 w-[100px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10' />
             }
             <img
               src={prevUrl}
               alt="prev"
-              className={`rounded-[30px] w-[300px] z-0 ${loading ? 'blur-lg' : 'blur-none'}`}
-              onClick={() => {
-                if (!loading)
-                  onClose();
-              }}
-              onMouseDown={() => {
-                if (!loading) onClose();
-              }}
+              className={`object-cover object-top rounded-[30px] w-[300px] h-[300px] z-0 ${loading ? 'blur-lg' : 'blur-none'}`}
             />
+            <div className='px-8 w-full'>
+              <button
+                className='text-center w-full rounded-[7px] bg-[#D9D9D9] py-2 flex items-center justify-center mt-5 disabled:bg-gray-300'
+                disabled={loading}
+                onClick={() => {
+                  if (!loading)
+                    onClose();
+                }}
+                onMouseDown={() => {
+                  if (!loading) onClose();
+                }}
+              >
+                More!
+              </button>
+            </div>
           </div>
         </div>
       </Dialog>

@@ -98,7 +98,6 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setTimeout(() => setShowModal(false), 3000);
     setShowModal(false);
 
-    console.log('se:', sex);
     setPrevUrl(sex === 'man' ? 'https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/viking_man/man%20viking%20(188).png' : 'https://remwbrfkzindyqlksvyv.supabase.co/storage/v1/object/public/viking_woman/woman%20viking%20(43).png');
     setPrevLoading(true);
     setShowPreviewDialog(true);
@@ -305,12 +304,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                               For best results:
                             </h3>
                             <p className='text-[15px] text-black w-[230px] mt-4'>
-                              {'\u2B24'} Upload one picture <br />
-                              {'\u2B24'} Neutral expression <br />
-                              {'\u2B24'} Remove glasses <br />
-                              {'\u2B24'} Look straight at the camera <br />
-                              {'\u2B24'} No blurry pictures <br />
-                              {'\u2B24'} Cature the entire face <br />
+                              {'\u2022'} Upload one picture <br />
+                              {'\u2022'} Neutral expression <br />
+                              {'\u2022'} Remove glasses <br />
+                              {'\u2022'} Look straight at the camera <br />
+                              {'\u2022'} No blurry pictures <br />
+                              {'\u2022'} Cature the entire face <br />
                             </p>
                             <div className='w-full text-center'>
                               <button
