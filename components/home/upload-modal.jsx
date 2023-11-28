@@ -53,21 +53,31 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setShowModal(true);
     setState('loading');
     // Check if this image can be 
-    const formData = new FormData();
-    formData.append('image', firstImage);
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-image`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }
-    });
 
-    if (response.data === 'impossible') {
-      // alert("Your picture didn't work! Take another one and make sure your entire face can be seen with a plain background");
+    try {
+      const formData = new FormData();
+      formData.append('image', firstImage);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      });
+
+      if (response.data === 'impossible') {
+        // alert("Your picture didn't work! Take another one and make sure your entire face can be seen with a plain background");
+        setState('error');
+        setTimeout(() => setShowModal(false), 2000);
+        // setShowModal(false);
+        return;
+      }
+    } catch (error) {
+      console.log('checking error:', error);
       setState('error');
       setTimeout(() => setShowModal(false), 2000);
       // setShowModal(false);
       return;
     }
+
 
     setShowText('Uploading...');
 
@@ -102,6 +112,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     setPrevLoading(true);
     setShowPreviewDialog(true);
 
+    const formData = new FormData();
+    formData.append('image', firstImage);
     formData.append('sex', sex);
     axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/generate-sample`, formData, {
       headers: {
