@@ -21,7 +21,7 @@ export async function POST(request) {
 
   try {
     let checkoutParams = {
-      success_url: `https://aiviking.com/${randomUrl}`,
+      success_url: `https://aiviking.com/success/${randomUrl}`,
       line_items: [{ price: priceID, quantity: 1 }],
       mode: "payment",
       customer_email: email,
