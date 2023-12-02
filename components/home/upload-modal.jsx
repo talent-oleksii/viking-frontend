@@ -223,7 +223,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   return (
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
       <Toaster richColors position="top-right" />
-      <div className="w-full overflow-hidden shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 relative bg-black">
+      <div className="w-full shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 relative bg-black">
         <form className="grid gap-3 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
           {
             currentStep === 'gender' &&
@@ -390,12 +390,19 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </svg>
 
                 </button>
-                <div className="flex justify-center items-center mb-2">
+                <img src='/60.gif' className='w-1/2 absolute top-0 left-0 translate-x-1/2 -translate-y-24' />
+                <div className="flex justify-center flex-col items-center mb-2">
                   <h2
-                    className="text-[20px] leading-6 text-black font-bold mb-3 text-center"
+                    className="text-[25px] text-black font-bold mb-3 text-center"
                   >
-                    How Many Pictures Do You Want?
+                    If This Is Your First Order:
                   </h2>
+
+                  <p className='text-[18px] text-center font-bold'>
+                    Use Code "<span className='text-[#00A006] text-[20px]'>DEC24</span>" For
+                    <br />
+                    <span className='text-[#00a006] text-[20px]'>$8 Off 20 Viking Photos</span>
+                  </p>
                 </div>
                 <div id="select" className="flex flex-col gap-2">
                   <button
@@ -408,11 +415,16 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     }}
                   >
                     <div className={`${clickedDiv === 1 ? 'text-black' : 'text-gray-700'}`}>2 Viking Photos</div>
-                    <div className={`${clickedDiv === 1 ? 'text-[#00A006]' : 'text-gray-700'}`}>$7</div>
+                    <div className='flex items-center'>
+                      <div className={`${clickedDiv === 1 ? 'text-[#00A006]' : 'text-gray-700'}`}>$9</div>
+                      <div className='ms-3'>
+                        <p className='text-xs text-white font-medium'>with coupon</p>
+                      </div>
+                    </div>
                   </button>
                   <button
                     className={`border ${clickedDiv === 2 ? "border-black" : "border-gray-300"
-                      } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                      } rounded-md bg-white w-full px-3 py-2 flex items-center justify-between text-sm text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 2 ? null : 2);
@@ -420,10 +432,18 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     }}
                   >
                     <div className={`${clickedDiv === 2 ? 'text-black' : 'text-gray-700'}`}>20 Viking Photos</div>
-                    <div className={`${clickedDiv === 2 ? 'text-[#00A006]' : 'text-gray-700'}`}>$9</div>
+                    <div className='flex items-center'>
+                      <div className={`${clickedDiv === 2 ? 'text-[#00A006]' : 'text-gray-700'}`}>
+                        $13
+                      </div>
+                      <div className='flex flex-col items-end ms-3'>
+                        <p className='text-sm text-[#00a006] font-medium'>$4.99</p>
+                        <p className='text-xs text-[#00a006] font-medium'>with coupon</p>
+                      </div>
+                    </div>
                   </button>
                 </div>
-                <p className='text-center w-full text-black my-2'>(This is the one you probably want)</p>
+                {/* <p className='text-center w-full text-black my-2'>(This is the one you probably want)</p> */}
                 <button
                   disabled={!orderOption}
                   onClick={async () => {
@@ -445,12 +465,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   className={`${!orderOption
                     ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                     : "border-black bg-black text-white"
-                    } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-5`}
+                    } flex h-12 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-5`}
                 >
                   {loading ? (
                     <BeatLoader size={8} color="#898989" />
                   ) : (
-                    <p className="text-sm text-white">Make me a viking!</p>
+                    <p className="text-md text-white">Make me a viking!</p>
                   )}
 
                 </button>
