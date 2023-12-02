@@ -445,7 +445,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </div>
                 {/* <p className='text-center w-full text-black my-2'>(This is the one you probably want)</p> */}
                 <button
-                  disabled={!orderOption}
+                  disabled={!orderOption || !clickedDiv}
                   onClick={async () => {
                     event.preventDefault();
                     setLoading(true);
@@ -465,7 +465,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   className={`${!orderOption
                     ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                     : "border-black bg-black text-white"
-                    } flex h-12 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-5`}
+                    } flex h-12 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none mt-5 disabled:bg-gray-400 disabled:border-gray-400`}
                 >
                   {loading ? (
                     <BeatLoader size={8} color="#898989" />
