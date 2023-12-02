@@ -28,7 +28,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const selectImageRef = useRef(null);
   const desktopModalRef = useRef(null);
 
-  const [currentStep, setCurrentStep] = useState("gender"); // "gender, picture, price, email"
+  const [currentStep, setCurrentStep] = useState("price"); // "gender, picture, price, email"
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [prevLoading, setPrevLoading] = useState(false);
@@ -390,10 +390,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </svg>
 
                 </button>
-                <img src='/60.gif' className='w-1/2 absolute top-0 left-0 translate-x-1/2 -translate-y-24' />
+                <img src='/60.gif' className='w-1/2 absolute top-0 left-0 translate-x-1/2 -translate-y-28 sm:-translate-y-24' />
                 <div className="flex justify-center flex-col items-center mb-2">
                   <h2
-                    className="text-[25px] text-black font-bold mb-3 text-center"
+                    className="text-[25px] text-black font-bold mb-5 text-center"
                   >
                     If This Is Your First Order:
                   </h2>
@@ -404,10 +404,10 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     <span className='text-[#00a006] text-[20px]'>$8 Off 20 Viking Photos</span>
                   </p>
                 </div>
-                <div id="select" className="flex flex-col gap-2">
+                <div id="select" className="flex flex-col gap-2 mt-4">
                   <button
                     className={`border ${clickedDiv === 1 ? "border-black" : "border-gray-300"
-                      } rounded-md bg-white w-full px-3 py-2 flex justify-between text-sm text-gray-900`}
+                      } rounded-md bg-white w-full p-4 flex justify-between text-sm text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 1 ? null : 1);
@@ -423,15 +423,15 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     </div>
                   </button>
                   <button
-                    className={`border ${clickedDiv === 2 ? "border-black" : "border-gray-300"
-                      } rounded-md bg-white w-full px-3 py-2 flex items-center justify-between text-sm text-gray-900`}
+                    className={`border ${clickedDiv === 2 ? "border-[#00a006]" : "border-black"
+                      } rounded-md bg-white w-full px-4 py-4 flex items-center justify-between text-sm text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 2 ? null : 2);
                       setOrderOption(20);
                     }}
                   >
-                    <div className={`${clickedDiv === 2 ? 'text-black' : 'text-gray-700'}`}>20 Viking Photos</div>
+                    <div className={`${clickedDiv === 2 ? "border-[#00a006]" : "border-black"}`}>20 Viking Photos</div>
                     <div className='flex items-center'>
                       <div className={`${clickedDiv === 2 ? 'text-[#00A006]' : 'text-gray-700'}`}>
                         $13
