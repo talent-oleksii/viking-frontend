@@ -406,7 +406,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </div>
                 <div id="select" className="flex flex-col gap-2 mt-4">
                   <button
-                    className={`border ${clickedDiv === 1 ? "border-black" : "border-gray-300"
+                    className={`border ${clickedDiv === 1 ? "border-[#00a006]" : "border-black"
                       } rounded-md bg-white w-full p-4 flex justify-between text-sm text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
