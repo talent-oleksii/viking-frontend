@@ -28,7 +28,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const selectImageRef = useRef(null);
   const desktopModalRef = useRef(null);
 
-  const [currentStep, setCurrentStep] = useState("gender"); // "gender, picture, price, email"
+  const [currentStep, setCurrentStep] = useState("price"); // "gender, picture, price, email"
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [prevLoading, setPrevLoading] = useState(false);
@@ -407,7 +407,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <div id="select" className="flex flex-col gap-2 mt-4">
                   <button
                     className={`border ${clickedDiv === 1 ? "border-[#00a006] border-[3px] bg-gray-200" : "border-black border-[1px]"
-                      } rounded-md bg-white w-full p-4 flex justify-between text-md text-gray-900`}
+                      } rounded-md w-full p-4 flex justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 1 ? null : 1);
@@ -424,7 +424,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </button>
                   <button
                     className={`border ${clickedDiv === 2 ? "border-[#00a006] border-[3px] bg-gray-200" : "border-black border-[1px]"
-                      } rounded-md bg-white w-full px-4 py-4 flex items-center justify-between text-md text-gray-900`}
+                      } rounded-md w-full px-4 py-4 flex items-center justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 2 ? null : 2);
