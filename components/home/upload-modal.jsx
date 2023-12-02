@@ -39,9 +39,9 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const [showText, setShowText] = useState('Analysing...');
 
 
-  const [clickedDiv, setClickedDiv] = useState(null);
+  const [clickedDiv, setClickedDiv] = useState(2);
   const [clickedButton, setClickedButton] = useState(null);
-  const [orderOption, setOrderOption] = useState("");
+  const [orderOption, setOrderOption] = useState(20);
   const [sex, setSex] = useState("");
   const [email, setEmail] = useState("");
 
