@@ -407,7 +407,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 <div id="select" className="flex flex-col gap-2 mt-4">
                   <button
                     className={`border ${clickedDiv === 1 ? "border-[#00a006]" : "border-black"
-                      } rounded-md bg-white w-full p-4 flex justify-between text-sm text-gray-900`}
+                      } rounded-md bg-white w-full p-4 flex justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 1 ? null : 1);
@@ -424,7 +424,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </button>
                   <button
                     className={`border ${clickedDiv === 2 ? "border-[#00a006]" : "border-black"
-                      } rounded-md bg-white w-full px-4 py-4 flex items-center justify-between text-sm text-gray-900`}
+                      } rounded-md bg-white w-full px-4 py-4 flex items-center justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
                       setClickedDiv(clickedDiv === 2 ? null : 2);
@@ -470,7 +470,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   {loading ? (
                     <BeatLoader size={8} color="#898989" />
                   ) : (
-                    <p className="text-md text-white">Make me a viking!</p>
+                    <p className="text-base text-white">Make me a viking!</p>
                   )}
 
                 </button>
