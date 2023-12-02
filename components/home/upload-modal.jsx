@@ -28,7 +28,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
   const selectImageRef = useRef(null);
   const desktopModalRef = useRef(null);
 
-  const [currentStep, setCurrentStep] = useState("price"); // "gender, picture, price, email"
+  const [currentStep, setCurrentStep] = useState("gender"); // "gender, picture, price, email"
   const [showInfoDialog, setShowInfoDialog] = useState(false);
   const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [prevLoading, setPrevLoading] = useState(false);
