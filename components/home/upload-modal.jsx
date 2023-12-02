@@ -406,7 +406,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                 </div>
                 <div id="select" className="flex flex-col gap-2 mt-4">
                   <button
-                    className={`border ${clickedDiv === 1 ? "border-[#00a006]" : "border-black"
+                    className={`border ${clickedDiv === 1 ? "border-[#00a006] border-[3px] bg-gray-200" : "border-black border-[1px]"
                       } rounded-md bg-white w-full p-4 flex justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
@@ -418,12 +418,12 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                     <div className='flex items-center'>
                       <div className={`${clickedDiv === 1 ? 'text-[#00A006]' : 'text-gray-700'}`}>$9</div>
                       <div className='ms-3'>
-                        <p className='text-xs text-white font-medium'>with coupon</p>
+                        <p className={`text-xs font-medium ${clickedDiv === 1 ? 'text-gray-200' : 'text-white'}`}>with coupon</p>
                       </div>
                     </div>
                   </button>
                   <button
-                    className={`border ${clickedDiv === 2 ? "border-[#00a006]" : "border-black"
+                    className={`border ${clickedDiv === 2 ? "border-[#00a006] border-[3px] bg-gray-200" : "border-black border-[1px]"
                       } rounded-md bg-white w-full px-4 py-4 flex items-center justify-between text-md text-gray-900`}
                     onClick={() => {
                       event.preventDefault();
@@ -488,8 +488,8 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   </svg>
 
                 </div>
-                <h2 className="block mb-5 text-[25px] font-bold text-black text-center">
-                  Email
+                <h2 className="block mb-5 text-[20px] font-bold text-black text-center">
+                  What email should we <br />send your picture to?
                 </h2>
                 <input
                   type="email"
