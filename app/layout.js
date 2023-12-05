@@ -63,7 +63,7 @@ export default function RootLayout({ children }) {
             fbq('track', 'PageView');
             fbq('track', 'Purchase', {
               value: 4.55,
-              currency: 'USD
+              currency: 'USD'
             });
         `,
           }}
