@@ -61,6 +61,10 @@ export default function RootLayout({ children }) {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '1539279456826902');
             fbq('track', 'PageView');
+            fbq('track', 'Purchase', {
+              value: 4.55,
+              currency: 'USD
+            });
         `,
           }}
         />
