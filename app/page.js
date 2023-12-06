@@ -116,27 +116,35 @@ export default function Home() {
               Matthew Iversen is a scammer
             </span>
           </motion.div> */}
+          <motion.div
+            className="mb-8 flex items-center justify-center"
+            variants={FADE_DOWN_ANIMATION_VARIANTS}
+          >
+            <p className="px-4 py-2 text-white bg-[red] rounded-full text-base -tracking-[.15px]">New Christmas pictures included!</p>
+          </motion.div>
           <motion.h1
             className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
+
             <div>become a viking</div>
           </motion.h1>
           <motion.p
-            className="mt-5 text-center text-white/50 md:text-xl"
+            className="mt-4 text-center text-white md:text-xl"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
             <Balancer ratio={0.6}>
-              <span className="sm:hidden">
-                Find out what you would look like<br /> as a real viking!
+              <span className="sm:hidden -tracking-[.15px]">
+                Get 20 pictures of you as a viking!
               </span>
-              <span className="hidden sm:inline">
-                Find out what you would look like<br /> as a real viking!
+              <span className="hidden sm:inline text-2xl -tracking-[.15px]">
+                Get 20 pictures of you as a viking!
               </span>
             </Balancer>
           </motion.p>
           <motion.div
             variants={FADE_DOWN_ANIMATION_VARIANTS}
+            className="flex items-center flex-col justify-center"
           >
             <button
               className="group mx-auto mt-6 sm:mt-7 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#00FFC2] bg-black px-12 py-5 text-sm text-white transition-colors"
@@ -149,16 +157,27 @@ export default function Home() {
               <div className="text-white/80">Upload Photo</div>
             </button>
 
-            <div className="hidden sm:block">
+            {/* <div className="hidden sm:block">
               <p className="mt-2.5 text-center text-lg text-white/50">
                 11,000+ viking photos generated so far!
               </p>
               <p className="text-lg mt-[10px] text-white/50 text-center">All examples were created with AI Viking</p>
               <p className="text-lg text-white/50 text-center">from the shown portraits</p>
+            </div> */}
+            <h4 className="text-lg text-white -tracking-[.2px] my-6 gap-4">Perfect for:</h4>
+            <div className="grid grid-cols-2">
+              <div className="col-span-1">
+                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Profile pictures!</p>
+                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Fun gift!</p>
+              </div>
+              <div className="col-span-1">
+                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Facebook posts!</p>
+                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Christmas cards!</p>
+              </div>
             </div>
           </motion.div>
           <div className="hidden sm:block">
-            <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-2 gap-8 sm:gap-16 relative">
+            <motion.div className="mt-4 sm:mt-4 grid sm:grid-cols-2 gap-8 sm:gap-16 relative">
               <img
                 src="/images/12.jpg"
                 className="rounded-[20px] w-[585px] h-[500px] object-cover object-top"
@@ -190,7 +209,7 @@ export default function Home() {
                 <path d="M25.7743 5.34129L28.2357 1.07805C28.3324 0.911257 28.4752 0.775951 28.647 0.688409C28.8188 0.600868 29.0122 0.56482 29.2039 0.584602C29.3957 0.604385 29.5776 0.679156 29.7279 0.79992C29.8781 0.920683 29.9903 1.0823 30.0509 1.26532L34.8974 16.0098C34.9426 16.1443 34.9587 16.2869 34.9446 16.4282C34.9305 16.5694 34.8864 16.706 34.8155 16.829C34.7445 16.9519 34.6482 17.0583 34.5329 17.1412C34.4176 17.224 34.2861 17.2814 34.1469 17.3095L18.9596 20.4759C18.7709 20.5149 18.5748 20.4986 18.3951 20.4289C18.2154 20.3591 18.0597 20.2389 17.9467 20.0828C17.8336 19.9266 17.7682 19.7411 17.7581 19.5485C17.748 19.356 17.7938 19.1647 17.8899 18.9975L20.3438 14.7473L20.1532 14.6372C14.6041 11.4335 7.19917 12.935 1.70569 18.4285C1.63357 18.4974 1.55154 18.5552 1.46232 18.5999L1.41383 18.6239C1.32814 18.6616 1.23759 18.6871 1.14483 18.6996L1.09516 18.7056C1.00116 18.7143 0.906413 18.7101 0.813537 18.6932L0.74856 18.6557C0.704375 18.6474 0.660878 18.6358 0.618428 18.621L0.510133 18.5585C0.443452 18.5188 0.381616 18.4715 0.325878 18.4175L0.304221 18.4049L0.269565 18.3849L0.198612 18.2978L0.151144 18.2299L0.100684 18.1372L0.0650541 18.0589L0.0350967 17.9607L0.0149656 17.8856C0.00983453 17.8475 0.00689944 17.8091 0.00617764 17.7707L0.00154022 17.6987C0.00301615 17.6584 0.00692853 17.6182 0.0132539 17.5784L0.0216113 17.5139C0.030698 17.4774 0.0418442 17.4414 0.0549871 17.4061C0.0674946 17.3844 0.0800011 17.3628 0.095009 17.3368C0.487234 16.4132 0.934902 15.5142 1.43557 14.6447C6.92817 5.10123 17.7697 1.00869 25.7743 5.34129Z" fill="#CCCCCC" />
               </svg>
             </motion.div>
-            <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-8 gap-8 sm:gap-8">
+            <motion.div className="mt-4 sm:mt-4 grid sm:grid-cols-8 gap-8 sm:gap-8">
               <ImageWithLogo className="col-span-3">
                 <img
                   src="/images/9.png"
@@ -214,7 +233,7 @@ export default function Home() {
               </ImageWithLogo>
 
             </motion.div>
-            <motion.div className="mt-11 sm:mt-11 grid sm:grid-cols-8 gap-8 sm:gap-8">
+            <motion.div className="mt-4 grid sm:grid-cols-8 gap-8 sm:gap-8">
               <ImageWithLogo className='col-span-3'>
                 <img
                   src="/images/5.png"
@@ -238,14 +257,12 @@ export default function Home() {
               </ImageWithLogo>
             </motion.div>
           </div>
-          <div className="block sm:hidden mt-[60px] ">
+          <div className="block sm:hidden mt-[30px] ">
             <div className="flex items-center justify-center flex-col">
               <img
                 src="/images/12.jpg"
                 className="border-[2px] border-white rounded-full h-[150px] w-[150px] object-cover object-top"
               />
-              <p className="text-md mt-4 text-white/50 text-center">All examples were created with AI Viking</p>
-              <p className="text-md text-white/50 text-center">from the shown portraits</p>
             </div>
             <div className="flex justify-center items-center mt-3">
               <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="me-8">

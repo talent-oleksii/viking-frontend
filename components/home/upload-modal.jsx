@@ -224,7 +224,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
     <Modal showModal={showUploadModal} setShowModal={setShowUploadModal}>
       <Toaster richColors position="top-right" />
       <div className="w-full shadow-xl md:max-w-md md:rounded-2xl md:border md:border-gray-200 relative bg-black">
-        <form className="grid gap-3 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16">
+        <form className="grid gap-3 bg-gray-50 px-4 sm:pt-8 sm:pb-8 pt-7 pb-5 md:px-16 rounded-[15px]">
           {
             currentStep === 'gender' &&
             <>
