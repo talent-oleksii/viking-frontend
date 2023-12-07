@@ -236,7 +236,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   <button
                     onClick={() => {
                       event.preventDefault();
-                      setClickedButton(clickedDiv === 1 ? null : 1);
+                      setClickedButton(clickedButton === 1 ? null : 1);
                       console.log('is called?');
                       setSex("man");
                     }}
@@ -248,7 +248,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
                   <button
                     onClick={() => {
                       event.preventDefault();
-                      setClickedButton(clickedDiv === 2 ? null : 2);
+                      setClickedButton(clickedButton === 2 ? null : 2);
                       setSex("woman");
                     }}
                     className={`border border-black  ${clickedButton === 2 ? "bg-black text-white" : "bg-white text-black"
@@ -489,7 +489,7 @@ const UploadModal = ({ showUploadModal, setShowUploadModal }) => {
 
                 </div>
                 <h2 className="block mb-5 text-[20px] font-bold text-black text-center">
-                  What email should we <br />send your picture to?
+                  What email should we <br />send your pictures to?
                 </h2>
                 <input
                   type="email"
