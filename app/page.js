@@ -18,7 +18,7 @@ import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
 import { Router, Upload } from "lucide-react";
 
 const ImageWithLogo = ({ className, children }) => {
-  return <div className={`relative ${className}`}>
+  return <div className={`relative ${className} items-center justify-center flex`}>
     {children}
     {/* <div className="flex absolute z-10 bottom-[15px] left-1/2 transform -translate-x-1/2 items-center justify-center opacity-60">
       <img
@@ -167,12 +167,12 @@ export default function Home() {
             <h4 className="text-lg text-white -tracking-[.2px] my-6 gap-4">Perfect for:</h4>
             <div className="grid grid-cols-2">
               <div className="col-span-1">
-                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Profile pictures!</p>
-                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Fun gift!</p>
+                <p className="text-white text-white text-base sm:text-lg -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Profile pictures!</p>
+                <p className="text-white text-white text-base sm:text-lg -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Fun gift!</p>
               </div>
               <div className="col-span-1">
-                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Facebook posts!</p>
-                <p className="text-white text-white text-base -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Christmas cards!</p>
+                <p className="text-white text-white text-base sm:text-lg -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Facebook posts!</p>
+                <p className="text-white text-white text-base sm:text-lg -tracking-[.15px]"><span className="mx-1">{'\u2022'}</span> Christmas cards!</p>
               </div>
             </div>
           </motion.div>
@@ -261,7 +261,7 @@ export default function Home() {
             <div className="flex items-center justify-center flex-col">
               <img
                 src="/images/12.jpg"
-                className="border-[2px] border-white rounded-full h-[150px] w-[150px] object-cover object-top"
+                className="border-[2px] border-white rounded-lg h-[150px] w-[150px] object-cover object-top"
               />
             </div>
             <div className="flex justify-center items-center mt-3">
@@ -292,7 +292,7 @@ export default function Home() {
 
               <img
                 src="/images/1.jpg"
-                className="border-[2px] border-white rounded-full h-[150px] w-[150px] object-cover object-top"
+                className="border-[2px] border-white rounded-lg h-[150px] w-[150px] object-cover object-top"
               />
             </div>
             <div className="flex justify-center items-center mt-3">
