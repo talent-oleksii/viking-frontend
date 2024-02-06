@@ -120,7 +120,7 @@ export default function Home() {
             className="mb-8 flex items-center justify-center"
             variants={FADE_DOWN_ANIMATION_VARIANTS}
           >
-            <p className="px-4 py-2 text-white bg-[red] rounded-full text-base -tracking-[.15px]">New Christmas pictures included!</p>
+            <p className="px-4 py-2 text-white bg-[green] rounded-full text-base -tracking-[.15px]">New Spring pictures included!</p>
           </motion.div>
           <motion.h1
             className="max-w-2xl mx-auto bg-gradient-to-br from-white to-stone-500 bg-clip-text text-center font-Norse text-6xl leading-[4rem] sm:text-8xl font-extrabold sm:font-bold tracking-[-0.02em] text-transparent drop-shadow-sm md:text-9xl md:leading-[6rem] pb-[2px]"
